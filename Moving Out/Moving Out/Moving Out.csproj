@@ -8,8 +8,24 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Models\**" />
+    <EmbeddedResource Remove="Models\**" />
+    <None Remove="Models\**" />
+    <Page Remove="Models\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="Images\thumbnail.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Images\thumbnail.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="Controller\" />
-    <Folder Include="Models\" />
   </ItemGroup>
 
 </Project>

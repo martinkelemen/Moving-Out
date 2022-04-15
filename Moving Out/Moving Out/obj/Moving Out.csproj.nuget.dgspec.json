@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "B:\\egyetem\\Prog\\6.felev\\prog4\\feleves\\Moving Out\\Moving Out\\Moving Out.csproj": {}
+    "B:\\egyetem\\Prog\\6.felev\\prog4\\feleves\\GUI_20212202_IL7XUS\\Moving Out\\Moving Out\\Moving Out.csproj": {}
   },
   "projects": {
-    "B:\\egyetem\\Prog\\6.felev\\prog4\\feleves\\Moving Out\\Moving Out\\Moving Out.csproj": {
+    "B:\\egyetem\\Prog\\6.felev\\prog4\\feleves\\GUI_20212202_IL7XUS\\Moving Out\\Moving Out\\Moving Out.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "B:\\egyetem\\Prog\\6.felev\\prog4\\feleves\\Moving Out\\Moving Out\\Moving Out.csproj",
+        "projectUniqueName": "B:\\egyetem\\Prog\\6.felev\\prog4\\feleves\\GUI_20212202_IL7XUS\\Moving Out\\Moving Out\\Moving Out.csproj",
         "projectName": "Moving Out",
-        "projectPath": "B:\\egyetem\\Prog\\6.felev\\prog4\\feleves\\Moving Out\\Moving Out\\Moving Out.csproj",
+        "projectPath": "B:\\egyetem\\Prog\\6.felev\\prog4\\feleves\\GUI_20212202_IL7XUS\\Moving Out\\Moving Out\\Moving Out.csproj",
         "packagesPath": "C:\\Users\\novaa\\.nuget\\packages\\",
-        "outputPath": "B:\\egyetem\\Prog\\6.felev\\prog4\\feleves\\Moving Out\\Moving Out\\obj\\",
+        "outputPath": "B:\\egyetem\\Prog\\6.felev\\prog4\\feleves\\GUI_20212202_IL7XUS\\Moving Out\\Moving Out\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\novaa\\AppData\\Roaming\\NuGet\\NuGet.Config",

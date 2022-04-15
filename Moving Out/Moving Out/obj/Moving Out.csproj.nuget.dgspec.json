@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\l55\\source\\repos\\GUI_20212202_IL7XUS\\Moving Out\\Moving Out\\Moving Out.csproj": {}
+    "B:\\egyetem\\Prog\\6.felev\\prog4\\feleves\\GUI_20212202_IL7XUS\\Moving Out\\Moving Out\\Moving Out.csproj": {}
   },
   "projects": {
-    "C:\\Users\\l55\\source\\repos\\GUI_20212202_IL7XUS\\Moving Out\\Moving Out\\Moving Out.csproj": {
+    "B:\\egyetem\\Prog\\6.felev\\prog4\\feleves\\GUI_20212202_IL7XUS\\Moving Out\\Moving Out\\Moving Out.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\l55\\source\\repos\\GUI_20212202_IL7XUS\\Moving Out\\Moving Out\\Moving Out.csproj",
+        "projectUniqueName": "B:\\egyetem\\Prog\\6.felev\\prog4\\feleves\\GUI_20212202_IL7XUS\\Moving Out\\Moving Out\\Moving Out.csproj",
         "projectName": "Moving Out",
-        "projectPath": "C:\\Users\\l55\\source\\repos\\GUI_20212202_IL7XUS\\Moving Out\\Moving Out\\Moving Out.csproj",
-        "packagesPath": "C:\\Users\\l55\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\l55\\source\\repos\\GUI_20212202_IL7XUS\\Moving Out\\Moving Out\\obj\\",
+        "projectPath": "B:\\egyetem\\Prog\\6.felev\\prog4\\feleves\\GUI_20212202_IL7XUS\\Moving Out\\Moving Out\\Moving Out.csproj",
+        "packagesPath": "C:\\Users\\novaa\\.nuget\\packages\\",
+        "outputPath": "B:\\egyetem\\Prog\\6.felev\\prog4\\feleves\\GUI_20212202_IL7XUS\\Moving Out\\Moving Out\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\l55\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\novaa\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -57,7 +57,7 @@
               "privateAssets": "none"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.400\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.405\\RuntimeIdentifierGraph.json"
         }
       }
     }

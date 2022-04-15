@@ -21,3 +21,5 @@ B:\egyetem\Prog\6.felev\prog4\feleves\GUI_20212202_IL7XUS\Moving Out\Moving Out\
 B:\egyetem\Prog\6.felev\prog4\feleves\GUI_20212202_IL7XUS\Moving Out\Moving Out\obj\Debug\net5.0-windows\ref\Moving Out.dll
 B:\egyetem\Prog\6.felev\prog4\feleves\GUI_20212202_IL7XUS\Moving Out\Moving Out\obj\Debug\net5.0-windows\Moving Out.pdb
 B:\egyetem\Prog\6.felev\prog4\feleves\GUI_20212202_IL7XUS\Moving Out\Moving Out\obj\Debug\net5.0-windows\Moving Out.genruntimeconfig.cache
+B:\egyetem\Prog\6.felev\prog4\feleves\GUI_20212202_IL7XUS\Moving Out\Moving Out\bin\Debug\net5.0-windows\Images\thumbnail.png
+B:\egyetem\Prog\6.felev\prog4\feleves\GUI_20212202_IL7XUS\Moving Out\Moving Out\obj\Debug\net5.0-windows\Moving Out_Content.g.cs

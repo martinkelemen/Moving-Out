@@ -83,12 +83,12 @@ namespace Moving_Out
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            display.SetupSizes(new Size(grid.ActualWidth, grid.ActualHeight));
+            display.SetupSizes(new Size(canvas.ActualWidth, canvas.ActualHeight));
         }
 
         private void Window_SizeChanged(object sender, SizeChangedEventArgs e)
         {
-            display.SetupSizes(new Size(grid.ActualWidth, grid.ActualHeight));
+            display.SetupSizes(new Size(canvas.ActualWidth, canvas.ActualHeight));
         }
     }
 }

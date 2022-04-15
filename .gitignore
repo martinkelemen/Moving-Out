@@ -1,0 +1,5 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/Moving Out/Moving Out/obj/Debug/net5.0-windows/.NETCoreApp,Version=v5.0.AssemblyAttributes.cs

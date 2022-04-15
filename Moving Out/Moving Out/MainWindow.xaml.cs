@@ -80,5 +80,15 @@ namespace Moving_Out
                 logic.Down = true;
             }
         }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            display.SetupSizes(new Size(grid.ActualWidth, grid.ActualHeight));
+        }
+
+        private void Window_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            display.SetupSizes(new Size(grid.ActualWidth, grid.ActualHeight));
+        }
     }
 }

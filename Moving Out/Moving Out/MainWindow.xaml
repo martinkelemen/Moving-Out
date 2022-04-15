@@ -7,7 +7,8 @@
         xmlns:renderer="clr-namespace:Moving_Out.Renderer"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <Grid x:Name="grid">
+    <Canvas x:Name="canvas" Focusable="True" KeyDown="KeyIsDown" KeyUp="KeyIsUp">
         <renderer:Display x:Name="display" />
-    </Grid>
+        <Rectangle x:Name="player" Height="50" Width="50" Fill="Red" Canvas.Left="20" Canvas.Top="50"/>
+    </Canvas>
 </Window>

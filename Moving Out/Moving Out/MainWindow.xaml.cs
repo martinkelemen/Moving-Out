@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Moving_Out.Logic;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 
 namespace Moving_Out
 {
@@ -20,9 +22,63 @@ namespace Moving_Out
     /// </summary>
     public partial class MainWindow : Window
     {
+        MoveLogic logic;
+        
+        private void Dt_Tick(object? sender, EventArgs e)
+        {
+            logic.TimeStep(player);
+        }
         public MainWindow()
         {
             InitializeComponent();
+            logic = new MoveLogic();
+            canvas.Focus();
+
+            DispatcherTimer dt = new DispatcherTimer();
+
+            dt.Tick += Dt_Tick;
+            dt.Interval = TimeSpan.FromMilliseconds(20);
+            dt.Start();
+        }
+
+        private void KeyIsUp(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Left)
+            {
+                logic.Left = false;
+            }
+            else if (e.Key == Key.Right)
+            {
+                logic.Right = false;
+            }
+            else if (e.Key == Key.Up)
+            {
+                logic.Up = false;
+            }
+            else if (e.Key == Key.Down)
+            {
+                logic.Down = false;
+            }
+        }
+
+        private void KeyIsDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key==Key.Left)
+            {
+                logic.Left = true;
+            }
+            else if (e.Key == Key.Right)
+            {
+                logic.Right = true;
+            }
+            else if (e.Key == Key.Up)
+            {
+                logic.Up = true;
+            }
+            else if (e.Key == Key.Down)
+            {
+                logic.Down = true;
+            }
         }
     }
 }

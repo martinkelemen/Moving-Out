@@ -21,3 +21,26 @@ B:\egyetem\Prog\6.felev\prog4\feleves\GUI_20212202_IL7XUS\Moving Out\Moving Out\
 B:\egyetem\Prog\6.felev\prog4\feleves\GUI_20212202_IL7XUS\Moving Out\Moving Out\obj\Debug\net5.0-windows\ref\Moving Out.dll
 B:\egyetem\Prog\6.felev\prog4\feleves\GUI_20212202_IL7XUS\Moving Out\Moving Out\obj\Debug\net5.0-windows\Moving Out.pdb
 B:\egyetem\Prog\6.felev\prog4\feleves\GUI_20212202_IL7XUS\Moving Out\Moving Out\obj\Debug\net5.0-windows\Moving Out.genruntimeconfig.cache
+C:\Users\l55\source\repos\GUI_20212202_IL7XUS\Moving Out\Moving Out\bin\Debug\net5.0-windows\Moving Out.exe
+C:\Users\l55\source\repos\GUI_20212202_IL7XUS\Moving Out\Moving Out\bin\Debug\net5.0-windows\Moving Out.deps.json
+C:\Users\l55\source\repos\GUI_20212202_IL7XUS\Moving Out\Moving Out\bin\Debug\net5.0-windows\Moving Out.runtimeconfig.json
+C:\Users\l55\source\repos\GUI_20212202_IL7XUS\Moving Out\Moving Out\bin\Debug\net5.0-windows\Moving Out.runtimeconfig.dev.json
+C:\Users\l55\source\repos\GUI_20212202_IL7XUS\Moving Out\Moving Out\bin\Debug\net5.0-windows\Moving Out.dll
+C:\Users\l55\source\repos\GUI_20212202_IL7XUS\Moving Out\Moving Out\bin\Debug\net5.0-windows\ref\Moving Out.dll
+C:\Users\l55\source\repos\GUI_20212202_IL7XUS\Moving Out\Moving Out\bin\Debug\net5.0-windows\Moving Out.pdb
+C:\Users\l55\source\repos\GUI_20212202_IL7XUS\Moving Out\Moving Out\obj\Debug\net5.0-windows\Moving Out.csproj.AssemblyReference.cache
+C:\Users\l55\source\repos\GUI_20212202_IL7XUS\Moving Out\Moving Out\obj\Debug\net5.0-windows\MainWindow.g.cs
+C:\Users\l55\source\repos\GUI_20212202_IL7XUS\Moving Out\Moving Out\obj\Debug\net5.0-windows\App.g.cs
+C:\Users\l55\source\repos\GUI_20212202_IL7XUS\Moving Out\Moving Out\obj\Debug\net5.0-windows\GeneratedInternalTypeHelper.g.cs
+C:\Users\l55\source\repos\GUI_20212202_IL7XUS\Moving Out\Moving Out\obj\Debug\net5.0-windows\Moving Out_MarkupCompile.cache
+C:\Users\l55\source\repos\GUI_20212202_IL7XUS\Moving Out\Moving Out\obj\Debug\net5.0-windows\Moving Out_MarkupCompile.lref
+C:\Users\l55\source\repos\GUI_20212202_IL7XUS\Moving Out\Moving Out\obj\Debug\net5.0-windows\MainWindow.baml
+C:\Users\l55\source\repos\GUI_20212202_IL7XUS\Moving Out\Moving Out\obj\Debug\net5.0-windows\Moving Out.g.resources
+C:\Users\l55\source\repos\GUI_20212202_IL7XUS\Moving Out\Moving Out\obj\Debug\net5.0-windows\Moving Out.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\l55\source\repos\GUI_20212202_IL7XUS\Moving Out\Moving Out\obj\Debug\net5.0-windows\Moving Out.AssemblyInfoInputs.cache
+C:\Users\l55\source\repos\GUI_20212202_IL7XUS\Moving Out\Moving Out\obj\Debug\net5.0-windows\Moving Out.AssemblyInfo.cs
+C:\Users\l55\source\repos\GUI_20212202_IL7XUS\Moving Out\Moving Out\obj\Debug\net5.0-windows\Moving Out.csproj.CoreCompileInputs.cache
+C:\Users\l55\source\repos\GUI_20212202_IL7XUS\Moving Out\Moving Out\obj\Debug\net5.0-windows\Moving Out.dll
+C:\Users\l55\source\repos\GUI_20212202_IL7XUS\Moving Out\Moving Out\obj\Debug\net5.0-windows\ref\Moving Out.dll
+C:\Users\l55\source\repos\GUI_20212202_IL7XUS\Moving Out\Moving Out\obj\Debug\net5.0-windows\Moving Out.pdb
+C:\Users\l55\source\repos\GUI_20212202_IL7XUS\Moving Out\Moving Out\obj\Debug\net5.0-windows\Moving Out.genruntimeconfig.cache

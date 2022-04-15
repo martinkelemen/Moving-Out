@@ -6,7 +6,9 @@
         xmlns:local="clr-namespace:Moving_Out"
         xmlns:renderer="clr-namespace:Moving_Out.Renderer"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="450" Width="800"
+        Loaded="Window_Loaded" SizeChanged="Window_SizeChanged"
+        WindowState="Maximized">
     <Canvas x:Name="canvas" Focusable="True" KeyDown="KeyIsDown" KeyUp="KeyIsUp">
         <renderer:Display x:Name="display" />
         <Rectangle x:Name="player" Height="50" Width="50" Fill="Red" Canvas.Left="20" Canvas.Top="50"/>

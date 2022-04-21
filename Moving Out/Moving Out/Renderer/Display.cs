@@ -51,8 +51,8 @@ namespace Moving_Out.Renderer
             if(area.Width > 0 && area.Height > 0 && model != null)
             {
                 drawingContext.DrawRectangle(HouseBrush, null, new Rect(0, 0, area.Width, area.Height));
-                drawingContext.DrawGeometry(Brushes.Black, null, new Wall((int)area.Width, (int)area.Height).Area);
-                drawingContext.DrawEllipse(Charachter_Standing_Brush, null, new Point(model.p.Center.X, model.p.Center.Y), 15, 15);
+                drawingContext.DrawGeometry(Brushes.Transparent, null, new Wall((int)area.Width, (int)area.Height).Area);
+                drawingContext.DrawGeometry(Charachter_Standing_Brush, null, (model.Player as GameItem).Area);
             }
         }
     }

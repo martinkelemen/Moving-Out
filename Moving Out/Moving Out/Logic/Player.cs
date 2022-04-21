@@ -4,17 +4,29 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Media;
 
 namespace Moving_Out.Logic
 {
-    public class Player : IGameControl
+    public class Player : GameItem, IGameControl
     {
+        private int radius;
+
         public System.Drawing.Point Center { get; set; }
         public Vector Speed { get; set; }
 
-        public Player()
+        public override Geometry Area
         {
-            Center = new System.Drawing.Point(500, 500);
+            get
+            {
+                return new EllipseGeometry(new Point(Center.X, Center.Y), radius, radius);
+            }
+        }
+
+        public Player(int centerX, int centerY, int radius)
+        {
+            this.radius = radius;
+            Center = new System.Drawing.Point(centerX, centerY);
             Speed = new Vector(0, 0);
         }
 

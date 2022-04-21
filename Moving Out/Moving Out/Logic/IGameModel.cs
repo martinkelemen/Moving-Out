@@ -10,6 +10,6 @@ namespace Moving_Out.Logic
     {
         event EventHandler Changed;
 
-        IGameControl p { get; }
+        IGameControl Player { get; set; }
     }
 }

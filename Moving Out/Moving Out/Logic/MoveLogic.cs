@@ -10,46 +10,26 @@ namespace Moving_Out.Logic
 {
     public class MoveLogic : IGameModel
     {
-        //public bool Left { get; set; }
-        //public bool Right { get; set; }
-        //public bool Up { get; set; }
-        //public bool Down { get; set; }
-        //int speed = 8;
-
-        //public void TimeStep(FrameworkElement player)
-        //{
-        //    if (Left==true && Canvas.GetLeft(player)>5)
-        //    {
-        //        Canvas.SetLeft(player, Canvas.GetLeft(player) - speed);
-        //    }
-        //    if (Right == true && Canvas.GetLeft(player) + (player.Width+20)< Application.Current.MainWindow.Width)
-        //    {
-        //        Canvas.SetLeft(player, Canvas.GetLeft(player) + speed);
-        //    }
-        //    if (Up==true && Canvas.GetTop(player)>5)
-        //    {
-        //        Canvas.SetTop(player, Canvas.GetTop(player) - speed);
-        //    }
-        //    if (Down == true && Canvas.GetTop(player) + (player.Width *2) < Application.Current.MainWindow.Height)
-        //    {
-        //        Canvas.SetTop(player, Canvas.GetTop(player) + speed);
-        //    }
-        //}
-
         public event EventHandler Changed;
-
         System.Windows.Size area;
 
-        public IGameControl p { get; }
+        public IGameControl Player { get; set; }
+        public Wall Wall { get; set; }
 
         public void SetupSizes(System.Windows.Size area)
         {
             this.area = area;
         }
 
+        public void SetupItems()
+        {
+            Wall = new Wall((int)area.Width, (int)area.Height);
+            Player = new Player(870, 870, 15);
+        }
+
         public MoveLogic()
         {
-            p = new Player();
+            
         }
 
         public enum Controls
@@ -58,49 +38,103 @@ namespace Moving_Out.Logic
         }
 
         public void Control(Controls control)
+        {   
+            if(TestMove(new Player(Player.Center.X, Player.Center.Y, 15), control))
+            {
+                switch (control)
+                {
+                    case Controls.Left:
+                        Player.Speed = new Vector(-8, 0);
+                        Player.Move();
+                        break;
+                    case Controls.Right:
+                        Player.Speed = new Vector(8, 0);
+                        Player.Move();
+                        break;
+                    case Controls.Up:
+                        Player.Speed = new Vector(0, -8);
+                        Player.Move();
+                        break;
+                    case Controls.Down:
+                        Player.Speed = new Vector(0, 8);
+                        Player.Move();
+                        break;
+                    case Controls.LeftUp:
+                        Player.Speed = new Vector(-8, -8);
+                        Player.Move();
+                        break;
+                    case Controls.LeftDown:
+                        Player.Speed = new Vector(-8, 8);
+                        Player.Move();
+                        break;
+                    case Controls.RightUp:
+                        Player.Speed = new Vector(8, -8);
+                        Player.Move();
+                        break;
+                    case Controls.RightDown:
+                        Player.Speed = new Vector(8, 8);
+                        Player.Move();
+                        break;
+                    case Controls.None:
+                        Player.Speed = new Vector(0, 0);
+                        Player.Move();
+                        break;
+                    default:
+                        break;
+                }
+            }
+            Changed?.Invoke(this, null);
+        }
+
+        private bool TestMove(IGameControl testPlayer, Controls control)
         {
             switch (control)
             {
                 case Controls.Left:
-                    p.Speed = new Vector(-8, 0);
-                    p.Move();
+                    testPlayer.Speed = new Vector(-8, 0);
+                    testPlayer.Move();
                     break;
                 case Controls.Right:
-                    p.Speed = new Vector(8, 0);
-                    p.Move();
+                    testPlayer.Speed = new Vector(8, 0);
+                    testPlayer.Move();
                     break;
                 case Controls.Up:
-                    p.Speed = new Vector(0, -8);
-                    p.Move();
+                    testPlayer.Speed = new Vector(0, -8);
+                    testPlayer.Move();
                     break;
                 case Controls.Down:
-                    p.Speed = new Vector(0, 8);
-                    p.Move();
+                    testPlayer.Speed = new Vector(0, 8);
+                    testPlayer.Move();
                     break;
                 case Controls.LeftUp:
-                    p.Speed = new Vector(-8, -8);
-                    p.Move();
+                    testPlayer.Speed = new Vector(-8, -8);
+                    testPlayer.Move();
                     break;
                 case Controls.LeftDown:
-                    p.Speed = new Vector(-8, 8);
-                    p.Move();
+                    testPlayer.Speed = new Vector(-8, 8);
+                    testPlayer.Move();
                     break;
                 case Controls.RightUp:
-                    p.Speed = new Vector(8, -8);
-                    p.Move();
+                    testPlayer.Speed = new Vector(8, -8);
+                    testPlayer.Move();
                     break;
                 case Controls.RightDown:
-                    p.Speed = new Vector(8, 8);
-                    p.Move();
+                    testPlayer.Speed = new Vector(8, 8);
+                    testPlayer.Move();
                     break;
                 case Controls.None:
-                    p.Speed = new Vector(0, 0);
-                    p.Move();
+                    testPlayer.Speed = new Vector(0, 0);
+                    testPlayer.Move();
                     break;
                 default:
                     break;
             }
-            Changed?.Invoke(this, null);
+
+            if ((testPlayer as GameItem).IsCollision(Wall))
+            {
+                return false;
+            }
+            else return true;
         }
 
     }

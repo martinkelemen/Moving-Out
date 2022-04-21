@@ -7,10 +7,10 @@
         xmlns:renderer="clr-namespace:Moving_Out.Renderer"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800"
-        Loaded="Window_Loaded" SizeChanged="Window_SizeChanged"
+        Loaded="Window_Loaded" SizeChanged="Window_SizeChanged" KeyDown="KeyIsDown" KeyUp="KeyIsUp"
         WindowState="Maximized">
-    <Canvas x:Name="canvas" Focusable="True" KeyDown="KeyIsDown" KeyUp="KeyIsUp">
+    <Canvas x:Name="canvas" Focusable="True">
         <renderer:Display x:Name="display" />
-        <Rectangle x:Name="player" Height="50" Width="50" Fill="Red" Canvas.Left="50" Canvas.Top="50"/>
+       
     </Canvas>
 </Window>

@@ -11,6 +11,7 @@ namespace Moving_Out.Logic
     {
         void Move();
 
+        int Radius { get; set; }
         Vector Speed { get; set; }
         System.Drawing.Point Center { get; set; }
     }

@@ -91,6 +91,10 @@ namespace Moving_Out
         private void Window_SizeChanged(object sender, SizeChangedEventArgs e)
         {
             display.SetupSizes(new Size(canvas.ActualWidth, canvas.ActualHeight));
+            //if (logic != null)
+            //{
+            //    logic.ChangeSize(new Size(canvas.ActualWidth, canvas.ActualHeight));
+            //}
         }
     }
 }

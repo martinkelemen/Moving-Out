@@ -10,8 +10,7 @@ namespace Moving_Out.Logic
 {
     public class Player : GameItem, IGameControl
     {
-        private int radius;
-
+        public int Radius { get; set; }
         public System.Drawing.Point Center { get; set; }
         public Vector Speed { get; set; }
 
@@ -19,13 +18,13 @@ namespace Moving_Out.Logic
         {
             get
             {
-                return new EllipseGeometry(new Point(Center.X, Center.Y), radius, radius);
+                return new EllipseGeometry(new Point(Center.X, Center.Y), Radius, Radius);
             }
         }
 
         public Player(int centerX, int centerY, int radius)
         {
-            this.radius = radius;
+            Radius = radius;
             Center = new System.Drawing.Point(centerX, centerY);
             Speed = new Vector(0, 0);
         }

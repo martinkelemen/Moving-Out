@@ -15,7 +15,7 @@ namespace Moving_Out.Logic
         public bool Up { get; set; }
         public bool Down { get; set; }
 
-        private int speed;
+        private double speed;
 
         public event EventHandler Changed;
         System.Windows.Size area;
@@ -31,9 +31,17 @@ namespace Moving_Out.Logic
         public void SetupItems()
         {
             Wall = new Wall((int)area.Width, (int)area.Height);
-            Player = new Player(870, 870, 15);
+            Player = new Player((int)(area.Width / 2.206897), (int)(area.Height / 1.168966), (int)(area.Width / 128));
             speed = 4;
         }
+
+        //public void ChangeSize(Size newArea)
+        //{
+        //    Player.Center = new System.Drawing.Point((int)(newArea.Width / (area.Width / Player.Center.X)), (int)(newArea.Height / (area.Height/Player.Center.Y)));
+        //    Player.Radius = (int)(newArea.Width / (area.Width / Player.Radius));
+        //    speed = (int)(newArea.Width / (area.Width / speed));
+        //    area = newArea;
+        //}
 
         public MoveLogic()
         {

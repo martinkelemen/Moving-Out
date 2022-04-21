@@ -26,76 +26,56 @@ namespace Moving_Out
         
         private void Dt_Tick(object sender, EventArgs e)
         {
-            //logic.TimeStep();
+            logic.TimeStep();
         }
         public MainWindow()
         {
             InitializeComponent();
 
-          //  DispatcherTimer dt = new DispatcherTimer();
+            DispatcherTimer dt = new DispatcherTimer();
 
-           // dt.Tick += Dt_Tick;
-           // dt.Interval = TimeSpan.FromMilliseconds(20);
-           // dt.Start();
+            dt.Tick += Dt_Tick;
+            dt.Interval = TimeSpan.FromMilliseconds(20);
+            dt.Start();
         }
 
         private void KeyIsUp(object sender, KeyEventArgs e)
         {
-            if(Keyboard.IsKeyDown(Key.Left))
+            if (e.Key == Key.Left)
             {
-                logic.Control(MoveLogic.Controls.Left);
+                logic.Left = false;
             }
-            else if (Keyboard.IsKeyDown(Key.Right))
+            else if (e.Key == Key.Right)
             {
-                logic.Control(MoveLogic.Controls.Right);
+                logic.Right = false;
             }
-            else if (Keyboard.IsKeyDown(Key.Up))
+            else if (e.Key == Key.Up)
             {
-                logic.Control(MoveLogic.Controls.Up);
+                logic.Up = false;
             }
-            else if (Keyboard.IsKeyDown(Key.Down))
+            else if (e.Key == Key.Down)
             {
-                logic.Control(MoveLogic.Controls.Down);
-            }
-            else
-            {
-                logic.Control(MoveLogic.Controls.None);
+                logic.Down = false;
             }
         }
 
         private void KeyIsDown(object sender, KeyEventArgs e)
         {
-            if ((e.Key == Key.Left && Keyboard.IsKeyDown(Key.Up)) || (e.Key == Key.Up && Keyboard.IsKeyDown(Key.Left)))
+            if (e.Key == Key.Left)
             {
-                logic.Control(MoveLogic.Controls.LeftUp);
-            }
-            else if ((e.Key == Key.Left && Keyboard.IsKeyDown(Key.Down)) || (e.Key == Key.Down && Keyboard.IsKeyDown(Key.Left)))
-            {
-                logic.Control(MoveLogic.Controls.LeftDown);
-            }
-            else if (e.Key == Key.Left)
-            {
-                logic.Control(MoveLogic.Controls.Left);
-            }
-            else if ((e.Key == Key.Right && Keyboard.IsKeyDown(Key.Up)) || (e.Key == Key.Up && Keyboard.IsKeyDown(Key.Right)))
-            {
-                logic.Control(MoveLogic.Controls.RightUp);
-            }
-            else if (e.Key == Key.Right && Keyboard.IsKeyDown(Key.Down) || (e.Key == Key.Down && Keyboard.IsKeyDown(Key.Right)))
-            {
-                logic.Control(MoveLogic.Controls.RightDown);
+                logic.Left = true;
             }
             else if (e.Key == Key.Right)
             {
-                logic.Control(MoveLogic.Controls.Right);
+                logic.Right = true;
             }
             else if (e.Key == Key.Up)
             {
-                logic.Control(MoveLogic.Controls.Up);
+                logic.Up = true;
             }
             else if (e.Key == Key.Down)
             {
-                logic.Control(MoveLogic.Controls.Down);
+                logic.Down = true;
             }
         }
 
@@ -105,6 +85,7 @@ namespace Moving_Out
             display.SetupModel(logic);
             display.SetupSizes(new Size(canvas.ActualWidth, canvas.ActualHeight));
             logic.SetupSizes(new Size((int)canvas.ActualWidth, (int)canvas.ActualHeight));
+            logic.SetupItems();
         }
 
         private void Window_SizeChanged(object sender, SizeChangedEventArgs e)

@@ -15,10 +15,14 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="Images\standing.png" />
     <None Remove="Images\thumbnail.png" />
   </ItemGroup>
 
   <ItemGroup>
+    <Content Include="Images\standing.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Images\thumbnail.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

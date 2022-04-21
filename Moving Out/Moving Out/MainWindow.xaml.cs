@@ -24,7 +24,7 @@ namespace Moving_Out
     {
         MoveLogic logic;
         
-        private void Dt_Tick(object? sender, EventArgs e)
+        private void Dt_Tick(object sender, EventArgs e)
         {
             logic.TimeStep(player);
         }
@@ -34,6 +34,7 @@ namespace Moving_Out
             logic = new MoveLogic();
             canvas.Focus();
 
+            player.Fill = display.Charachter_Standing_Brush;
             DispatcherTimer dt = new DispatcherTimer();
 
             dt.Tick += Dt_Tick;

@@ -29,6 +29,14 @@ namespace Moving_Out.Renderer
             }
         }
 
+        public Brush Charachter_Standing_Brush
+        {
+            get
+            {
+                return new ImageBrush(new BitmapImage(new Uri(Path.Combine("Images", "standing.png"), UriKind.RelativeOrAbsolute)));
+            }
+        }
+
         protected override void OnRender(DrawingContext drawingContext)
         {
             base.OnRender(drawingContext);

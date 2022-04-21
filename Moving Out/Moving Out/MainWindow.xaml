@@ -11,6 +11,6 @@
         WindowState="Maximized">
     <Canvas x:Name="canvas" Focusable="True" KeyDown="KeyIsDown" KeyUp="KeyIsUp">
         <renderer:Display x:Name="display" />
-        <Rectangle x:Name="player" Height="50" Width="50" Fill="Red" Canvas.Left="20" Canvas.Top="50"/>
+        <Rectangle x:Name="player" Height="50" Width="50" Fill="Red" Canvas.Left="50" Canvas.Top="50"/>
     </Canvas>
 </Window>

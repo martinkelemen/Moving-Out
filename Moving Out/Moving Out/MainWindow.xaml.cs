@@ -26,15 +26,12 @@ namespace Moving_Out
         
         private void Dt_Tick(object sender, EventArgs e)
         {
-            logic.TimeStep(player);
+            logic.TimeStep();
         }
         public MainWindow()
         {
             InitializeComponent();
-            logic = new MoveLogic();
-            canvas.Focus();
 
-            player.Fill = display.Charachter_Standing_Brush;
             DispatcherTimer dt = new DispatcherTimer();
 
             dt.Tick += Dt_Tick;
@@ -64,7 +61,7 @@ namespace Moving_Out
 
         private void KeyIsDown(object sender, KeyEventArgs e)
         {
-            if (e.Key==Key.Left)
+            if (e.Key == Key.Left)
             {
                 logic.Left = true;
             }
@@ -84,12 +81,20 @@ namespace Moving_Out
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
+            logic = new MoveLogic();
+            display.SetupModel(logic);
             display.SetupSizes(new Size(canvas.ActualWidth, canvas.ActualHeight));
+            logic.SetupSizes(new Size((int)canvas.ActualWidth, (int)canvas.ActualHeight));
+            logic.SetupItems();
         }
 
         private void Window_SizeChanged(object sender, SizeChangedEventArgs e)
         {
             display.SetupSizes(new Size(canvas.ActualWidth, canvas.ActualHeight));
+            //if (logic != null)
+            //{
+            //    logic.ChangeSize(new Size(canvas.ActualWidth, canvas.ActualHeight));
+            //}
         }
     }
 }

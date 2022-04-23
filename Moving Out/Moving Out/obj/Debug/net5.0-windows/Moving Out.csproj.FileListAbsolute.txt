@@ -46,3 +46,8 @@ C:\Users\l55\source\repos\GUI_20212202_IL7XUS\Moving Out\Moving Out\obj\Debug\ne
 C:\Users\l55\source\repos\GUI_20212202_IL7XUS\Moving Out\Moving Out\obj\Debug\net5.0-windows\Moving Out.genruntimeconfig.cache
 C:\Users\l55\source\repos\GUI_20212202_IL7XUS\Moving Out\Moving Out\obj\Debug\net5.0-windows\Moving Out_Content.g.cs
 C:\Users\l55\source\repos\GUI_20212202_IL7XUS\Moving Out\Moving Out\bin\Debug\net5.0-windows\Images\thumbnail.png
+C:\Users\l55\source\repos\GUI_20212202_IL7XUS\Moving Out\Moving Out\bin\Debug\net5.0-windows\Images\DoomerMenu.png
+C:\Users\l55\source\repos\GUI_20212202_IL7XUS\Moving Out\Moving Out\bin\Debug\net5.0-windows\Images\Ghost_Front.png
+C:\Users\l55\source\repos\GUI_20212202_IL7XUS\Moving Out\Moving Out\bin\Debug\net5.0-windows\Images\standing.png
+C:\Users\l55\source\repos\GUI_20212202_IL7XUS\Moving Out\Moving Out\obj\Debug\net5.0-windows\MainMenu.g.cs
+C:\Users\l55\source\repos\GUI_20212202_IL7XUS\Moving Out\Moving Out\obj\Debug\net5.0-windows\MainMenu.baml

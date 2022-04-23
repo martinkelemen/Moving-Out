@@ -39,14 +39,6 @@ namespace Moving_Out.Logic
             speed = 3;
         }
 
-        //public void ChangeSize(Size newArea)
-        //{
-        //    Player.Center = new System.Drawing.Point((int)(newArea.Width / (area.Width / Player.Center.X)), (int)(newArea.Height / (area.Height/Player.Center.Y)));
-        //    Player.Radius = (int)(newArea.Width / (area.Width / Player.Radius));
-        //    speed = (int)(newArea.Width / (area.Width / speed));
-        //    area = newArea;
-        //}
-
         public MoveLogic()
         {
             
@@ -126,61 +118,6 @@ namespace Moving_Out.Logic
 
             Changed?.Invoke(this, null);
         }
-
-        //public enum Controls
-        //{
-        //    Left, Right, Up, Down, LeftUp, LeftDown, RightUp, RightDown, None
-        //}
-
-
-        //public void Control(Controls control)
-        //{   
-        //    if(TestMove(new Player(Player.Center.X, Player.Center.Y, 15), control))
-        //    {
-        //        switch (control)
-        //        {
-        //            case Controls.Left:
-        //                Player.Speed = new Vector(-8, 0);
-        //                Player.Move();
-        //                break;
-        //            case Controls.Right:
-        //                Player.Speed = new Vector(8, 0);
-        //                Player.Move();
-        //                break;
-        //            case Controls.Up:
-        //                Player.Speed = new Vector(0, -8);
-        //                Player.Move();
-        //                break;
-        //            case Controls.Down:
-        //                Player.Speed = new Vector(0, 8);
-        //                Player.Move();
-        //                break;
-        //            case Controls.LeftUp:
-        //                Player.Speed = new Vector(-8, -8);
-        //                Player.Move();
-        //                break;
-        //            case Controls.LeftDown:
-        //                Player.Speed = new Vector(-8, 8);
-        //                Player.Move();
-        //                break;
-        //            case Controls.RightUp:
-        //                Player.Speed = new Vector(8, -8);
-        //                Player.Move();
-        //                break;
-        //            case Controls.RightDown:
-        //                Player.Speed = new Vector(8, 8);
-        //                Player.Move();
-        //                break;
-        //            case Controls.None:
-        //                Player.Speed = new Vector(0, 0);
-        //                Player.Move();
-        //                break;
-        //            default:
-        //                break;
-        //        }
-        //    }
-        //    Changed?.Invoke(this, null);
-        //}
 
         private bool TestMove(IGameControl testPlayer)
         {

@@ -23,5 +23,22 @@ namespace Moving_Out
         {
             InitializeComponent();
         }
+
+        private void New_Game(object sender, RoutedEventArgs e)
+        {
+            MainWindow mw = new MainWindow();
+            mw.Show();
+            this.Close();
+        }
+
+        private void HighScore(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Quit(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
     }
 }

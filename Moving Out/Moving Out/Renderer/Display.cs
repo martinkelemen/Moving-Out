@@ -44,6 +44,14 @@ namespace Moving_Out.Renderer
             }
         }
 
+        public Brush Roommate_Brush
+        {
+            get
+            {
+                return new ImageBrush(new BitmapImage(new Uri(Path.Combine("Images", "Ghost_Front.png"), UriKind.RelativeOrAbsolute)));
+            }
+        }
+
         protected override void OnRender(DrawingContext drawingContext)
         {
             base.OnRender(drawingContext);
@@ -53,6 +61,7 @@ namespace Moving_Out.Renderer
                 drawingContext.DrawRectangle(HouseBrush, null, new Rect(0, 0, area.Width, area.Height));
                 drawingContext.DrawGeometry(Brushes.Transparent, null, new Wall((int)area.Width, (int)area.Height).Area);
                 drawingContext.DrawGeometry(Charachter_Standing_Brush, null, (model.Player as GameItem).Area);
+                drawingContext.DrawGeometry(Roommate_Brush, null, (model.Roommate as GameItem).Area);
             }
         }
     }

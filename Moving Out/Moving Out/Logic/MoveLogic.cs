@@ -10,6 +10,8 @@ namespace Moving_Out.Logic
 {
     public class MoveLogic : IGameModel
     {
+        static Random r = new Random();
+
         public bool Left { get; set; }
         public bool Right { get; set; }
         public bool Up { get; set; }
@@ -21,6 +23,7 @@ namespace Moving_Out.Logic
         System.Windows.Size area;
 
         public IGameControl Player { get; set; }
+        public IGameControl Roommate { get; set; }
         public Wall Wall { get; set; }
 
         public void SetupSizes(System.Windows.Size area)
@@ -32,7 +35,8 @@ namespace Moving_Out.Logic
         {
             Wall = new Wall((int)area.Width, (int)area.Height);
             Player = new Player((int)(area.Width / 2.206897), (int)(area.Height / 1.168966), (int)(area.Width / 128));
-            speed = 4;
+            Roommate = new Roommate((int)(area.Width / 4.8), (int)(area.Height / 2.5425), (int)(area.Width / 128));
+            speed = 3;
         }
 
         //public void ChangeSize(Size newArea)
@@ -48,9 +52,47 @@ namespace Moving_Out.Logic
             
         }
 
+        public void ChangeRoommateDirection()
+        {
+            int newDirection_number = r.Next(0, 201);
+
+            if (newDirection_number <= 25)
+            {
+                Roommate.Speed = new Vector(speed * -1/2, 0);
+            }
+            else if (newDirection_number <= 50)
+            {
+                Roommate.Speed = new Vector(speed/2, 0);
+            }
+            else if (newDirection_number <= 75)
+            {
+                Roommate.Speed = new Vector(speed *-1/2, speed/2);
+            }
+            else if (newDirection_number <= 100)
+            {
+                Roommate.Speed = new Vector(speed/2, speed/2);
+            }
+            else if (newDirection_number <= 125)
+            {
+                Roommate.Speed = new Vector(speed*-1/2, speed*-1/2);
+            }
+            else if (newDirection_number <= 150)
+            {
+                Roommate.Speed = new Vector(speed*-1/2, speed/2);
+            }
+            else if (newDirection_number <= 175)
+            {
+                Roommate.Speed = new Vector(0, speed*-1/2);
+            }
+            else
+            {
+                Roommate.Speed = new Vector(0, speed/2);
+            }
+        }
+
         public void TimeStep()
         {
-            if (TestMove(new Player(Player.Center.X, Player.Center.Y, 15)))
+            if (TestMove(new Player(Player.Center.X, Player.Center.Y, Player.Radius)))
             {
                 if (Left == true)
                 {
@@ -73,6 +115,14 @@ namespace Moving_Out.Logic
                     Player.Move();
                 }
             }
+
+            if(Roommate.Center.X < (int)(area.Width / 12.631579) || Roommate.Center.X > (int)(area.Width / 1.078652) 
+                || Roommate.Center.Y < (int)(area.Height / 8.843478) || Roommate.Center.Y > (int)(area.Height / 1.13))
+            {
+                Roommate.Speed = new Vector(Roommate.Speed.X * -1, Roommate.Speed.Y * -1);
+            }
+
+            Roommate.Move();
 
             Changed?.Invoke(this, null);
         }

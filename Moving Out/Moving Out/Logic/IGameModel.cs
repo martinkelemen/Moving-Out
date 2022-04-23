@@ -12,5 +12,6 @@ namespace Moving_Out.Logic
 
         IGameControl Player { get; set; }
         IGameControl Roommate { get; set; }
+        List<GameObjective> Objectives { get; set; }
     }
 }

@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -23,7 +24,9 @@ namespace Moving_Out
     public partial class MainWindow : Window
     {
         MoveLogic logic;
-        
+        object lockObject;
+        bool programPaused;
+
         private void Dt_Tick(object sender, EventArgs e)
         {
             logic.TimeStep();
@@ -34,9 +37,22 @@ namespace Moving_Out
             logic.ChangeRoommateDirection();
         }
 
+        private void Dt_Obj_Tick(object sender, EventArgs e)
+        {
+            logic.RandomObjective();
+        }
+
+        private void Dt_Obj_T_Tick(object sender, EventArgs e)
+        {
+            logic.DecreaseSeconds();
+        }
+
         public MainWindow()
         {
             InitializeComponent();
+
+            lockObject = new object();
+            programPaused = false;
 
             DispatcherTimer dt = new DispatcherTimer();
 
@@ -49,6 +65,40 @@ namespace Moving_Out
             dt_rm.Tick += Dt_Rm_Tick;
             dt_rm.Interval = TimeSpan.FromSeconds(5);
             dt_rm.Start();
+
+            DispatcherTimer dt_obj = new DispatcherTimer();
+
+            dt_obj.Tick += Dt_Obj_Tick;
+            dt_obj.Interval = TimeSpan.FromSeconds(10);
+            dt_obj.Start();
+
+            DispatcherTimer dt_obj_t = new DispatcherTimer();
+
+            dt_obj_t = new DispatcherTimer();
+            dt_obj_t.Tick += Dt_Obj_T_Tick;
+            dt_obj_t.Interval = TimeSpan.FromSeconds(1);
+            dt_obj_t.Start();
+
+            new Task(() =>
+            {
+                while (true)
+                {
+                    if (logic != null && logic.Objectives != null)
+                    {
+                        Thread.Sleep(10000);
+                        lock(lockObject)
+                        {
+                            while(programPaused)
+                            {
+                                Monitor.Wait(lockObject);
+                            }
+                        }
+                        dt_rm.Stop();
+                        logic.RoommateObjective();
+                        dt_rm.Start();
+                    }
+                }
+            }).Start();
         }
 
         private void KeyIsUp(object sender, KeyEventArgs e)
@@ -88,6 +138,10 @@ namespace Moving_Out
             else if (e.Key == Key.Down)
             {
                 logic.Down = true;
+            }
+            else if (e.Key == Key.E)
+            {
+                logic.Interact();
             }
         }
 

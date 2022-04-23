@@ -8,38 +8,136 @@ using System.Windows.Media;
 
 namespace Moving_Out.Logic
 {
+    public enum ObjectiveType
+    {
+        Pizza, Music, Trash, Fish, Dishes, Clean_Picture, Clean_Dinosaur, None
+    }
+
     public class GameObjective : GameItem
     {
-        public enum ObjectiveType
-        {
-            Pizza, Music, Trash, Fish, Dishes, Clean_Picture, Clean_Dinosaur
-        }
+        static Random r = new Random();
 
-        private ObjectiveType objType;
+        public ObjectiveType ObjType { get; }
+        private int displayWidth;
+        private int displayHeight;
 
         public int Radius { get; set; }
         public System.Drawing.Point Center { get; set; }
+
+        public bool Interactable { get; private set; }
+        public int PartCounter { get; set; }
+        public int Seconds { get; set; }
 
         public override Geometry Area
         {
             get
             {
-                return new EllipseGeometry(new Point(Center.X, Center.Y), Radius, Radius);
+                if (ObjType == ObjectiveType.Pizza)
+                {
+                    if (PartCounter == 0)
+                    {
+                        Interactable = false;
+                        Center = new System.Drawing.Point((int)(displayWidth / 1.676856), (int)(displayHeight / 2.26));
+                        return new EllipseGeometry(new Point(Center.X, Center.Y), Radius, Radius);
+                    }
+                    else if (PartCounter == 1)
+                    {
+                        Interactable = true;
+                        Center = new System.Drawing.Point((int)(displayWidth / 2.269504), (int)(displayHeight / 1.13));
+                        return new EllipseGeometry(new Point(Center.X, Center.Y), Radius, Radius);
+                    }
+                    else
+                    {
+                        Center = new System.Drawing.Point((int)(displayWidth / 1.567347), (int)(displayHeight / 10.17));
+                        return new EllipseGeometry(new Point(Center.X, Center.Y), Radius, Radius);
+                    }
+                }
+                else if (ObjType == ObjectiveType.Music)
+                {
+                    Center = new System.Drawing.Point((int)(displayWidth / 12.631579), (int)(displayHeight / 2.16383));
+                    return new EllipseGeometry(new Point(Center.X, Center.Y), Radius, Radius);
+                }
+                else if (ObjType == ObjectiveType.Trash)
+                {
+                    if (PartCounter == 0)
+                    {
+                        return new EllipseGeometry(new Point(Center.X, Center.Y), Radius, Radius);
+                    }
+                    else
+                    {
+                        Center = new System.Drawing.Point((int)(displayWidth / 1.111111), (int)(displayHeight / 8.475));
+                        return new EllipseGeometry(new Point(Center.X, Center.Y), Radius, Radius);
+                    }
+                }
+                else if (ObjType == ObjectiveType.Fish)
+                {
+                    if (PartCounter == 0)
+                    {
+                        Center = new System.Drawing.Point((int)(displayWidth / 1.665221), (int)(displayHeight / 1.432394));
+                        return new EllipseGeometry(new Point(Center.X, Center.Y), Radius, Radius);
+                    }
+                    else
+                    {
+                        Center = new System.Drawing.Point((int)(displayWidth / 1.111111), (int)(displayHeight / 8.475));
+                        return new EllipseGeometry(new Point(Center.X, Center.Y), Radius, Radius);
+                    }
+                }
+                else if (ObjType == ObjectiveType.Dishes)
+                {
+                    if (PartCounter == 0)
+                    {
+                        Center = new System.Drawing.Point((int)(displayWidth / 1.4307), (int)(displayHeight / 8.475));
+                        return new EllipseGeometry(new Point(Center.X, Center.Y), Radius, Radius);
+                    }
+                    else
+                    {
+                        Center = new System.Drawing.Point((int)(displayWidth / 1.389291), (int)(displayHeight / 10.17));
+                        return new EllipseGeometry(new Point(Center.X, Center.Y), Radius, Radius);
+                    }
+                }
+                else if (ObjType == ObjectiveType.Clean_Picture)
+                {
+
+                    return new EllipseGeometry(new Point(Center.X, Center.Y), Radius, Radius);
+                }
+                else
+                {
+                    return new EllipseGeometry(new Point(Center.X, Center.Y), Radius, Radius);
+                }
             }
         }
 
-        public GameObjective(ObjectiveType objType, int centerX, int centerY, int radius)
+        public GameObjective(ObjectiveType objType, int radius, int displayWidth, int displayHeight, int centerX = 0, int centerY = 0)
         {
-            this.objType = objType;
+            this.ObjType = objType;
             Radius = radius;
             Center = new System.Drawing.Point(centerX, centerY);
+            PartCounter = 0;
+            Interactable = true;
+            this.displayWidth = displayWidth;
+            this.displayHeight = displayHeight;
+            Seconds = 30;
+
+            if (objType == ObjectiveType.Clean_Picture)
+            {
+                int number = r.Next(0, 2);
+                if (number == 0) Center = new System.Drawing.Point((int)(displayWidth / 1.14082), (int)(displayHeight / 2.511111));
+                else Center = new System.Drawing.Point((int)(displayWidth / 1.14082), (int)(displayHeight / 2.511111));
+            }
+            else if (objType == ObjectiveType.Clean_Dinosaur)
+            {
+                int number = r.Next(0, 3);
+                if (number == 0) Center = new System.Drawing.Point((int)(displayWidth / 5.565217), (int)(displayHeight / 1.849091));
+                else if (number == 1) Center = new System.Drawing.Point((int)(displayWidth / 6.736842), (int)(displayHeight / 1.27125));
+                else Center = new System.Drawing.Point((int)(displayWidth / 3.84), (int)(displayHeight / 1.255556));
+            }
         }
 
-        public IList<string> ObjectiveText()
+        static public IList<string> ObjectiveText(ObjectiveType type)
         {
             List<string> texts = new List<string>();
 
-            switch (objType)
+            switch (type)
             {
                 case ObjectiveType.Pizza:
                     texts.Add("Your roommate ordered a pizza, get ready!");

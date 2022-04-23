@@ -28,6 +28,12 @@ namespace Moving_Out
         {
             logic.TimeStep();
         }
+
+        private void Dt_Rm_Tick(object sender, EventArgs e)
+        {
+            logic.ChangeRoommateDirection();
+        }
+
         public MainWindow()
         {
             InitializeComponent();
@@ -35,8 +41,14 @@ namespace Moving_Out
             DispatcherTimer dt = new DispatcherTimer();
 
             dt.Tick += Dt_Tick;
-            dt.Interval = TimeSpan.FromMilliseconds(20);
+            dt.Interval = TimeSpan.FromMilliseconds(10);
             dt.Start();
+
+            DispatcherTimer dt_rm = new DispatcherTimer();
+
+            dt_rm.Tick += Dt_Rm_Tick;
+            dt_rm.Interval = TimeSpan.FromSeconds(5);
+            dt_rm.Start();
         }
 
         private void KeyIsUp(object sender, KeyEventArgs e)

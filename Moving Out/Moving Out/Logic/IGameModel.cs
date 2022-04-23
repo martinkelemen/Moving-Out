@@ -11,5 +11,6 @@ namespace Moving_Out.Logic
         event EventHandler Changed;
 
         IGameControl Player { get; set; }
+        IGameControl Roommate { get; set; }
     }
 }

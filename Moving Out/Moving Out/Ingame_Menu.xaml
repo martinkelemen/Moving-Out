@@ -1,0 +1,30 @@
+﻿<Window x:Class="Moving_Out.Ingame_Menu"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Moving_Out"
+        mc:Ignorable="d"
+        Title="Ingame_Menu" Height="270" Width="400"
+        WindowStartupLocation="CenterScreen" WindowStyle="None">
+    <Grid>
+        <StackPanel>
+            <Button Height="70" Width="350" Content="Continue" FontFamily="Papyrus" Margin="10" FontSize="24" Click="Continue" BorderThickness="0,0,0,0">
+                <Button.Background>
+                    <ImageBrush ImageSource="/Images/ingamemenuclick.png"/>
+                </Button.Background>
+            </Button>
+            <Button Height="70" Width="350" Content="xd" FontFamily="Papyrus" Margin="10" FontSize="24" Click="Save" BorderThickness="0,0,0,0">
+                <Button.Background>
+                    <ImageBrush ImageSource="/Images/ingamemenuclick.png"/>
+                </Button.Background>
+            </Button>
+            <Button Height="70" Width="350" Content="Exit to Main Menu" FontFamily="Papyrus" Margin="10" FontSize="24" Click="Exit" BorderThickness="0,0,0,0">
+                <Button.Background>
+                    <ImageBrush ImageSource="/Images/ingamemenuclick.png"/>
+                </Button.Background>
+            </Button>
+        </StackPanel>
+        
+    </Grid>
+</Window>

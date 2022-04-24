@@ -17,6 +17,7 @@
   <ItemGroup>
     <None Remove="Images\DoomerMenu.png" />
     <None Remove="Images\Ghost_Front.png" />
+    <None Remove="Images\ingamemenuclick.png" />
     <None Remove="Images\menuclick.png" />
     <None Remove="Images\standing.png" />
     <None Remove="Images\thumbnail.png" />
@@ -27,6 +28,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Images\Ghost_Front.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\ingamemenuclick.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Images\menuclick.png">

@@ -23,7 +23,7 @@ namespace Moving_Out
         {
             InitializeComponent();
         }
-
+        
         private void New_Game(object sender, RoutedEventArgs e)
         {
             MainWindow mw = new MainWindow();

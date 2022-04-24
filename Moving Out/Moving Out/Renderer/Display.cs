@@ -62,6 +62,11 @@ namespace Moving_Out.Renderer
                 drawingContext.DrawGeometry(Brushes.Transparent, null, new Wall((int)area.Width, (int)area.Height).Area);
                 drawingContext.DrawGeometry(Charachter_Standing_Brush, null, (model.Player as GameItem).Area);
                 drawingContext.DrawGeometry(Roommate_Brush, null, (model.Roommate as GameItem).Area);
+
+                for (int i = 0; i < model.Objectives.Count(); i++)
+                {
+                    drawingContext.DrawGeometry(Brushes.Transparent, new Pen(Brushes.Red, 1), model.Objectives[i].Area);
+                }
             }
         }
     }

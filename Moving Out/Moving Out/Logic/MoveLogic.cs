@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -25,6 +26,7 @@ namespace Moving_Out.Logic
         public IGameControl Player { get; set; }
         public IGameControl Roommate { get; set; }
         public Wall Wall { get; set; }
+        public List<GameObjective> Objectives { get; set; }
 
         public void SetupSizes(System.Windows.Size area)
         {
@@ -36,20 +38,130 @@ namespace Moving_Out.Logic
             Wall = new Wall((int)area.Width, (int)area.Height);
             Player = new Player((int)(area.Width / 2.206897), (int)(area.Height / 1.168966), (int)(area.Width / 128));
             Roommate = new Roommate((int)(area.Width / 4.8), (int)(area.Height / 2.5425), (int)(area.Width / 128));
+            Objectives = new List<GameObjective>();
             speed = 3;
         }
-
-        //public void ChangeSize(Size newArea)
-        //{
-        //    Player.Center = new System.Drawing.Point((int)(newArea.Width / (area.Width / Player.Center.X)), (int)(newArea.Height / (area.Height/Player.Center.Y)));
-        //    Player.Radius = (int)(newArea.Width / (area.Width / Player.Radius));
-        //    speed = (int)(newArea.Width / (area.Width / speed));
-        //    area = newArea;
-        //}
 
         public MoveLogic()
         {
             
+        }
+
+        public void Interact()
+        {
+            for (int i = 0; i < Objectives.Count(); i++)
+            {
+                if ((Player as GameItem).IsCollision(Objectives[i]) && Objectives[i].Interactable)
+                {
+                    IncreasePartCounter(Objectives[i]);
+                }
+            }
+        }
+
+        public void DecreaseSeconds()
+        {
+            for (int i = 0; i < Objectives.Count(); i++)
+            {
+                Objectives[i].Seconds--;
+
+                if(Objectives[i].Seconds == 0 && !Objectives[i].Interactable)
+                {
+                    IncreasePartCounter(Objectives[i]);
+                    Objectives[i].Seconds = 30;
+                }
+                else
+                {
+                    //todo game over
+                }
+            }
+        }
+
+        private void IncreasePartCounter(GameObjective obj)
+        {
+            obj.PartCounter++;
+            if ((obj.PartCounter + 1) == GameObjective.ObjectiveText(obj.ObjType).Count())
+            {
+                Objectives.Remove(obj);
+            }
+        }
+
+        public void RandomObjective()
+        {
+            int number = r.Next(0, 3);
+
+            if(!(Objectives.Where(t => t.ObjType == ObjectiveType.Fish).Any() && Objectives.Where(t => t.ObjType == ObjectiveType.Clean_Picture).Any() 
+                && Objectives.Where(t => t.ObjType == ObjectiveType.Clean_Dinosaur).Any()))
+            {
+                if (number == 0 && !Objectives.Where(t => t.ObjType == ObjectiveType.Fish).Any()) Objectives.Add(new GameObjective(ObjectiveType.Fish, 50, (int)area.Width, (int)area.Height));
+                else if (number == 1 && !Objectives.Where(t => t.ObjType == ObjectiveType.Clean_Picture).Any()) Objectives.Add(new GameObjective(ObjectiveType.Clean_Picture, 50, (int)area.Width, (int)area.Height));
+                else if (number == 2 && !Objectives.Where(t => t.ObjType == ObjectiveType.Clean_Dinosaur).Any()) Objectives.Add(new GameObjective(ObjectiveType.Clean_Dinosaur, 50, (int)area.Width, (int)area.Height));
+                else RandomObjective();
+            }
+        }
+
+        public void RoommateObjective()
+        {
+            int number = r.Next(0, 4);
+            //int number = 2;
+
+            if(!(Objectives.Where(t => t.ObjType == ObjectiveType.Pizza).Any() && Objectives.Where(t => t.ObjType == ObjectiveType.Music).Any() &&
+                Objectives.Where(t => t.ObjType == ObjectiveType.Trash).Any() && Objectives.Where(t => t.ObjType == ObjectiveType.Dishes).Any()))
+            {
+                if (number == 0 && !Objectives.Where(t => t.ObjType == ObjectiveType.Pizza).Any())
+                {
+                    MoveRoommateToObjective(ObjectiveType.Pizza);
+                    Objectives.Add(new GameObjective(ObjectiveType.Pizza, 50, (int)area.Width, (int)area.Height));
+                }
+                else if (number == 1 && !Objectives.Where(t => t.ObjType == ObjectiveType.Music).Any())
+                {
+                    MoveRoommateToObjective(ObjectiveType.Music);
+                    Objectives.Add(new GameObjective(ObjectiveType.Music, 50, (int)area.Width, (int)area.Height));
+                }
+                else if (number == 2 && !Objectives.Where(t => t.ObjType == ObjectiveType.Trash).Any())
+                {
+                    MoveRoommateToObjective(ObjectiveType.Trash);
+                    Objectives.Add(new GameObjective(ObjectiveType.Trash, 50, (int)area.Width, (int)area.Height, Roommate.Center.X, Roommate.Center.Y));
+                }
+                else if (number == 3 && !Objectives.Where(t => t.ObjType == ObjectiveType.Dishes).Any())
+                {
+                    MoveRoommateToObjective(ObjectiveType.Dishes);
+                    Objectives.Add(new GameObjective(ObjectiveType.Dishes, 50, (int)area.Width, (int)area.Height));
+                }
+                else
+                {
+                    RoommateObjective();
+                }
+            }
+        }
+
+        private void MoveRoommateToObjective(ObjectiveType type)
+        {
+            GameObjective tmp;
+            if (type == ObjectiveType.Trash)
+            {
+                while ((Roommate as GameItem).IsCollision(Wall))
+                {
+                    ChangeRoommateDirection();
+                    Thread.Sleep(5000);
+                }
+            }
+            else
+            {
+                tmp = new GameObjective(type, 30, (int)area.Width, (int)area.Height);
+
+                while (!(Roommate as GameItem).IsCollision(tmp))
+                {
+                    if (Roommate.Center.X > tmp.Center.X && Roommate.Center.Y > tmp.Center.Y) Roommate.Speed = new Vector(speed * -1 / 2, speed * -1 / 2);
+                    else if (Roommate.Center.X < tmp.Center.X && Roommate.Center.Y > tmp.Center.Y) Roommate.Speed = new Vector(speed / 2, speed * -1 / 2);
+                    else if (Roommate.Center.X < tmp.Center.X && Roommate.Center.Y < tmp.Center.Y) Roommate.Speed = new Vector(speed / 2, speed / 2);
+                    else if (Roommate.Center.X > tmp.Center.X && Roommate.Center.Y < tmp.Center.Y) Roommate.Speed = new Vector(speed * -1 / 2, speed / 2);
+                    else if (Roommate.Center.X == tmp.Center.X && Roommate.Center.Y < tmp.Center.Y) Roommate.Speed = new Vector(0, speed / 2);
+                    else if (Roommate.Center.X == tmp.Center.X && Roommate.Center.Y > tmp.Center.Y) Roommate.Speed = new Vector(0, speed * -1 / 2);
+                    else if (Roommate.Center.X > tmp.Center.X && Roommate.Center.Y == tmp.Center.Y) Roommate.Speed = new Vector(speed * -1 / 2, 0);
+                    else if (Roommate.Center.X < tmp.Center.X && Roommate.Center.Y == tmp.Center.Y) Roommate.Speed = new Vector(speed / 2, 0);
+                }
+            }
+            Roommate.Speed = new Vector(0, 0);
         }
 
         public void ChangeRoommateDirection()
@@ -88,6 +200,7 @@ namespace Moving_Out.Logic
             {
                 Roommate.Speed = new Vector(0, speed/2);
             }
+            //newObjective(ObjectiveType.None);
         }
 
         public void TimeStep()
@@ -126,61 +239,6 @@ namespace Moving_Out.Logic
 
             Changed?.Invoke(this, null);
         }
-
-        //public enum Controls
-        //{
-        //    Left, Right, Up, Down, LeftUp, LeftDown, RightUp, RightDown, None
-        //}
-
-
-        //public void Control(Controls control)
-        //{   
-        //    if(TestMove(new Player(Player.Center.X, Player.Center.Y, 15), control))
-        //    {
-        //        switch (control)
-        //        {
-        //            case Controls.Left:
-        //                Player.Speed = new Vector(-8, 0);
-        //                Player.Move();
-        //                break;
-        //            case Controls.Right:
-        //                Player.Speed = new Vector(8, 0);
-        //                Player.Move();
-        //                break;
-        //            case Controls.Up:
-        //                Player.Speed = new Vector(0, -8);
-        //                Player.Move();
-        //                break;
-        //            case Controls.Down:
-        //                Player.Speed = new Vector(0, 8);
-        //                Player.Move();
-        //                break;
-        //            case Controls.LeftUp:
-        //                Player.Speed = new Vector(-8, -8);
-        //                Player.Move();
-        //                break;
-        //            case Controls.LeftDown:
-        //                Player.Speed = new Vector(-8, 8);
-        //                Player.Move();
-        //                break;
-        //            case Controls.RightUp:
-        //                Player.Speed = new Vector(8, -8);
-        //                Player.Move();
-        //                break;
-        //            case Controls.RightDown:
-        //                Player.Speed = new Vector(8, 8);
-        //                Player.Move();
-        //                break;
-        //            case Controls.None:
-        //                Player.Speed = new Vector(0, 0);
-        //                Player.Move();
-        //                break;
-        //            default:
-        //                break;
-        //        }
-        //    }
-        //    Changed?.Invoke(this, null);
-        //}
 
         private bool TestMove(IGameControl testPlayer)
         {

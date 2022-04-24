@@ -43,7 +43,7 @@ namespace Moving_Out.Logic
                 gg.Children.Add(new RectangleGeometry(new Rect((int)(displayWidth / 1.997919), (int)(displayHeight / 1.469653), (int)(displayWidth / 24.935065), (int)(displayHeight / 9.970588))));
                 gg.Children.Add(new RectangleGeometry(new Rect((int)(displayWidth / 1.726619), (int)(displayHeight / 1.313953), (int)(displayWidth / 16.134454), (int)(displayHeight / 50.85))));
                 gg.Children.Add(new RectangleGeometry(new Rect((int)(displayWidth / 1.562246), (int)(displayHeight / 1.160959), (int)(displayWidth / 48), (int)(displayHeight / 50.85))));
-                gg.Children.Add(new RectangleGeometry(new Rect((int)(displayWidth / 1.562246), (int)(displayHeight / 1.564615), (int)(displayWidth / 48), (int)(displayHeight / 6.277778))));
+                gg.Children.Add(new RectangleGeometry(new Rect((int)(displayWidth / 1.562246), (int)(displayHeight / 1.564615), (int)(displayWidth / 48), (int)(displayHeight / 6.277778) + (int)(displayHeight / 50.85))));
                 gg.Children.Add(new RectangleGeometry(new Rect((int)(displayWidth / 1.513002), (int)(displayHeight / 1.564615), (int)(displayWidth / 3.84), (int)(displayHeight / 50.85))));
                 gg.Children.Add(new RectangleGeometry(new Rect((int)(displayWidth / 1.315068), (int)(displayHeight / 2.11875), (int)(displayWidth / 48), (int)(displayHeight / 6.78))));
                 //hálószoba/konyha
@@ -52,10 +52,10 @@ namespace Moving_Out.Logic
                 //tárgyak - nappali
                 gg.Children.Add(new RectangleGeometry(new Rect((int)(displayWidth / 9.846154), (int)(displayHeight / 5.811429), (int)(displayWidth / 29.538462), (int)(displayHeight / 19.557692)))); //zongora
                 gg.Children.Add(new RectangleGeometry(new Rect((int)(displayWidth / 12.387097), (int)(displayHeight / 2.905714), (int)(displayWidth / 12.8), (int)(displayHeight / 19.557692)))); //könyvespolc
-                gg.Children.Add(new RectangleGeometry(new Rect((int)(displayWidth / 9.142857), (int)(displayHeight / 2.409953), (int)(displayWidth / 42.666667), (int)(displayHeight / 40.68)))); //könyvolvasó
+                gg.Children.Add(new RectangleGeometry(new Rect((int)(displayWidth / 9.142857), (int)(displayHeight / 2.409953), (int)(displayWidth / 42.666667), (int)(displayHeight / 40.68) - (int)(displayHeight / 101.7)))); //könyvolvasó
                 gg.Children.Add(new RectangleGeometry(new Rect((int)(displayWidth / 12.631579), (int)(displayHeight / 2.16383), (int)(displayWidth / 42.666667), (int)(displayHeight / 40.68)))); //rádió
-                gg.Children.Add(new RectangleGeometry(new Rect((int)(displayWidth / 3.33913), (int)(displayHeight / 2.947826), (int)(displayWidth / 8.533333), (int)(displayHeight / 9.685714)))); //kanapé
-                //gg.Children.Add(new RectangleGeometry(new Rect(745, 470, 50, 20))); //orgona
+                gg.Children.Add(new RectangleGeometry(new Rect((int)(displayWidth / 3.33913), (int)(displayHeight / 2.947826), (int)(displayWidth / 8.533333), (int)(displayHeight / 9.685714) - (int)(displayHeight / 101.7)))); //kanapé
+                gg.Children.Add(new RectangleGeometry(new Rect((int)(displayWidth/2.577181), (int)(displayHeight / 2.311364), 50, 20))); //hangszer
                 gg.Children.Add(new RectangleGeometry(new Rect((int)(displayWidth / 2.782609), (int)(displayHeight / 4.52), (int)(displayWidth / 25.6), (int)(displayHeight / 50.85)))); //kandalló
                 gg.Children.Add(new RectangleGeometry(new Rect((int)(displayWidth / 5.454545), (int)(displayHeight / 10.705263), (int)(displayWidth / 32), (int)(displayHeight / 50.85)))); //ruhásszekrény
                 //tárgyak - konyha
@@ -69,7 +69,8 @@ namespace Moving_Out.Logic
                 //tárgyak - hálószoba1
                 gg.Children.Add(new RectangleGeometry(new Rect((int)(displayWidth / 1.14082), (int)(displayHeight / 2.511111), (int)(displayWidth / 23.13253), (int)(displayHeight / 101.7)))); //ágy
                 gg.Children.Add(new RectangleGeometry(new Rect((int)(displayWidth / 1.132743), (int)(displayHeight / 1.648298), (int)(displayWidth / 32), (int)(displayHeight / 101.7)))); //könyvek
-                gg.Children.Add(new RectangleGeometry(new Rect((int)(displayWidth / 1.28), (int)(displayHeight / 1.695), (int)(displayWidth / 25.6), (int)(displayHeight / 33.9)))); //sarok
+                gg.Children.Add(new RectangleGeometry(new Rect((int)(displayWidth / 1.28), (int)(displayHeight / 1.695), (int)(displayWidth / 51.891892), (int)(displayHeight / 33.9)))); //sarok
+                gg.Children.Add(new RectangleGeometry(new Rect((int)(displayWidth / 1.248375), (int)(displayHeight / 1.614286), (int)(displayWidth / 51.891892), (int)(displayHeight / 101.7)))); //sarok2
                 //tárgyak - hálószoba2
                 gg.Children.Add(new RectangleGeometry(new Rect((int)(displayWidth / 1.315068), (int)(displayHeight / 1.473913), (int)(displayWidth / 16.99115), (int)(displayHeight / 101.7)))); //ágy
                 gg.Children.Add(new RectangleGeometry(new Rect((int)(displayWidth / 1.219822), (int)(displayHeight / 1.51791), (int)(displayWidth / 25.6), (int)(displayHeight / 101.7)))); //éjjeliszekrény
@@ -92,7 +93,7 @@ namespace Moving_Out.Logic
                 gg.Children.Add(new RectangleGeometry(new Rect((int)(displayWidth / 4.571429), (int)(displayHeight / 1.540909), (int)(displayWidth / 24), (int)(displayHeight / 18.490909)))); //betört téma
                 gg.Children.Add(new RectangleGeometry(new Rect((int)(displayWidth / 12.387097), (int)(displayHeight / 1.240244), (int)(displayWidth / 32), (int)(displayHeight / 25.425)))); //fotel
                 gg.Children.Add(new RectangleGeometry(new Rect((int)(displayWidth / 6.736842), (int)(displayHeight / 1.27125), (int)(displayWidth / 14.222222), (int)(displayHeight / 16.95)))); //dínó2
-                gg.Children.Add(new RectangleGeometry(new Rect((int)(displayWidth / 4.571429), (int)(displayHeight / 1.287342), (int)(displayWidth/48), (int)(displayHeight / 50.85)))); //farok
+                gg.Children.Add(new RectangleGeometry(new Rect((int)(displayWidth / 4.571429), (int)(displayHeight / 1.287342) + (int)(displayHeight / 101.7), (int)(displayWidth/48), (int)(displayHeight / 101.7)))); //farok
                 gg.Children.Add(new RectangleGeometry(new Rect((int)(displayWidth / 3.84), (int)(displayHeight / 1.255556), (int)(displayWidth / 17.454545), (int)(displayHeight / 29.057143)))); //dínó3
                 //tárgyak - egyéb
                 gg.Children.Add(new RectangleGeometry(new Rect((int)(displayWidth / 2.269504), (int)(displayHeight / 1.13), (int)(displayWidth / 25.6), (int)(displayHeight / 101.7)))); //ajtó

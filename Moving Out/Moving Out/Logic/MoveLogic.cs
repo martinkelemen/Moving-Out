@@ -89,9 +89,14 @@ namespace Moving_Out.Logic
         {
             int number = r.Next(0, 3);
 
-            if (number == 0 && !Objectives.Where(t => t.ObjType == ObjectiveType.Fish).Any()) Objectives.Add(new GameObjective(ObjectiveType.Fish, 50, (int)area.Width, (int)area.Height));
-            else if (number == 1 && !Objectives.Where(t => t.ObjType == ObjectiveType.Clean_Picture).Any()) Objectives.Add(new GameObjective(ObjectiveType.Clean_Picture, 50, (int)area.Width, (int)area.Height));
-            else if (number == 2 && !Objectives.Where(t => t.ObjType == ObjectiveType.Clean_Dinosaur).Any()) Objectives.Add(new GameObjective(ObjectiveType.Clean_Dinosaur, 50, (int)area.Width, (int)area.Height));
+            if(!(Objectives.Where(t => t.ObjType == ObjectiveType.Fish).Any() && Objectives.Where(t => t.ObjType == ObjectiveType.Clean_Picture).Any() 
+                && Objectives.Where(t => t.ObjType == ObjectiveType.Clean_Dinosaur).Any()))
+            {
+                if (number == 0 && !Objectives.Where(t => t.ObjType == ObjectiveType.Fish).Any()) Objectives.Add(new GameObjective(ObjectiveType.Fish, 50, (int)area.Width, (int)area.Height));
+                else if (number == 1 && !Objectives.Where(t => t.ObjType == ObjectiveType.Clean_Picture).Any()) Objectives.Add(new GameObjective(ObjectiveType.Clean_Picture, 50, (int)area.Width, (int)area.Height));
+                else if (number == 2 && !Objectives.Where(t => t.ObjType == ObjectiveType.Clean_Dinosaur).Any()) Objectives.Add(new GameObjective(ObjectiveType.Clean_Dinosaur, 50, (int)area.Width, (int)area.Height));
+                else RandomObjective();
+            }
         }
 
         public void RoommateObjective()
@@ -99,36 +104,32 @@ namespace Moving_Out.Logic
             int number = r.Next(0, 4);
             //int number = 2;
 
-            if (number==0)
+            if(!(Objectives.Where(t => t.ObjType == ObjectiveType.Pizza).Any() && Objectives.Where(t => t.ObjType == ObjectiveType.Music).Any() &&
+                Objectives.Where(t => t.ObjType == ObjectiveType.Trash).Any() && Objectives.Where(t => t.ObjType == ObjectiveType.Dishes).Any()))
             {
-                if(!Objectives.Where(t=>t.ObjType == ObjectiveType.Pizza).Any())
+                if (number == 0 && !Objectives.Where(t => t.ObjType == ObjectiveType.Pizza).Any())
                 {
                     MoveRoommateToObjective(ObjectiveType.Pizza);
                     Objectives.Add(new GameObjective(ObjectiveType.Pizza, 50, (int)area.Width, (int)area.Height));
                 }
-            }
-            else if (number == 1)
-            {
-                if (!Objectives.Where(t => t.ObjType == ObjectiveType.Music).Any())
+                else if (number == 1 && !Objectives.Where(t => t.ObjType == ObjectiveType.Music).Any())
                 {
                     MoveRoommateToObjective(ObjectiveType.Music);
                     Objectives.Add(new GameObjective(ObjectiveType.Music, 50, (int)area.Width, (int)area.Height));
                 }
-            }
-            else if (number == 2)
-            {
-                if (!Objectives.Where(t => t.ObjType == ObjectiveType.Trash).Any())
+                else if (number == 2 && !Objectives.Where(t => t.ObjType == ObjectiveType.Trash).Any())
                 {
                     MoveRoommateToObjective(ObjectiveType.Trash);
                     Objectives.Add(new GameObjective(ObjectiveType.Trash, 50, (int)area.Width, (int)area.Height, Roommate.Center.X, Roommate.Center.Y));
                 }
-            }
-            else
-            {
-                if (!Objectives.Where(t => t.ObjType == ObjectiveType.Dishes).Any())
+                else if (number == 3 && !Objectives.Where(t => t.ObjType == ObjectiveType.Dishes).Any())
                 {
                     MoveRoommateToObjective(ObjectiveType.Dishes);
                     Objectives.Add(new GameObjective(ObjectiveType.Dishes, 50, (int)area.Width, (int)area.Height));
+                }
+                else
+                {
+                    RoommateObjective();
                 }
             }
         }

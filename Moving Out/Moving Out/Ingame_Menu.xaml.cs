@@ -46,11 +46,5 @@ namespace Moving_Out
             CloseMainWindow?.Invoke(this, null);
             this.Close();
         }
-
-        protected override void OnClosing(CancelEventArgs e)
-        {
-            this.Visibility = Visibility.Hidden;
-            e.Cancel = true;
-        }
     }
 }

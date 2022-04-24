@@ -24,7 +24,7 @@ namespace Moving_Out
     {
         MoveLogic logic;
         DispatcherTimer dt = new DispatcherTimer();
-        Ingame_Menu ingame_Menu = new Ingame_Menu();
+        
 
         private void Dt_Tick(object sender, EventArgs e)
         {
@@ -39,8 +39,6 @@ namespace Moving_Out
         public MainWindow()
         {
             InitializeComponent();
-            ingame_Menu.Dt_start += (sender, eventargs) => dt.Start();
-            ingame_Menu.CloseMainWindow += (sender, eventargs) => this.Close();
 
             dt.Tick += Dt_Tick;
             dt.Interval = TimeSpan.FromMilliseconds(10);
@@ -98,6 +96,9 @@ namespace Moving_Out
             else if (e.Key == Key.Escape)
             {
                 dt.Stop();
+                Ingame_Menu ingame_Menu = new Ingame_Menu();
+                ingame_Menu.Dt_start += (sender, eventargs) => dt.Start();
+                ingame_Menu.CloseMainWindow += (sender, eventargs) => this.Close();
                 ingame_Menu.ShowDialog();
             }
         }

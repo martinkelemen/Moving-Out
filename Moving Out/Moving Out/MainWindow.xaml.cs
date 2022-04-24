@@ -24,8 +24,11 @@ namespace Moving_Out
     public partial class MainWindow : Window
     {
         MoveLogic logic;
+        DispatcherTimer dt = new DispatcherTimer();
+        
         object lockObject;
         bool programPaused;
+
 
         private void Dt_Tick(object sender, EventArgs e)
         {
@@ -51,12 +54,12 @@ namespace Moving_Out
         {
             InitializeComponent();
 
+            DispatcherTimer dt = new DispatcherTimer();
             lockObject = new object();
             programPaused = false;
 
             DispatcherTimer dt = new DispatcherTimer();
 
-            dt.Tick += Dt_Tick;
             dt.Interval = TimeSpan.FromMilliseconds(10);
             dt.Start();
 
@@ -119,6 +122,10 @@ namespace Moving_Out
             {
                 logic.Down = false;
             }
+            else if (e.Key == Key.Escape)
+            {
+                //semmi
+            }
         }
 
         private void KeyIsDown(object sender, KeyEventArgs e)
@@ -139,11 +146,19 @@ namespace Moving_Out
             {
                 logic.Down = true;
             }
+        }
+            {
+                dt.Stop();
+                Ingame_Menu ingame_Menu = new Ingame_Menu();
+                ingame_Menu.Dt_start += (sender, eventargs) => dt.Start();
+                ingame_Menu.CloseMainWindow += (sender, eventargs) => this.Close();
+                ingame_Menu.ShowDialog();
+            }
+        }
             else if (e.Key == Key.E)
             {
                 logic.Interact();
             }
-        }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {

@@ -7,11 +7,17 @@
     </ApplicationDefinition>
   </ItemGroup>
   <ItemGroup>
+    <Compile Update="Ingame_Menu.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="MainMenu.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Page Update="Ingame_Menu.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="MainMenu.xaml">
       <SubType>Designer</SubType>
     </Page>

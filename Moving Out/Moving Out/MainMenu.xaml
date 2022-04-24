@@ -16,19 +16,24 @@
             <ImageBrush ImageSource="/Images/DoomerMenu.png"/>
         </Grid.Background>
         <StackPanel Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center">
-            <Button Height="70" Width="350" Content="New Game" Foreground="White" FontFamily="Papyrus" Margin="10" FontSize="24" Click="New_Game">
+            <Button Height="120" Width="550" Content="New Game" Foreground="White" FontFamily="Papyrus" Margin="10" FontSize="30" Click="New_Game" BorderThickness="0,0,0,0">
                 <Button.Background>
                     <ImageBrush ImageSource="/Images/menuclick.png"/>
                 </Button.Background>
             </Button>
-            <Button Height="70" Width="350" Content="Highscore" Foreground="White" FontFamily="Papyrus" Margin="10" FontSize="24" Click="HighScore">
+            <Button Height="120" Width="550" Content="Highscore" Foreground="White" FontFamily="Papyrus" Margin="10" FontSize="30" Click="HighScore" BorderThickness="0,0,0,0">
                 <Button.Background>
                     <ImageBrush ImageSource="/Images/menuclick.png"/>
                 </Button.Background>
             </Button>
-            <Button Height="70" Width="350" Content="Quit" Foreground="White" FontFamily="Papyrus" Margin="10" FontSize="24" Click="Quit">
+            <Button Height="120" Width="550" Content="Quit" Foreground="White" FontFamily="Papyrus" Margin="10" FontSize="30" Click="Quit" BorderThickness="0,0,0,0">
                 <Button.Background>
                     <ImageBrush ImageSource="/Images/menuclick.png"/>
+                </Button.Background>
+            </Button>
+            <Button Height="100" Width="100" Margin="10" Click="Mute" BorderThickness="0,0,0,0">
+                <Button.Background>
+                    <ImageBrush x:Name="SoundButton"/>
                 </Button.Background>
             </Button>
         </StackPanel>

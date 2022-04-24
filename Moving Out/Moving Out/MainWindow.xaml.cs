@@ -28,6 +28,7 @@ namespace Moving_Out
         DispatcherTimer dt_rm = new DispatcherTimer();
         DispatcherTimer dt_obj = new DispatcherTimer();
         DispatcherTimer dt_obj_t = new DispatcherTimer();
+        DispatcherTimer dt_music = new DispatcherTimer();
 
         readonly object lockObject = new object();
         bool programPaused;
@@ -52,6 +53,11 @@ namespace Moving_Out
         {
             logic.DecreaseSeconds();
         }
+        private void Dt_Music_Tick(object sender, EventArgs e)
+        {
+            logic.CheckMusic();
+        }
+
 
         public MainWindow()
         {
@@ -74,6 +80,10 @@ namespace Moving_Out
             dt_obj_t.Tick += Dt_Obj_T_Tick;
             dt_obj_t.Interval = TimeSpan.FromSeconds(1);
             dt_obj_t.Start();
+
+            dt_music.Tick += Dt_Music_Tick;
+            dt_music.Interval = TimeSpan.FromMilliseconds(10);
+            dt_music.Start();
 
             new Task(() =>
             {

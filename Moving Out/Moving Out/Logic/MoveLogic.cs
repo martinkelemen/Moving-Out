@@ -6,13 +6,15 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
 
 namespace Moving_Out.Logic
 {
     public class MoveLogic : IGameModel
     {
         static Random r = new Random();
-
+        private MediaPlayer ingamemp = new MediaPlayer();
+        
         public bool Left { get; set; }
         public bool Right { get; set; }
         public bool Up { get; set; }
@@ -39,7 +41,7 @@ namespace Moving_Out.Logic
             Player = new Player((int)(area.Width / 2.206897), (int)(area.Height / 1.168966), (int)(area.Width / 128));
             Roommate = new Roommate((int)(area.Width / 4.8), (int)(area.Height / 2.5425), (int)(area.Width / 128));
             Objectives = new List<GameObjective>();
-            speed = 3;
+            speed = 8;
         }
 
         public MoveLogic()
@@ -54,6 +56,19 @@ namespace Moving_Out.Logic
                 if ((Player as GameItem).IsCollision(Objectives[i]) && Objectives[i].Interactable)
                 {
                     IncreasePartCounter(Objectives[i]);
+                }
+            }
+        }
+
+        public void CheckMusic()
+        {
+            for (int i = 0; i < Objectives.Count(); i++)
+            {
+                if (ingamemp.Source == null && Objectives[i].ObjType == ObjectiveType.Music)
+                {
+                    ingamemp.Open(new Uri(System.IO.Path.Combine("Audio", "polizei.mp3"), UriKind.RelativeOrAbsolute));
+                    ingamemp.Play();
+                    ingamemp.Volume = 0.3;
                 }
             }
         }
@@ -83,6 +98,11 @@ namespace Moving_Out.Logic
             {
                 Objectives.Remove(obj);
             }
+            if ((obj.PartCounter + 1) == GameObjective.ObjectiveText(obj.ObjType).Count() && obj.ObjType == ObjectiveType.Music)
+            {
+                Objectives.Remove(obj);
+                ingamemp.Pause();
+            }
         }
 
         public void RandomObjective()
@@ -101,8 +121,8 @@ namespace Moving_Out.Logic
 
         public void RoommateObjective()
         {
-            int number = r.Next(0, 4);
-            //int number = 2;
+            //int number = r.Next(0, 4);
+            int number = 1;
 
             if(!(Objectives.Where(t => t.ObjType == ObjectiveType.Pizza).Any() && Objectives.Where(t => t.ObjType == ObjectiveType.Music).Any() &&
                 Objectives.Where(t => t.ObjType == ObjectiveType.Trash).Any() && Objectives.Where(t => t.ObjType == ObjectiveType.Dishes).Any()))

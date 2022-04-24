@@ -88,9 +88,9 @@ namespace Moving_Out.Logic
         {
             int number = r.Next(0, 3);
 
-            if (number == 0 && !Objectives.Where(t => t.ObjType == ObjectiveType.Fish).Any()) Objectives.Add(new GameObjective(ObjectiveType.Fish, 30, (int)area.Width, (int)area.Height));
-            else if (number == 1 && !Objectives.Where(t => t.ObjType == ObjectiveType.Clean_Picture).Any()) Objectives.Add(new GameObjective(ObjectiveType.Clean_Picture, 30, (int)area.Width, (int)area.Height));
-            else if (number == 2 && !Objectives.Where(t => t.ObjType == ObjectiveType.Clean_Dinosaur).Any()) Objectives.Add(new GameObjective(ObjectiveType.Clean_Dinosaur, 30, (int)area.Width, (int)area.Height));
+            if (number == 0 && !Objectives.Where(t => t.ObjType == ObjectiveType.Fish).Any()) Objectives.Add(new GameObjective(ObjectiveType.Fish, 50, (int)area.Width, (int)area.Height));
+            else if (number == 1 && !Objectives.Where(t => t.ObjType == ObjectiveType.Clean_Picture).Any()) Objectives.Add(new GameObjective(ObjectiveType.Clean_Picture, 50, (int)area.Width, (int)area.Height));
+            else if (number == 2 && !Objectives.Where(t => t.ObjType == ObjectiveType.Clean_Dinosaur).Any()) Objectives.Add(new GameObjective(ObjectiveType.Clean_Dinosaur, 50, (int)area.Width, (int)area.Height));
         }
 
         public void RoommateObjective()
@@ -103,7 +103,7 @@ namespace Moving_Out.Logic
                 if(!Objectives.Where(t=>t.ObjType == ObjectiveType.Pizza).Any())
                 {
                     MoveRoommateToObjective(ObjectiveType.Pizza);
-                    Objectives.Add(new GameObjective(ObjectiveType.Pizza, 30, (int)area.Width, (int)area.Height));
+                    Objectives.Add(new GameObjective(ObjectiveType.Pizza, 50, (int)area.Width, (int)area.Height));
                 }
             }
             else if (number == 1)
@@ -111,7 +111,7 @@ namespace Moving_Out.Logic
                 if (!Objectives.Where(t => t.ObjType == ObjectiveType.Music).Any())
                 {
                     MoveRoommateToObjective(ObjectiveType.Music);
-                    Objectives.Add(new GameObjective(ObjectiveType.Music, 30, (int)area.Width, (int)area.Height));
+                    Objectives.Add(new GameObjective(ObjectiveType.Music, 50, (int)area.Width, (int)area.Height));
                 }
             }
             else if (number == 2)
@@ -119,7 +119,7 @@ namespace Moving_Out.Logic
                 if (!Objectives.Where(t => t.ObjType == ObjectiveType.Trash).Any())
                 {
                     MoveRoommateToObjective(ObjectiveType.Trash);
-                    Objectives.Add(new GameObjective(ObjectiveType.Trash, 30, (int)area.Width, (int)area.Height, Roommate.Center.X, Roommate.Center.Y));
+                    Objectives.Add(new GameObjective(ObjectiveType.Trash, 50, (int)area.Width, (int)area.Height, Roommate.Center.X, Roommate.Center.Y));
                 }
             }
             else
@@ -127,7 +127,7 @@ namespace Moving_Out.Logic
                 if (!Objectives.Where(t => t.ObjType == ObjectiveType.Dishes).Any())
                 {
                     MoveRoommateToObjective(ObjectiveType.Dishes);
-                    Objectives.Add(new GameObjective(ObjectiveType.Dishes, 30, (int)area.Width, (int)area.Height));
+                    Objectives.Add(new GameObjective(ObjectiveType.Dishes, 50, (int)area.Width, (int)area.Height));
                 }
             }
         }

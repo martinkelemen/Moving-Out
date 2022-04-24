@@ -37,24 +37,24 @@ namespace Moving_Out.Logic
                     if (PartCounter == 0)
                     {
                         Interactable = false;
-                        Center = new System.Drawing.Point((int)(displayWidth / 1.676856), (int)(displayHeight / 2.26));
+                        Center = new System.Drawing.Point((int)(displayWidth / 1.662338), (int)(displayHeight / 2.21087));
                         return new EllipseGeometry(new Point(Center.X, Center.Y), Radius, Radius);
                     }
                     else if (PartCounter == 1)
                     {
                         Interactable = true;
-                        Center = new System.Drawing.Point((int)(displayWidth / 2.269504), (int)(displayHeight / 1.13));
+                        Center = new System.Drawing.Point((int)(displayWidth / 2.269504) + (int)(displayWidth / 64), (int)(displayHeight / 1.13));
                         return new EllipseGeometry(new Point(Center.X, Center.Y), Radius, Radius);
                     }
                     else
                     {
-                        Center = new System.Drawing.Point((int)(displayWidth / 1.567347), (int)(displayHeight / 10.17));
+                        Center = new System.Drawing.Point((int)(displayWidth / 1.567347) + (int)(displayWidth / 64), (int)(displayHeight / 10.17));
                         return new EllipseGeometry(new Point(Center.X, Center.Y), Radius, Radius);
                     }
                 }
                 else if (ObjType == ObjectiveType.Music)
                 {
-                    Center = new System.Drawing.Point((int)(displayWidth / 12.631579), (int)(displayHeight / 2.16383));
+                    Center = new System.Drawing.Point((int)(displayWidth / 12.631579) + (int)(displayWidth / 96), (int)(displayHeight / 2.16383) + (int)(displayHeight / 50.85));
                     return new EllipseGeometry(new Point(Center.X, Center.Y), Radius, Radius);
                 }
                 else if (ObjType == ObjectiveType.Trash)
@@ -65,7 +65,7 @@ namespace Moving_Out.Logic
                     }
                     else
                     {
-                        Center = new System.Drawing.Point((int)(displayWidth / 1.111111), (int)(displayHeight / 8.475));
+                        Center = new System.Drawing.Point((int)(displayWidth / 1.111111) + (int)(displayWidth / 96), (int)(displayHeight / 8.475) + (int)(displayHeight / 20.34));
                         return new EllipseGeometry(new Point(Center.X, Center.Y), Radius, Radius);
                     }
                 }
@@ -73,12 +73,12 @@ namespace Moving_Out.Logic
                 {
                     if (PartCounter == 0)
                     {
-                        Center = new System.Drawing.Point((int)(displayWidth / 1.665221), (int)(displayHeight / 1.432394));
+                        Center = new System.Drawing.Point((int)(displayWidth / 1.665221) - (int)(displayWidth / 48), (int)(displayHeight / 1.432394) - (int)(displayHeight / 11.3));
                         return new EllipseGeometry(new Point(Center.X, Center.Y), Radius, Radius);
                     }
                     else
                     {
-                        Center = new System.Drawing.Point((int)(displayWidth / 1.111111), (int)(displayHeight / 8.475));
+                        Center = new System.Drawing.Point((int)(displayWidth / 1.111111) + (int)(displayWidth / 96), (int)(displayHeight / 8.475) + (int)(displayHeight / 20.34));
                         return new EllipseGeometry(new Point(Center.X, Center.Y), Radius, Radius);
                     }
                 }
@@ -86,12 +86,12 @@ namespace Moving_Out.Logic
                 {
                     if (PartCounter == 0)
                     {
-                        Center = new System.Drawing.Point((int)(displayWidth / 1.4307), (int)(displayHeight / 8.475));
+                        Center = new System.Drawing.Point((int)(displayWidth / 1.4307) + (int)(displayWidth / 96), (int)(displayHeight / 8.475) + (int)(displayHeight / 50.85));
                         return new EllipseGeometry(new Point(Center.X, Center.Y), Radius, Radius);
                     }
                     else
                     {
-                        Center = new System.Drawing.Point((int)(displayWidth / 1.389291), (int)(displayHeight / 10.17));
+                        Center = new System.Drawing.Point((int)(displayWidth / 1.389291) + (int)(displayWidth / 12.8), (int)(displayHeight / 10.17) + (int)(displayHeight / 50.85));
                         return new EllipseGeometry(new Point(Center.X, Center.Y), Radius, Radius);
                     }
                 }
@@ -120,16 +120,19 @@ namespace Moving_Out.Logic
 
             if (objType == ObjectiveType.Clean_Picture)
             {
-                int number = r.Next(0, 2);
-                if (number == 0) Center = new System.Drawing.Point((int)(displayWidth / 1.14082), (int)(displayHeight / 2.511111));
-                else Center = new System.Drawing.Point((int)(displayWidth / 1.14082), (int)(displayHeight / 2.511111));
+                int number = r.Next(0, 4);
+                if (number == 0) Center = new System.Drawing.Point((int)(displayWidth / 1.14082) + (int)(displayWidth / 192), (int)(displayHeight / 2.511111) - (int)(displayHeight / 50.85));
+                else if (number == 1) Center = new System.Drawing.Point((int)(displayWidth / 1.14082) - (int)(displayWidth / 19.2), (int)(displayHeight / 2.511111) - (int)(displayHeight / 50.85));
+                else if (number == 2) Center = new System.Drawing.Point((int)(displayWidth / 1.4307) - (int)(displayWidth / 6.4), (int)(displayHeight / 8.475));
+                else  Center = new System.Drawing.Point((int)(displayWidth / 1.315068) - (int)(displayWidth / 24), (int)(displayHeight / 1.473913));
             }
             else if (objType == ObjectiveType.Clean_Dinosaur)
             {
+                Radius = 50;
                 int number = r.Next(0, 3);
-                if (number == 0) Center = new System.Drawing.Point((int)(displayWidth / 5.565217), (int)(displayHeight / 1.849091));
-                else if (number == 1) Center = new System.Drawing.Point((int)(displayWidth / 6.736842), (int)(displayHeight / 1.27125));
-                else Center = new System.Drawing.Point((int)(displayWidth / 3.84), (int)(displayHeight / 1.255556));
+                if (number == 0) Center = new System.Drawing.Point((int)(displayWidth / 5.565217) + (int)(displayWidth / 27.428571), (int)(displayHeight / 1.849091) + (int)(displayHeight / 33.9));
+                else if (number == 1) Center = new System.Drawing.Point((int)(displayWidth / 6.736842) + (int)(displayWidth / 27.428571), (int)(displayHeight / 1.27125) + (int)(displayHeight / 33.9));
+                else Center = new System.Drawing.Point((int)(displayWidth / 3.84) + (int)(displayWidth / 27.428571), (int)(displayHeight / 1.255556) + (int)(displayHeight / 33.9));
             }
         }
 

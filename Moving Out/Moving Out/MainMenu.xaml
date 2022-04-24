@@ -31,6 +31,11 @@
                     <ImageBrush ImageSource="/Images/menuclick.png"/>
                 </Button.Background>
             </Button>
+            <Button Height="100" Width="100" Margin="10" Click="Mute" BorderThickness="0,0,0,0">
+                <Button.Background>
+                    <ImageBrush x:Name="SoundButton"/>
+                </Button.Background>
+            </Button>
         </StackPanel>
         
     </Grid>

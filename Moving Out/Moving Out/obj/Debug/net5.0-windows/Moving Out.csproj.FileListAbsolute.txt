@@ -55,3 +55,5 @@ C:\Users\l55\source\repos\GUI_20212202_IL7XUS\Moving Out\Moving Out\bin\Debug\ne
 C:\Users\l55\source\repos\GUI_20212202_IL7XUS\Moving Out\Moving Out\obj\Debug\net5.0-windows\Ingame_Menu.g.cs
 C:\Users\l55\source\repos\GUI_20212202_IL7XUS\Moving Out\Moving Out\obj\Debug\net5.0-windows\Ingame_Menu.baml
 C:\Users\l55\source\repos\GUI_20212202_IL7XUS\Moving Out\Moving Out\bin\Debug\net5.0-windows\Images\ingamemenuclick.png
+C:\Users\l55\source\repos\GUI_20212202_IL7XUS\Moving Out\Moving Out\bin\Debug\net5.0-windows\Audio\doomer.mp3
+C:\Users\l55\source\repos\GUI_20212202_IL7XUS\Moving Out\Moving Out\bin\Debug\net5.0-windows\Audio\polizei.mp3

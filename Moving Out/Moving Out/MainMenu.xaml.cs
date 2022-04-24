@@ -19,13 +19,29 @@ namespace Moving_Out
     /// </summary>
     public partial class MainMenu : Window
     {
+        private MediaPlayer mpMainMenu = new MediaPlayer();
         public MainMenu()
         {
             InitializeComponent();
+
+            mpMainMenu.Open(new Uri(System.IO.Path.Combine("Audio", "doomer.mp3"),UriKind.RelativeOrAbsolute));
+            mpMainMenu.MediaEnded += new EventHandler(Media_Ended);
+            mpMainMenu.Play();
+            mpMainMenu.Volume=0.2;
         }
-        
+
+        private void Media_Ended(object sender, EventArgs e)
+        {
+            mpMainMenu.Position = TimeSpan.Zero;
+            mpMainMenu.Play();
+            mpMainMenu.Volume = 0.2;
+        }
+
         private void New_Game(object sender, RoutedEventArgs e)
         {
+            mpMainMenu.Stop();
+            //mpMainMenu.Open(new Uri(System.IO.Path.Combine("Audio", "polizei.mp3"), UriKind.RelativeOrAbsolute));
+            //mpMainMenu.Play();
             MainWindow mw = new MainWindow();
             mw.Show();
             this.Close();

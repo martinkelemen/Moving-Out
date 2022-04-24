@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -96,7 +97,7 @@ namespace Moving_Out.Logic
         public void RoommateObjective()
         {
             int number = r.Next(0, 4);
-            //int number = 0;
+            //int number = 2;
 
             if (number==0)
             {
@@ -137,28 +138,27 @@ namespace Moving_Out.Logic
             GameObjective tmp;
             if (type == ObjectiveType.Trash)
             {
-                tmp = new GameObjective(type, 30, (int)area.Width, (int)area.Height, Roommate.Center.X, Roommate.Center.Y);
-                while (!(Roommate as GameItem).IsCollision(Wall))
+                while ((Roommate as GameItem).IsCollision(Wall))
                 {
                     ChangeRoommateDirection();
+                    Thread.Sleep(5000);
                 }
             }
             else
             {
                 tmp = new GameObjective(type, 30, (int)area.Width, (int)area.Height);
-            }
-            while (!(Roommate as GameItem).IsCollision(tmp))
-            {
-                if (Roommate.Center.X > tmp.Center.X && Roommate.Center.Y > tmp.Center.Y) Roommate.Speed = new Vector(speed * -1 / 2, speed * -1 / 2);
-                else if (Roommate.Center.X < tmp.Center.X && Roommate.Center.Y > tmp.Center.Y) Roommate.Speed = new Vector(speed / 2, speed * -1 / 2);
-                else if (Roommate.Center.X < tmp.Center.X && Roommate.Center.Y < tmp.Center.Y) Roommate.Speed = new Vector(speed / 2, speed / 2);
-                else if (Roommate.Center.X > tmp.Center.X && Roommate.Center.Y < tmp.Center.Y) Roommate.Speed = new Vector(speed * -1 / 2, speed / 2);
-                else if (Roommate.Center.X == tmp.Center.X && Roommate.Center.Y < tmp.Center.Y) Roommate.Speed = new Vector(0, speed / 2);
-                else if (Roommate.Center.X == tmp.Center.X && Roommate.Center.Y > tmp.Center.Y) Roommate.Speed = new Vector(0, speed * -1 / 2);
-                else if (Roommate.Center.X > tmp.Center.X && Roommate.Center.Y == tmp.Center.Y) Roommate.Speed = new Vector(speed * -1 / 2, 0);
-                else if (Roommate.Center.X < tmp.Center.X && Roommate.Center.Y == tmp.Center.Y) Roommate.Speed = new Vector(speed / 2, 0);
 
-                bool xd = (Roommate as GameItem).IsCollision(tmp);
+                while (!(Roommate as GameItem).IsCollision(tmp))
+                {
+                    if (Roommate.Center.X > tmp.Center.X && Roommate.Center.Y > tmp.Center.Y) Roommate.Speed = new Vector(speed * -1 / 2, speed * -1 / 2);
+                    else if (Roommate.Center.X < tmp.Center.X && Roommate.Center.Y > tmp.Center.Y) Roommate.Speed = new Vector(speed / 2, speed * -1 / 2);
+                    else if (Roommate.Center.X < tmp.Center.X && Roommate.Center.Y < tmp.Center.Y) Roommate.Speed = new Vector(speed / 2, speed / 2);
+                    else if (Roommate.Center.X > tmp.Center.X && Roommate.Center.Y < tmp.Center.Y) Roommate.Speed = new Vector(speed * -1 / 2, speed / 2);
+                    else if (Roommate.Center.X == tmp.Center.X && Roommate.Center.Y < tmp.Center.Y) Roommate.Speed = new Vector(0, speed / 2);
+                    else if (Roommate.Center.X == tmp.Center.X && Roommate.Center.Y > tmp.Center.Y) Roommate.Speed = new Vector(0, speed * -1 / 2);
+                    else if (Roommate.Center.X > tmp.Center.X && Roommate.Center.Y == tmp.Center.Y) Roommate.Speed = new Vector(speed * -1 / 2, 0);
+                    else if (Roommate.Center.X < tmp.Center.X && Roommate.Center.Y == tmp.Center.Y) Roommate.Speed = new Vector(speed / 2, 0);
+                }
             }
             Roommate.Speed = new Vector(0, 0);
         }

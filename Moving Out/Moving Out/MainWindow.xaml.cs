@@ -25,8 +25,11 @@ namespace Moving_Out
     {
         MoveLogic logic;
         DispatcherTimer dt = new DispatcherTimer();
-        
-        object lockObject;
+        DispatcherTimer dt_rm = new DispatcherTimer();
+        DispatcherTimer dt_obj = new DispatcherTimer();
+        DispatcherTimer dt_obj_t = new DispatcherTimer();
+
+        readonly object lockObject = new object();
         bool programPaused;
 
 
@@ -54,30 +57,20 @@ namespace Moving_Out
         {
             InitializeComponent();
 
-            DispatcherTimer dt = new DispatcherTimer();
-            lockObject = new object();
             programPaused = false;
 
-            DispatcherTimer dt = new DispatcherTimer();
-
+            dt.Tick += Dt_Tick;
             dt.Interval = TimeSpan.FromMilliseconds(10);
             dt.Start();
-
-            DispatcherTimer dt_rm = new DispatcherTimer();
 
             dt_rm.Tick += Dt_Rm_Tick;
             dt_rm.Interval = TimeSpan.FromSeconds(5);
             dt_rm.Start();
 
-            DispatcherTimer dt_obj = new DispatcherTimer();
-
             dt_obj.Tick += Dt_Obj_Tick;
             dt_obj.Interval = TimeSpan.FromSeconds(10);
             dt_obj.Start();
 
-            DispatcherTimer dt_obj_t = new DispatcherTimer();
-
-            dt_obj_t = new DispatcherTimer();
             dt_obj_t.Tick += Dt_Obj_T_Tick;
             dt_obj_t.Interval = TimeSpan.FromSeconds(1);
             dt_obj_t.Start();
@@ -89,16 +82,12 @@ namespace Moving_Out
                     if (logic != null && logic.Objectives != null)
                     {
                         Thread.Sleep(10000);
-                        lock(lockObject)
+                        if (!programPaused)
                         {
-                            while(programPaused)
-                            {
-                                Monitor.Wait(lockObject);
-                            }
+                            dt_rm.Stop();
+                            logic.RoommateObjective();
+                            dt_rm.Start();
                         }
-                        dt_rm.Stop();
-                        logic.RoommateObjective();
-                        dt_rm.Start();
                     }
                 }
             }).Start();
@@ -146,20 +135,31 @@ namespace Moving_Out
             {
                 logic.Down = true;
             }
-        }
-            {
-                dt.Stop();
-                Ingame_Menu ingame_Menu = new Ingame_Menu();
-                ingame_Menu.Dt_start += (sender, eventargs) => dt.Start();
-                ingame_Menu.CloseMainWindow += (sender, eventargs) => this.Close();
-                ingame_Menu.ShowDialog();
-            }
-        }
             else if (e.Key == Key.E)
             {
                 logic.Interact();
             }
-
+            else if (e.Key == Key.Escape)
+            {
+                dt.Stop();
+                dt_rm.Stop();
+                dt_obj.Stop();
+                dt_obj_t.Stop();
+                programPaused = true;
+                
+                Ingame_Menu ingame_Menu = new Ingame_Menu();
+                ingame_Menu.Dt_start += (sender, eventargs) =>
+                {
+                    dt.Start();
+                    dt_rm.Start();
+                    dt_obj.Start();
+                    dt_obj_t.Start();
+                    programPaused = false;
+                };
+                ingame_Menu.CloseMainWindow += (sender, eventargs) => this.Close();
+                ingame_Menu.ShowDialog();
+            }
+        }
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             logic = new MoveLogic();

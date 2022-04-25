@@ -166,13 +166,21 @@ namespace Moving_Out
             }
             else if (e.Key == Key.Escape)
             {
+                Ingame_Menu ingame_Menu = new Ingame_Menu();
                 dt.Stop();
                 dt_rm.Stop();
                 dt_obj.Stop();
                 dt_obj_t.Stop();
                 dt_rm_obj.Stop();
-
-                Ingame_Menu ingame_Menu = new Ingame_Menu();
+                if (logic.is_playing_audio)
+                {
+                    logic.ingamemp.Pause();
+                    ingame_Menu.ContinueMusic += (sender, eventargs) => logic.ingamemp.Play();
+                }
+                else
+                {
+                    ingame_Menu.ContinueMusic += (sender, eventargs) => logic.ingamemp.Stop();
+                }
                 ingame_Menu.Dt_start += (sender, eventargs) =>
                 {
                     dt.Start();

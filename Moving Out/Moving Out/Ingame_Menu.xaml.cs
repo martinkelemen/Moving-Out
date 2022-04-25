@@ -27,10 +27,12 @@ namespace Moving_Out
 
         public event EventHandler Dt_start;
         public event EventHandler CloseMainWindow;
+        public event EventHandler ContinueMusic;
 
         private void Continue(object sender, RoutedEventArgs e)
         {
             Dt_start?.Invoke(this, null);
+            ContinueMusic?.Invoke(this, null);
             this.Close();
         }
 

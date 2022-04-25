@@ -13,7 +13,8 @@ namespace Moving_Out.Logic
     public class MoveLogic : IGameModel
     {
         static Random r = new Random();
-        private MediaPlayer ingamemp;
+        public MediaPlayer ingamemp;
+        public bool is_playing_audio;
 
         public bool Left { get; set; }
         public bool Right { get; set; }
@@ -90,8 +91,9 @@ namespace Moving_Out.Logic
             {
                 if (obj.ObjType == ObjectiveType.Music)
                 {
-                    ingamemp.Pause();
+                    ingamemp.Stop();
                     ObjectivesFull = false;
+                    is_playing_audio = false;
                 }
                 else if (obj.ObjType == ObjectiveType.Pizza || obj.ObjType == ObjectiveType.Dishes || obj.ObjType == ObjectiveType.Trash)
                 {
@@ -184,6 +186,7 @@ namespace Moving_Out.Logic
                         ingamemp.Open(new Uri(System.IO.Path.Combine("Audio", "polizei.mp3"), UriKind.RelativeOrAbsolute));
                         ingamemp.Volume = 0.3;
                         ingamemp.Play();
+                        is_playing_audio = true;
                     }
                     Roommate.Speed = new Vector(0, 0);
                     RoommateAtObjective = true;

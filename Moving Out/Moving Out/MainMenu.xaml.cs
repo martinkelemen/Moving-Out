@@ -25,10 +25,10 @@ namespace Moving_Out
         {
             InitializeComponent();
             SoundButton.ImageSource = new BitmapImage(new Uri(System.IO.Path.Combine("Images", "volume.png"), UriKind.RelativeOrAbsolute));
-            mpMainMenu.Open(new Uri(System.IO.Path.Combine("Audio", "doomer.mp3"),UriKind.RelativeOrAbsolute));
+            mpMainMenu.Open(new Uri(System.IO.Path.Combine("Audio", "doomer.mp3"), UriKind.RelativeOrAbsolute));
             mpMainMenu.MediaEnded += new EventHandler(Media_Ended);
             mpMainMenu.Play();
-            mpMainMenu.Volume=0.2;
+            mpMainMenu.Volume = 0.2;
             sound_playing = true;
         }
 
@@ -42,7 +42,7 @@ namespace Moving_Out
         private void New_Game(object sender, RoutedEventArgs e)
         {
             mpMainMenu.Stop();
-            mpMainMenu.Close();
+            //mpMainMenu.Close();
             sound_playing = false;
             //mpMainMenu.Open(new Uri(System.IO.Path.Combine("Audio", "polizei.mp3"), UriKind.RelativeOrAbsolute));
             //mpMainMenu.Play();

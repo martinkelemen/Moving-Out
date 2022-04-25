@@ -10,7 +10,7 @@ namespace Moving_Out.Logic
 {
     public enum ObjectiveType
     {
-        Pizza, Music, Trash, Fish, Dishes, Clean_Picture, Clean_Dinosaur, None
+        Pizza, Music, Trash, Fish, Dishes, Clean_Picture, Clean_Dinosaur, None, NotFound
     }
 
     public class GameObjective : GameItem

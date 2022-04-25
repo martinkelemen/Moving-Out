@@ -1,6 +1,7 @@
 ﻿using Moving_Out.Logic;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -24,15 +25,13 @@ namespace Moving_Out
     public partial class MainWindow : Window
     {
         MoveLogic logic;
-        DispatcherTimer dt = new DispatcherTimer();
-        DispatcherTimer dt_rm = new DispatcherTimer();
-        DispatcherTimer dt_obj = new DispatcherTimer();
-        DispatcherTimer dt_obj_t = new DispatcherTimer();
-        DispatcherTimer dt_music = new DispatcherTimer();
-
-        readonly object lockObject = new object();
-        bool programPaused;
-
+        DispatcherTimer dt;
+        DispatcherTimer dt_rm;
+        DispatcherTimer dt_obj;
+        DispatcherTimer dt_obj_t;
+        DispatcherTimer dt_rm_obj;
+        DispatcherTimer dt_moverm;
+        ObjectiveType type;
 
         private void Dt_Tick(object sender, EventArgs e)
         {
@@ -53,17 +52,47 @@ namespace Moving_Out
         {
             logic.DecreaseSeconds();
         }
-        private void Dt_Music_Tick(object sender, EventArgs e)
+        private void Dt_Rm_Obj_Tick(object sender, EventArgs e)
         {
-            logic.CheckMusic();
+            type = logic.RoommateObjective();
+            if (type != ObjectiveType.NotFound && type != ObjectiveType.None)
+            {
+                dt_rm.Stop();
+                dt_rm_obj.Stop();
+                dt_moverm.Start();
+            }
+            else if (type == ObjectiveType.NotFound)
+            {
+                Dt_Rm_Obj_Tick(sender, e);
+            }
         }
 
+        private void Move_Rm(object sender, EventArgs e)
+        {
+            if (!logic.RoommateAtObjective)
+            {
+                GameObjective tmp = new GameObjective(type, 50, (int)canvas.ActualWidth, (int)canvas.ActualHeight);
+                logic.MoveRoommateToObjective(type, tmp);
+            }
+            else if (logic.RoommateAtObjective)
+            {
+                dt_moverm.Stop();
+                dt_rm.Start();
+                dt_rm_obj.Start();
+                logic.RoommateAtObjective = false;
+            }
+        }
 
         public MainWindow()
         {
             InitializeComponent();
 
-            programPaused = false;
+            dt = new DispatcherTimer();
+            dt_rm = new DispatcherTimer();
+            dt_obj = new DispatcherTimer();
+            dt_obj_t = new DispatcherTimer();
+            dt_rm_obj = new DispatcherTimer();
+            dt_moverm = new DispatcherTimer();
 
             dt.Tick += Dt_Tick;
             dt.Interval = TimeSpan.FromMilliseconds(10);
@@ -81,26 +110,12 @@ namespace Moving_Out
             dt_obj_t.Interval = TimeSpan.FromSeconds(1);
             dt_obj_t.Start();
 
-            dt_music.Tick += Dt_Music_Tick;
-            dt_music.Interval = TimeSpan.FromMilliseconds(10);
-            dt_music.Start();
+            dt_rm_obj.Tick += Dt_Rm_Obj_Tick;
+            dt_rm_obj.Interval = TimeSpan.FromSeconds(10);
+            dt_rm_obj.Start();
 
-            new Task(() =>
-            {
-                while (true)
-                {
-                    if (logic != null && logic.Objectives != null)
-                    {
-                        Thread.Sleep(10000);
-                        if (!programPaused)
-                        {
-                            dt_rm.Stop();
-                            logic.RoommateObjective();
-                            dt_rm.Start();
-                        }
-                    }
-                }
-            }).Start();
+            dt_moverm.Tick += Move_Rm;
+            dt_moverm.Interval = TimeSpan.FromMilliseconds(10);
         }
 
         private void KeyIsUp(object sender, KeyEventArgs e)
@@ -155,8 +170,8 @@ namespace Moving_Out
                 dt_rm.Stop();
                 dt_obj.Stop();
                 dt_obj_t.Stop();
-                programPaused = true;
-                
+                dt_rm_obj.Stop();
+
                 Ingame_Menu ingame_Menu = new Ingame_Menu();
                 ingame_Menu.Dt_start += (sender, eventargs) =>
                 {
@@ -164,7 +179,7 @@ namespace Moving_Out
                     dt_rm.Start();
                     dt_obj.Start();
                     dt_obj_t.Start();
-                    programPaused = false;
+                    dt_rm_obj.Start();
                 };
                 ingame_Menu.CloseMainWindow += (sender, eventargs) => this.Close();
                 ingame_Menu.ShowDialog();

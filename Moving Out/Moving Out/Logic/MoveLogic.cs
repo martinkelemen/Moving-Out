@@ -13,8 +13,8 @@ namespace Moving_Out.Logic
     public class MoveLogic : IGameModel
     {
         static Random r = new Random();
-        private MediaPlayer ingamemp = new MediaPlayer();
-        
+        private MediaPlayer ingamemp;
+
         public bool Left { get; set; }
         public bool Right { get; set; }
         public bool Up { get; set; }
@@ -30,6 +30,9 @@ namespace Moving_Out.Logic
         public Wall Wall { get; set; }
         public List<GameObjective> Objectives { get; set; }
 
+        public bool RoommateAtObjective { get; set; }
+        private bool ObjectivesFull { get; set; }
+
         public void SetupSizes(System.Windows.Size area)
         {
             this.area = area;
@@ -41,12 +44,14 @@ namespace Moving_Out.Logic
             Player = new Player((int)(area.Width / 2.206897), (int)(area.Height / 1.168966), (int)(area.Width / 128));
             Roommate = new Roommate((int)(area.Width / 4.8), (int)(area.Height / 2.5425), (int)(area.Width / 128));
             Objectives = new List<GameObjective>();
-            speed = 8;
+            speed = 3;
         }
 
         public MoveLogic()
         {
-            
+            RoommateAtObjective = false;
+            ObjectivesFull = false;
+            ingamemp = new MediaPlayer();
         }
 
         public void Interact()
@@ -60,26 +65,13 @@ namespace Moving_Out.Logic
             }
         }
 
-        public void CheckMusic()
-        {
-            for (int i = 0; i < Objectives.Count(); i++)
-            {
-                if (ingamemp.Source == null && Objectives[i].ObjType == ObjectiveType.Music)
-                {
-                    ingamemp.Open(new Uri(System.IO.Path.Combine("Audio", "polizei.mp3"), UriKind.RelativeOrAbsolute));
-                    ingamemp.Play();
-                    ingamemp.Volume = 0.3;
-                }
-            }
-        }
-
         public void DecreaseSeconds()
         {
             for (int i = 0; i < Objectives.Count(); i++)
             {
                 Objectives[i].Seconds--;
 
-                if(Objectives[i].Seconds == 0 && !Objectives[i].Interactable)
+                if (Objectives[i].Seconds == 0 && !Objectives[i].Interactable)
                 {
                     IncreasePartCounter(Objectives[i]);
                     Objectives[i].Seconds = 30;
@@ -96,12 +88,17 @@ namespace Moving_Out.Logic
             obj.PartCounter++;
             if ((obj.PartCounter + 1) == GameObjective.ObjectiveText(obj.ObjType).Count())
             {
+                if (obj.ObjType == ObjectiveType.Music)
+                {
+                    ingamemp.Pause();
+                    ObjectivesFull = false;
+                }
+                else if (obj.ObjType == ObjectiveType.Pizza || obj.ObjType == ObjectiveType.Dishes || obj.ObjType == ObjectiveType.Trash)
+                {
+                    ObjectivesFull = false;
+                }
+
                 Objectives.Remove(obj);
-            }
-            if ((obj.PartCounter + 1) == GameObjective.ObjectiveText(obj.ObjType).Count() && obj.ObjType == ObjectiveType.Music)
-            {
-                Objectives.Remove(obj);
-                ingamemp.Pause();
             }
         }
 
@@ -109,7 +106,7 @@ namespace Moving_Out.Logic
         {
             int number = r.Next(0, 3);
 
-            if(!(Objectives.Where(t => t.ObjType == ObjectiveType.Fish).Any() && Objectives.Where(t => t.ObjType == ObjectiveType.Clean_Picture).Any() 
+            if (!(Objectives.Where(t => t.ObjType == ObjectiveType.Fish).Any() && Objectives.Where(t => t.ObjType == ObjectiveType.Clean_Picture).Any()
                 && Objectives.Where(t => t.ObjType == ObjectiveType.Clean_Dinosaur).Any()))
             {
                 if (number == 0 && !Objectives.Where(t => t.ObjType == ObjectiveType.Fish).Any()) Objectives.Add(new GameObjective(ObjectiveType.Fish, 50, (int)area.Width, (int)area.Height));
@@ -119,57 +116,56 @@ namespace Moving_Out.Logic
             }
         }
 
-        public void RoommateObjective()
+        public ObjectiveType RoommateObjective()
         {
-            //int number = r.Next(0, 4);
-            int number = 1;
+            int number = r.Next(0, 4);
+            //int number = 1;
 
-            if(!(Objectives.Where(t => t.ObjType == ObjectiveType.Pizza).Any() && Objectives.Where(t => t.ObjType == ObjectiveType.Music).Any() &&
+            if (!(Objectives.Where(t => t.ObjType == ObjectiveType.Pizza).Any() && Objectives.Where(t => t.ObjType == ObjectiveType.Music).Any() &&
                 Objectives.Where(t => t.ObjType == ObjectiveType.Trash).Any() && Objectives.Where(t => t.ObjType == ObjectiveType.Dishes).Any()))
             {
                 if (number == 0 && !Objectives.Where(t => t.ObjType == ObjectiveType.Pizza).Any())
                 {
-                    MoveRoommateToObjective(ObjectiveType.Pizza);
-                    Objectives.Add(new GameObjective(ObjectiveType.Pizza, 50, (int)area.Width, (int)area.Height));
+                    return ObjectiveType.Pizza;
                 }
                 else if (number == 1 && !Objectives.Where(t => t.ObjType == ObjectiveType.Music).Any())
                 {
-                    MoveRoommateToObjective(ObjectiveType.Music);
-                    Objectives.Add(new GameObjective(ObjectiveType.Music, 50, (int)area.Width, (int)area.Height));
+                    return ObjectiveType.Music;
                 }
                 else if (number == 2 && !Objectives.Where(t => t.ObjType == ObjectiveType.Trash).Any())
                 {
-                    MoveRoommateToObjective(ObjectiveType.Trash);
-                    Objectives.Add(new GameObjective(ObjectiveType.Trash, 50, (int)area.Width, (int)area.Height, Roommate.Center.X, Roommate.Center.Y));
+                    return ObjectiveType.Trash;
                 }
                 else if (number == 3 && !Objectives.Where(t => t.ObjType == ObjectiveType.Dishes).Any())
                 {
-                    MoveRoommateToObjective(ObjectiveType.Dishes);
-                    Objectives.Add(new GameObjective(ObjectiveType.Dishes, 50, (int)area.Width, (int)area.Height));
+                    return ObjectiveType.Dishes;
                 }
                 else
                 {
-                    RoommateObjective();
-                }
-            }
-        }
-
-        private void MoveRoommateToObjective(ObjectiveType type)
-        {
-            GameObjective tmp;
-            if (type == ObjectiveType.Trash)
-            {
-                while ((Roommate as GameItem).IsCollision(Wall))
-                {
-                    ChangeRoommateDirection();
-                    Thread.Sleep(5000);
+                    return ObjectiveType.NotFound;
                 }
             }
             else
             {
-                tmp = new GameObjective(type, 30, (int)area.Width, (int)area.Height);
+                ObjectivesFull = true;
+                return ObjectiveType.None;
+            }
+        }
 
-                while (!(Roommate as GameItem).IsCollision(tmp))
+        public void MoveRoommateToObjective(ObjectiveType type, GameObjective tmp)
+        {
+            if (type == ObjectiveType.Trash)
+            {
+                if (!(Roommate as GameItem).IsCollision(Wall))
+                {
+                    Objectives.Add(new GameObjective(type, 50, (int)area.Width, (int)area.Height, Roommate.Center.X, Roommate.Center.Y));
+                    Roommate.Speed = new Vector(0, 0);
+                    RoommateAtObjective = true;
+                }
+            }
+            else
+            {
+                if (!(Roommate as GameItem).IsCollision(tmp))
                 {
                     if (Roommate.Center.X > tmp.Center.X && Roommate.Center.Y > tmp.Center.Y) Roommate.Speed = new Vector(speed * -1 / 2, speed * -1 / 2);
                     else if (Roommate.Center.X < tmp.Center.X && Roommate.Center.Y > tmp.Center.Y) Roommate.Speed = new Vector(speed / 2, speed * -1 / 2);
@@ -180,8 +176,19 @@ namespace Moving_Out.Logic
                     else if (Roommate.Center.X > tmp.Center.X && Roommate.Center.Y == tmp.Center.Y) Roommate.Speed = new Vector(speed * -1 / 2, 0);
                     else if (Roommate.Center.X < tmp.Center.X && Roommate.Center.Y == tmp.Center.Y) Roommate.Speed = new Vector(speed / 2, 0);
                 }
+                else
+                {
+                    Objectives.Add(new GameObjective(type, 50, (int)area.Width, (int)area.Height));
+                    if (type == ObjectiveType.Music)
+                    {
+                        ingamemp.Open(new Uri(System.IO.Path.Combine("Audio", "polizei.mp3"), UriKind.RelativeOrAbsolute));
+                        ingamemp.Volume = 0.3;
+                        ingamemp.Play();
+                    }
+                    Roommate.Speed = new Vector(0, 0);
+                    RoommateAtObjective = true;
+                }
             }
-            Roommate.Speed = new Vector(0, 0);
         }
 
         public void ChangeRoommateDirection()
@@ -190,37 +197,36 @@ namespace Moving_Out.Logic
 
             if (newDirection_number <= 25)
             {
-                Roommate.Speed = new Vector(speed * -1/2, 0);
+                Roommate.Speed = new Vector(speed * -1 / 2, 0);
             }
             else if (newDirection_number <= 50)
             {
-                Roommate.Speed = new Vector(speed/2, 0);
+                Roommate.Speed = new Vector(speed / 2, 0);
             }
             else if (newDirection_number <= 75)
             {
-                Roommate.Speed = new Vector(speed *-1/2, speed/2);
+                Roommate.Speed = new Vector(speed * -1 / 2, speed / 2);
             }
             else if (newDirection_number <= 100)
             {
-                Roommate.Speed = new Vector(speed/2, speed/2);
+                Roommate.Speed = new Vector(speed / 2, speed / 2);
             }
             else if (newDirection_number <= 125)
             {
-                Roommate.Speed = new Vector(speed*-1/2, speed*-1/2);
+                Roommate.Speed = new Vector(speed * -1 / 2, speed * -1 / 2);
             }
             else if (newDirection_number <= 150)
             {
-                Roommate.Speed = new Vector(speed*-1/2, speed/2);
+                Roommate.Speed = new Vector(speed * -1 / 2, speed / 2);
             }
             else if (newDirection_number <= 175)
             {
-                Roommate.Speed = new Vector(0, speed*-1/2);
+                Roommate.Speed = new Vector(0, speed * -1 / 2);
             }
             else
             {
-                Roommate.Speed = new Vector(0, speed/2);
+                Roommate.Speed = new Vector(0, speed / 2);
             }
-            //newObjective(ObjectiveType.None);
         }
 
         public void TimeStep()
@@ -249,7 +255,7 @@ namespace Moving_Out.Logic
                 }
             }
 
-            if(Roommate.Center.X < (int)(area.Width / 12.631579) || Roommate.Center.X > (int)(area.Width / 1.078652) 
+            if (Roommate.Center.X < (int)(area.Width / 12.631579) || Roommate.Center.X > (int)(area.Width / 1.078652)
                 || Roommate.Center.Y < (int)(area.Height / 8.843478) || Roommate.Center.Y > (int)(area.Height / 1.13))
             {
                 Roommate.Speed = new Vector(Roommate.Speed.X * -1, Roommate.Speed.Y * -1);

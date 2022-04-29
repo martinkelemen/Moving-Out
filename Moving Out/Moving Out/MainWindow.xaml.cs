@@ -172,14 +172,23 @@ namespace Moving_Out
                 dt_obj.Stop();
                 dt_obj_t.Stop();
                 dt_rm_obj.Stop();
-                if (logic.is_playing_audio)
+                if (logic.main_is_playing_audio==true)
+                {
+                    logic.ingamemp2.Pause();
+                    ingame_Menu.ContinueMusic += (sender, eventargs) => logic.ingamemp2.Play();
+                }
+                else if(logic.main_is_playing_audio==false)
+                {
+                    ingame_Menu.ContinueMusic += (sender, eventargs) => logic.ingamemp2.Pause();
+                }
+                if (logic.task_is_playing_audio == true)
                 {
                     logic.ingamemp.Pause();
                     ingame_Menu.ContinueMusic += (sender, eventargs) => logic.ingamemp.Play();
                 }
-                else
+                else if (logic.task_is_playing_audio == false)
                 {
-                    ingame_Menu.ContinueMusic += (sender, eventargs) => logic.ingamemp.Stop();
+                    ingame_Menu.ContinueMusic += (sender, eventargs) => logic.ingamemp.Pause();
                 }
                 ingame_Menu.Dt_start += (sender, eventargs) =>
                 {
@@ -201,6 +210,8 @@ namespace Moving_Out
             logic.SetupSizes(new Size((int)canvas.ActualWidth, (int)canvas.ActualHeight));
             logic.SetupItems();
         }
+
+        
 
         private void Window_SizeChanged(object sender, SizeChangedEventArgs e)
         {

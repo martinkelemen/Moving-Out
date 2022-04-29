@@ -14,7 +14,9 @@ namespace Moving_Out.Logic
     {
         static Random r = new Random();
         public MediaPlayer ingamemp;
-        public bool is_playing_audio;
+        public MediaPlayer ingamemp2;
+        public bool task_is_playing_audio;
+        public bool main_is_playing_audio;
 
         public bool Left { get; set; }
         public bool Right { get; set; }
@@ -33,6 +35,13 @@ namespace Moving_Out.Logic
 
         public bool RoommateAtObjective { get; set; }
         private bool ObjectivesFull { get; set; }
+
+        private void Media_Ended(object sender, EventArgs e)
+        {
+            ingamemp2.Position = TimeSpan.Zero;
+            ingamemp2.Play();
+            ingamemp2.Volume = 0.2;
+        }
 
         public void SetupSizes(System.Windows.Size area)
         {
@@ -53,6 +62,12 @@ namespace Moving_Out.Logic
             RoommateAtObjective = false;
             ObjectivesFull = false;
             ingamemp = new MediaPlayer();
+            ingamemp2 = new MediaPlayer();
+            ingamemp2.Open(new Uri(System.IO.Path.Combine("Audio", "doomermenu.mp3"), UriKind.RelativeOrAbsolute));
+            ingamemp2.MediaEnded += new EventHandler(Media_Ended);
+            ingamemp2.Play();
+            ingamemp2.Volume = 0.2;
+            main_is_playing_audio = true;
         }
 
         public void Interact()
@@ -92,8 +107,10 @@ namespace Moving_Out.Logic
                 if (obj.ObjType == ObjectiveType.Music)
                 {
                     ingamemp.Stop();
+                    ingamemp2.Play();
                     ObjectivesFull = false;
-                    is_playing_audio = false;
+                    task_is_playing_audio = false;
+                    main_is_playing_audio = true;
                 }
                 else if (obj.ObjType == ObjectiveType.Pizza || obj.ObjType == ObjectiveType.Dishes || obj.ObjType == ObjectiveType.Trash)
                 {
@@ -120,8 +137,8 @@ namespace Moving_Out.Logic
 
         public ObjectiveType RoommateObjective()
         {
-            int number = r.Next(0, 4);
-            //int number = 1;
+            //int number = r.Next(0, 4);
+            int number = 1;
 
             if (!(Objectives.Where(t => t.ObjType == ObjectiveType.Pizza).Any() && Objectives.Where(t => t.ObjType == ObjectiveType.Music).Any() &&
                 Objectives.Where(t => t.ObjType == ObjectiveType.Trash).Any() && Objectives.Where(t => t.ObjType == ObjectiveType.Dishes).Any()))
@@ -183,10 +200,12 @@ namespace Moving_Out.Logic
                     Objectives.Add(new GameObjective(type, 50, (int)area.Width, (int)area.Height));
                     if (type == ObjectiveType.Music)
                     {
+                        ingamemp2.Pause();
                         ingamemp.Open(new Uri(System.IO.Path.Combine("Audio", "polizei.mp3"), UriKind.RelativeOrAbsolute));
                         ingamemp.Volume = 0.3;
                         ingamemp.Play();
-                        is_playing_audio = true;
+                        task_is_playing_audio = true;
+                        main_is_playing_audio = false;
                     }
                     Roommate.Speed = new Vector(0, 0);
                     RoommateAtObjective = true;

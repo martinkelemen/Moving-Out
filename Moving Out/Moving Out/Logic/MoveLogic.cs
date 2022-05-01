@@ -14,9 +14,10 @@ namespace Moving_Out.Logic
     {
         static Random r = new Random();
         public MediaPlayer ingamemp;
-        public MediaPlayer ingamemp2;
         public bool task_is_playing_audio;
         public bool main_is_playing_audio;
+        TimeSpan mainpositon;
+        TimeSpan taskposition;
 
         public bool Left { get; set; }
         public bool Right { get; set; }
@@ -38,9 +39,9 @@ namespace Moving_Out.Logic
 
         private void Media_Ended(object sender, EventArgs e)
         {
-            ingamemp2.Position = TimeSpan.Zero;
-            ingamemp2.Play();
-            ingamemp2.Volume = 0.2;
+            ingamemp.Position = TimeSpan.Zero;
+            ingamemp.Play();
+            ingamemp.Volume = 0.2;
         }
 
         public void SetupSizes(System.Windows.Size area)
@@ -62,11 +63,9 @@ namespace Moving_Out.Logic
             RoommateAtObjective = false;
             ObjectivesFull = false;
             ingamemp = new MediaPlayer();
-            ingamemp2 = new MediaPlayer();
-            ingamemp2.Open(new Uri(System.IO.Path.Combine("Audio", "doomermenu.mp3"), UriKind.RelativeOrAbsolute));
-            ingamemp2.MediaEnded += new EventHandler(Media_Ended);
-            ingamemp2.Play();
-            ingamemp2.Volume = 0.2;
+            ingamemp.Open(new Uri(System.IO.Path.Combine("Audio", "doomermenu.mp3"), UriKind.RelativeOrAbsolute));
+            ingamemp.MediaEnded += new EventHandler(Media_Ended);
+            ingamemp.Play();
             main_is_playing_audio = true;
         }
 
@@ -106,8 +105,12 @@ namespace Moving_Out.Logic
             {
                 if (obj.ObjType == ObjectiveType.Music)
                 {
+                    taskposition = ingamemp.Position;
                     ingamemp.Stop();
-                    ingamemp2.Play();
+                    ingamemp.Close();
+                    ingamemp.Open(new Uri(System.IO.Path.Combine("Audio", "doomermenu.mp3"), UriKind.RelativeOrAbsolute));
+                    ingamemp.Position = mainpositon;
+                    ingamemp.Play();
                     ObjectivesFull = false;
                     task_is_playing_audio = false;
                     main_is_playing_audio = true;
@@ -137,8 +140,8 @@ namespace Moving_Out.Logic
 
         public ObjectiveType RoommateObjective()
         {
-            //int number = r.Next(0, 4);
-            int number = 1;
+            int number = r.Next(0, 4);
+            //int number = 1;
 
             if (!(Objectives.Where(t => t.ObjType == ObjectiveType.Pizza).Any() && Objectives.Where(t => t.ObjType == ObjectiveType.Music).Any() &&
                 Objectives.Where(t => t.ObjType == ObjectiveType.Trash).Any() && Objectives.Where(t => t.ObjType == ObjectiveType.Dishes).Any()))
@@ -200,8 +203,11 @@ namespace Moving_Out.Logic
                     Objectives.Add(new GameObjective(type, 50, (int)area.Width, (int)area.Height));
                     if (type == ObjectiveType.Music)
                     {
-                        ingamemp2.Pause();
+                        mainpositon = ingamemp.Position;
+                        ingamemp.Stop();
+                        ingamemp.Close();
                         ingamemp.Open(new Uri(System.IO.Path.Combine("Audio", "polizei.mp3"), UriKind.RelativeOrAbsolute));
+                        ingamemp.Position = taskposition;
                         ingamemp.Volume = 0.3;
                         ingamemp.Play();
                         task_is_playing_audio = true;

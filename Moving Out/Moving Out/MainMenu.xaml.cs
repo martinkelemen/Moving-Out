@@ -42,10 +42,8 @@ namespace Moving_Out
         private void New_Game(object sender, RoutedEventArgs e)
         {
             mpMainMenu.Stop();
-            //mpMainMenu.Close();
+            mpMainMenu.Close();
             sound_playing = false;
-            //mpMainMenu.Open(new Uri(System.IO.Path.Combine("Audio", "polizei.mp3"), UriKind.RelativeOrAbsolute));
-            //mpMainMenu.Play();
             MainWindow mw = new MainWindow();
             mw.Show();
             this.Close();

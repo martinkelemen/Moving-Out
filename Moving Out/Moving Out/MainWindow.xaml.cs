@@ -172,21 +172,12 @@ namespace Moving_Out
                 dt_obj.Stop();
                 dt_obj_t.Stop();
                 dt_rm_obj.Stop();
-                if (logic.main_is_playing_audio==true)
-                {
-                    logic.ingamemp2.Pause();
-                    ingame_Menu.ContinueMusic += (sender, eventargs) => logic.ingamemp2.Play();
-                }
-                else if(logic.main_is_playing_audio==false)
-                {
-                    ingame_Menu.ContinueMusic += (sender, eventargs) => logic.ingamemp2.Pause();
-                }
-                if (logic.task_is_playing_audio == true)
+                if ((logic.main_is_playing_audio==true && logic.task_is_playing_audio == false)||(logic.main_is_playing_audio == false && logic.task_is_playing_audio == true) )
                 {
                     logic.ingamemp.Pause();
                     ingame_Menu.ContinueMusic += (sender, eventargs) => logic.ingamemp.Play();
                 }
-                else if (logic.task_is_playing_audio == false)
+                else
                 {
                     ingame_Menu.ContinueMusic += (sender, eventargs) => logic.ingamemp.Pause();
                 }

@@ -19,12 +19,35 @@
     <None Remove="Audio\doomermenu.mp3" />
     <None Remove="Audio\polizei.mp3" />
     <None Remove="Images\DoomerMenu.png" />
+    <None Remove="Images\exclamation_mark.png" />
+    <None Remove="Images\E_button.png" />
+    <None Remove="Images\fish.png" />
     <None Remove="Images\Ghost_Front.png" />
     <None Remove="Images\ingamemenuclick.png" />
     <None Remove="Images\menuclick.png" />
+    <None Remove="Images\mosquito.gif" />
     <None Remove="Images\mute.png" />
+    <None Remove="Images\oldkurvinnyo_running_back.png" />
+    <None Remove="Images\oldkurvinnyo_running_front.png" />
+    <None Remove="Images\oldkurvinnyo_standing_back.png" />
+    <None Remove="Images\oldkurvinnyo_standing_front.png" />
+    <None Remove="Images\pizza_running_back.png" />
+    <None Remove="Images\pizza_running_front.png" />
+    <None Remove="Images\pizza_standing_back.png" />
+    <None Remove="Images\pizza_standing_front.png" />
+    <None Remove="Images\plates.png" />
+    <None Remove="Images\Q_button.png" />
+    <None Remove="Images\running_back.png" />
+    <None Remove="Images\running_front.png" />
+    <None Remove="Images\running_left.png" />
+    <None Remove="Images\running_right.png" />
+    <None Remove="Images\silverfish.png" />
     <None Remove="Images\standing.png" />
+    <None Remove="Images\standing_back.png" />
+    <None Remove="Images\standing_left.png" />
+    <None Remove="Images\standing_right.png" />
     <None Remove="Images\thumbnail.png" />
+    <None Remove="Images\trash_bag.png" />
     <None Remove="Images\volume.png" />
   </ItemGroup>
 
@@ -41,6 +64,15 @@
     <Content Include="Images\DoomerMenu.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Images\exclamation_mark.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\E_button.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\fish.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Images\Ghost_Front.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -50,13 +82,73 @@
     <Content Include="Images\menuclick.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Images\mosquito.gif">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Images\mute.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\oldkurvinnyo_running_back.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\oldkurvinnyo_running_front.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\oldkurvinnyo_standing_back.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\oldkurvinnyo_standing_front.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\pizza_running_back.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\pizza_running_front.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\pizza_standing_back.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\pizza_standing_front.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\plates.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\Q_button.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\running_back.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\running_front.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\running_left.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\running_right.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\silverfish.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Images\standing.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Images\standing_back.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\standing_left.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\standing_right.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Images\thumbnail.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\trash_bag.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Images\volume.png">

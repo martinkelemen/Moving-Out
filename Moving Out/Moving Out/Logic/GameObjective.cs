@@ -244,20 +244,20 @@ namespace Moving_Out.Logic
                     texts.Add("Your roommate ordered a pizza, get ready!");
                     texts.Add("The pizza deliver guy has arrived!");
                     texts.Add("Take the pizza to the fridge!");
-                    texts.Add("The pizza cooled down..");
+                    texts.Add("The pizza is spoiled..");
                     break;
                 case ObjectiveType.Music:
                     texts.Add("Your roommate turned on the radio, turn it off before your neighbour comes over!");
-                    texts.Add("The old kurvinnyo has arrived..");
+                    texts.Add("The old Kurvinnyo has arrived..");
                     break;
                 case ObjectiveType.Trash:
                     texts.Add("Your roommate threw trash on the ground, pick it up before mosquitoes take over the house!");
-                    texts.Add("Drop the trash out!");
+                    texts.Add("Drop out the trash!");
                     texts.Add("The mosquito boss is here..");
                     break;
                 case ObjectiveType.Fish:
                     texts.Add("A dead fish came up from the drain, pick it up before you die from the smell!");
-                    texts.Add("Drop the fish out quick!");
+                    texts.Add("Drop out the fish!");
                     texts.Add("Your nose died..");
                     break;
                 case ObjectiveType.Dishes:

@@ -15,6 +15,9 @@ namespace Moving_Out.Renderer
     {
         Size area;
         IGameModel model;
+        int charachterBrushCounter;
+        Brush last;
+        Brush last_standing;
 
         public void SetupSizes(Size area)
         {
@@ -26,6 +29,13 @@ namespace Moving_Out.Renderer
         {
             this.model = model;
             this.model.Changed += (sender, eventargs) => this.InvalidateVisual();
+        }
+
+        public Display()
+        {
+            last = new ImageBrush(new BitmapImage(new Uri(Path.Combine("Images", "standing.png"), UriKind.RelativeOrAbsolute)));
+            last_standing = new ImageBrush(new BitmapImage(new Uri(Path.Combine("Images", "standing.png"), UriKind.RelativeOrAbsolute)));
+            charachterBrushCounter = 0;
         }
 
         public Brush HouseBrush
@@ -40,7 +50,68 @@ namespace Moving_Out.Renderer
         {
             get
             {
-                return new ImageBrush(new BitmapImage(new Uri(Path.Combine("Images", "standing.png"), UriKind.RelativeOrAbsolute)));
+                if (model.Down == true)
+                {
+                    charachterBrushCounter++;
+                    if (charachterBrushCounter % 20 == 0)
+                    {
+                        charachterBrushCounter = 0;
+                        last = new ImageBrush(new BitmapImage(new Uri(Path.Combine("Images", "standing.png"), UriKind.RelativeOrAbsolute)));
+                        last_standing = last;
+                    }
+                    else if (charachterBrushCounter % 20 == 10)
+                    {
+                        last = new ImageBrush(new BitmapImage(new Uri(Path.Combine("Images", "running_front.png"), UriKind.RelativeOrAbsolute)));
+                    }
+                }
+                else if (model.Up == true)
+                {
+                    charachterBrushCounter++;
+                    if (charachterBrushCounter % 20 == 0)
+                    {
+                        charachterBrushCounter = 0;
+                        last = new ImageBrush(new BitmapImage(new Uri(Path.Combine("Images", "standing_back.png"), UriKind.RelativeOrAbsolute)));
+                        last_standing = last;
+                    }
+                    else if (charachterBrushCounter % 20 == 10)
+                    {
+                        last = new ImageBrush(new BitmapImage(new Uri(Path.Combine("Images", "running_back.png"), UriKind.RelativeOrAbsolute)));
+                    }
+                }
+                else if (model.Left == true)
+                {
+                    charachterBrushCounter++;
+                    if (charachterBrushCounter % 20 == 0)
+                    {
+                        charachterBrushCounter = 0;
+                        last = new ImageBrush(new BitmapImage(new Uri(Path.Combine("Images", "standing_left.png"), UriKind.RelativeOrAbsolute)));
+                        last_standing = last;
+                    }
+                    else if (charachterBrushCounter % 20 == 10)
+                    {
+                        last = new ImageBrush(new BitmapImage(new Uri(Path.Combine("Images", "running_left.png"), UriKind.RelativeOrAbsolute)));
+                    }
+                }
+                else if (model.Right == true)
+                {
+                    charachterBrushCounter++;
+                    if (charachterBrushCounter % 20 == 0)
+                    {
+                        charachterBrushCounter = 0;
+                        last = new ImageBrush(new BitmapImage(new Uri(Path.Combine("Images", "standing_right.png"), UriKind.RelativeOrAbsolute)));
+                        last_standing = last;
+                    }
+                    else if (charachterBrushCounter % 20 == 10)
+                    {
+                        last = new ImageBrush(new BitmapImage(new Uri(Path.Combine("Images", "running_right.png"), UriKind.RelativeOrAbsolute)));
+                    }
+                }
+                else
+                {
+                    last = last_standing;
+                }
+
+                return last;
             }
         }
 

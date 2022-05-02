@@ -15,5 +15,9 @@ namespace Moving_Out.Logic
         List<GameObjective> Objectives { get; set; }
         bool PlayerAtObjective { get; set; }
         int Points { get; set; }
+        bool Left { get; set; }
+        bool Right { get; set; }
+        bool Up { get; set; }
+        bool Down { get; set; }
     }
 }

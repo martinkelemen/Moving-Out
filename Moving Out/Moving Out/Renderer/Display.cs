@@ -113,7 +113,7 @@ namespace Moving_Out.Renderer
                         FlowDirection.LeftToRight, new Typeface(new FontFamily("Arial"), FontStyles.Italic,
                         FontWeights.UltraBold, FontStretches.Normal), 16, Brushes.Black, 10);
 
-                    drawingContext.DrawText(objText, new Point(10, 10+moveTextPosition));
+                    drawingContext.DrawText(objText, new Point((int)(area.Width / 192), (int)(area.Height / 108) + moveTextPosition));
 
                     FormattedText timerText = new FormattedText($"{model.Objectives[i].Seconds}s", System.Globalization.CultureInfo.CurrentCulture,
                         FlowDirection.LeftToRight, new Typeface(new FontFamily("Arial"), FontStyles.Italic,
@@ -124,7 +124,7 @@ namespace Moving_Out.Renderer
                     //Geometry textGeometry = text.BuildGeometry(new Point(10, 20+moveTextPosition));
                     //drawingContext.DrawGeometry(Brushes.Black, new Pen(Brushes.White, 0.25), textGeometry);
 
-                    moveTextPosition += 20;
+                    moveTextPosition += (int)(area.Height / 54);
 
                     if (model.Objectives[i].PartCounter == 0)
                     {
@@ -160,7 +160,7 @@ namespace Moving_Out.Renderer
                     FlowDirection.LeftToRight, new Typeface(new FontFamily("Arial"), FontStyles.Italic,
                     FontWeights.UltraBold, FontStretches.Normal), 20, Brushes.White, 10);
 
-                drawingContext.DrawText(pointsText, new Point(1800, 20));
+                drawingContext.DrawText(pointsText, new Point((int)(area.Width / 1.066667), (int)(area.Height / 54)));
             }
         }
     }

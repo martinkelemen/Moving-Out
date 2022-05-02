@@ -31,7 +31,11 @@ namespace Moving_Out
         DispatcherTimer dt_obj_t;
         DispatcherTimer dt_rm_obj;
         DispatcherTimer dt_moverm;
+        DispatcherTimer dt_setseconds;
         ObjectiveType type;
+
+        int rm_obj_seconds;
+        int obj_seconds;
 
         private void Dt_Tick(object sender, EventArgs e)
         {
@@ -83,9 +87,26 @@ namespace Moving_Out
             }
         }
 
+        private void Set_Seconds(object sender, EventArgs e)
+        {
+            if(rm_obj_seconds > 2)
+            {
+                rm_obj_seconds -= 2;
+                dt_rm_obj.Interval = TimeSpan.FromSeconds(rm_obj_seconds);
+            }
+            if (obj_seconds > 3)
+            {
+                obj_seconds -= 3;
+                dt_obj.Interval = TimeSpan.FromSeconds(obj_seconds);
+            }
+        }
+
         public MainWindow()
         {
             InitializeComponent();
+
+            rm_obj_seconds = 20;
+            obj_seconds = 30;
 
             dt = new DispatcherTimer();
             dt_rm = new DispatcherTimer();
@@ -93,6 +114,7 @@ namespace Moving_Out
             dt_obj_t = new DispatcherTimer();
             dt_rm_obj = new DispatcherTimer();
             dt_moverm = new DispatcherTimer();
+            dt_setseconds = new DispatcherTimer();
 
             dt.Tick += Dt_Tick;
             dt.Interval = TimeSpan.FromMilliseconds(10);
@@ -103,7 +125,7 @@ namespace Moving_Out
             dt_rm.Start();
 
             dt_obj.Tick += Dt_Obj_Tick;
-            dt_obj.Interval = TimeSpan.FromSeconds(10);
+            dt_obj.Interval = TimeSpan.FromSeconds(obj_seconds);
             dt_obj.Start();
 
             dt_obj_t.Tick += Dt_Obj_T_Tick;
@@ -111,11 +133,15 @@ namespace Moving_Out
             dt_obj_t.Start();
 
             dt_rm_obj.Tick += Dt_Rm_Obj_Tick;
-            dt_rm_obj.Interval = TimeSpan.FromSeconds(10);
+            dt_rm_obj.Interval = TimeSpan.FromSeconds(rm_obj_seconds);
             dt_rm_obj.Start();
 
             dt_moverm.Tick += Move_Rm;
             dt_moverm.Interval = TimeSpan.FromMilliseconds(10);
+
+            dt_setseconds.Tick += Set_Seconds;
+            dt_setseconds.Interval = TimeSpan.FromSeconds(60);
+            dt_setseconds.Start();
         }
 
         private void KeyIsUp(object sender, KeyEventArgs e)
@@ -172,6 +198,7 @@ namespace Moving_Out
                 dt_obj.Stop();
                 dt_obj_t.Stop();
                 dt_rm_obj.Stop();
+                dt_setseconds.Stop();
                 if ((logic.main_is_playing_audio==true && logic.task_is_playing_audio == false)||(logic.main_is_playing_audio == false && logic.task_is_playing_audio == true) )
                 {
                     logic.ingamemp.Pause();
@@ -188,6 +215,7 @@ namespace Moving_Out
                     dt_obj.Start();
                     dt_obj_t.Start();
                     dt_rm_obj.Start();
+                    dt_setseconds.Start();
                 };
                 ingame_Menu.CloseMainWindow += (sender, eventargs) => this.Close();
                 ingame_Menu.ShowDialog();

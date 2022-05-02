@@ -35,6 +35,7 @@ namespace Moving_Out.Logic
         public List<GameObjective> Objectives { get; set; }
 
         public bool RoommateAtObjective { get; set; }
+        public bool PlayerAtObjective { get; set; }
         private bool ObjectivesFull { get; set; }
 
         private void Media_Ended(object sender, EventArgs e)
@@ -290,6 +291,17 @@ namespace Moving_Out.Logic
             }
 
             Roommate.Move();
+
+            int count = 0;
+            for (int i = 0; i < Objectives.Count(); i++)
+            {
+                if ((Player as GameItem).IsCollision(Objectives[i]) && Objectives[i].Interactable)
+                {
+                    PlayerAtObjective = true;
+                    count++;
+                }
+            }
+            if (count == 0) PlayerAtObjective = false;
 
             Changed?.Invoke(this, null);
         }

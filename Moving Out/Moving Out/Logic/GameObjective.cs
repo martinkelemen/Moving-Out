@@ -28,6 +28,8 @@ namespace Moving_Out.Logic
         public int PartCounter { get; set; }
         public int Seconds { get; set; }
 
+        private int areaMoveValue;
+
         public override Geometry Area
         {
             get
@@ -37,35 +39,35 @@ namespace Moving_Out.Logic
                     if (PartCounter == 0)
                     {
                         Interactable = false;
-                        Center = new System.Drawing.Point((int)(displayWidth / 1.662338), (int)(displayHeight / 2.21087));
+                        Center = new System.Drawing.Point((int)(displayWidth / 1.662338), (int)(displayHeight / 2.21087) - areaMoveValue);
                         return new EllipseGeometry(new Point(Center.X, Center.Y), Radius, Radius);
                     }
                     else if (PartCounter == 1)
                     {
                         Interactable = true;
-                        Center = new System.Drawing.Point((int)(displayWidth / 2.269504) + (int)(displayWidth / 64), (int)(displayHeight / 1.13));
+                        Center = new System.Drawing.Point((int)(displayWidth / 2.269504) + (int)(displayWidth / 64), (int)(displayHeight / 1.13) - areaMoveValue);
                         return new EllipseGeometry(new Point(Center.X, Center.Y), Radius, Radius);
                     }
                     else
                     {
-                        Center = new System.Drawing.Point((int)(displayWidth / 1.567347) + (int)(displayWidth / 64), (int)(displayHeight / 10.17));
+                        Center = new System.Drawing.Point((int)(displayWidth / 1.567347) + (int)(displayWidth / 64), (int)(displayHeight / 10.17) - areaMoveValue);
                         return new EllipseGeometry(new Point(Center.X, Center.Y), Radius, Radius);
                     }
                 }
                 else if (ObjType == ObjectiveType.Music)
                 {
-                    Center = new System.Drawing.Point((int)(displayWidth / 12.631579) + (int)(displayWidth / 96), (int)(displayHeight / 2.16383) + (int)(displayHeight / 50.85));
+                    Center = new System.Drawing.Point((int)(displayWidth / 12.631579) + (int)(displayWidth / 96), (int)(displayHeight / 2.16383) + (int)(displayHeight / 50.85) - areaMoveValue);
                     return new EllipseGeometry(new Point(Center.X, Center.Y), Radius, Radius);
                 }
                 else if (ObjType == ObjectiveType.Trash)
                 {
                     if (PartCounter == 0)
                     {
-                        return new EllipseGeometry(new Point(Center.X, Center.Y), Radius, Radius);
+                        return new EllipseGeometry(new Point(Center.X, Center.Y - areaMoveValue), Radius, Radius);
                     }
                     else
                     {
-                        Center = new System.Drawing.Point((int)(displayWidth / 1.111111) + (int)(displayWidth / 96), (int)(displayHeight / 8.475) + (int)(displayHeight / 20.34));
+                        Center = new System.Drawing.Point((int)(displayWidth / 1.111111) + (int)(displayWidth / 96), (int)(displayHeight / 8.475) + (int)(displayHeight / 20.34) - areaMoveValue);
                         return new EllipseGeometry(new Point(Center.X, Center.Y), Radius, Radius);
                     }
                 }
@@ -73,12 +75,12 @@ namespace Moving_Out.Logic
                 {
                     if (PartCounter == 0)
                     {
-                        Center = new System.Drawing.Point((int)(displayWidth / 1.665221) - (int)(displayWidth / 48), (int)(displayHeight / 1.432394) - (int)(displayHeight / 11.3));
+                        Center = new System.Drawing.Point((int)(displayWidth / 1.665221) - (int)(displayWidth / 48), (int)(displayHeight / 1.432394) - (int)(displayHeight / 11.3) - areaMoveValue);
                         return new EllipseGeometry(new Point(Center.X, Center.Y), Radius, Radius);
                     }
                     else
                     {
-                        Center = new System.Drawing.Point((int)(displayWidth / 1.111111) + (int)(displayWidth / 96), (int)(displayHeight / 8.475) + (int)(displayHeight / 20.34));
+                        Center = new System.Drawing.Point((int)(displayWidth / 1.111111) + (int)(displayWidth / 96), (int)(displayHeight / 8.475) + (int)(displayHeight / 20.34) - areaMoveValue);
                         return new EllipseGeometry(new Point(Center.X, Center.Y), Radius, Radius);
                     }
                 }
@@ -86,24 +88,119 @@ namespace Moving_Out.Logic
                 {
                     if (PartCounter == 0)
                     {
-                        Center = new System.Drawing.Point((int)(displayWidth / 1.4307) + (int)(displayWidth / 96), (int)(displayHeight / 8.475) + (int)(displayHeight / 50.85));
+                        Center = new System.Drawing.Point((int)(displayWidth / 1.4307) + (int)(displayWidth / 96), (int)(displayHeight / 8.475) + (int)(displayHeight / 50.85) - areaMoveValue);
                         return new EllipseGeometry(new Point(Center.X, Center.Y), Radius, Radius);
                     }
                     else
                     {
-                        Center = new System.Drawing.Point((int)(displayWidth / 1.389291) + (int)(displayWidth / 12.8), (int)(displayHeight / 10.17) + (int)(displayHeight / 50.85));
+                        Center = new System.Drawing.Point((int)(displayWidth / 1.389291) + (int)(displayWidth / 12.8), (int)(displayHeight / 10.17) + (int)(displayHeight / 50.85) - areaMoveValue);
                         return new EllipseGeometry(new Point(Center.X, Center.Y), Radius, Radius);
                     }
                 }
                 else if (ObjType == ObjectiveType.Clean_Picture)
                 {
 
-                    return new EllipseGeometry(new Point(Center.X, Center.Y), Radius, Radius);
+                    return new EllipseGeometry(new Point(Center.X, Center.Y - areaMoveValue), Radius, Radius);
                 }
                 else
                 {
-                    return new EllipseGeometry(new Point(Center.X, Center.Y), Radius, Radius);
+                    return new EllipseGeometry(new Point(Center.X, Center.Y - areaMoveValue), Radius, Radius);
                 }
+            }
+        }
+
+        public Geometry Objective_Alert_Area
+        {
+            get
+            {
+                areaMoveValue = (int)(displayHeight / 21.6);
+                var area = Area;
+                areaMoveValue = 0;
+                return area;
+            }
+        }
+
+        public Geometry Objective_Texture_Area
+        {
+            get
+            {
+                Radius -= (int)(displayWidth / 54.857143);
+                var area = Area;
+                Radius += (int)(displayWidth / 54.857143);
+                return area;
+            }
+        }
+
+        public Point Objective_Timer_Position()
+        {
+            if (ObjType == ObjectiveType.Pizza)
+            {
+                if (PartCounter == 0)
+                {
+                    Center = new System.Drawing.Point((int)(displayWidth / 1.662338) - (int)(displayWidth / 96), (int)(displayHeight / 2.21087) + (int)(displayHeight / 43.2));
+                    return new Point(Center.X, Center.Y);
+                }
+                else if (PartCounter == 1)
+                {
+                    Center = new System.Drawing.Point((int)(displayWidth / 2.269504) + (int)(displayWidth / 64) - (int)(displayWidth / 96), (int)(displayHeight / 1.13) + (int)(displayHeight / 43.2));
+                    return new Point(Center.X, Center.Y);
+                }
+                else
+                {
+                    Center = new System.Drawing.Point((int)(displayWidth / 1.567347) + (int)(displayWidth / 64) - (int)(displayWidth / 96), (int)(displayHeight / 10.17) + (int)(displayHeight / 43.2));
+                    return new Point(Center.X, Center.Y);
+                }
+            }
+            else if (ObjType == ObjectiveType.Music)
+            {
+                Center = new System.Drawing.Point((int)(displayWidth / 12.631579) + (int)(displayWidth / 96) - (int)(displayWidth / 96), (int)(displayHeight / 2.16383) + (int)(displayHeight / 50.85) + (int)(displayHeight / 43.2));
+                return new Point(Center.X, Center.Y);
+            }
+            else if (ObjType == ObjectiveType.Trash)
+            {
+                if (PartCounter == 0)
+                {
+                    return new Point(Center.X - (int)(displayWidth / 96), Center.Y + (int)(displayHeight / 43.2));
+                }
+                else
+                {
+                    Center = new System.Drawing.Point((int)(displayWidth / 1.111111), (int)(displayHeight / 8.475) + (int)(displayHeight / 20.34) + (int)(displayHeight / 43.2));
+                    return new Point(Center.X, Center.Y);
+                }
+            }
+            else if (ObjType == ObjectiveType.Fish)
+            {
+                if (PartCounter == 0)
+                {
+                    Center = new System.Drawing.Point((int)(displayWidth / 1.665221) - (int)(displayWidth / 48) - (int)(displayWidth / 96), (int)(displayHeight / 1.432394) - (int)(displayHeight / 11.3) + (int)(displayHeight / 43.2));
+                    return new Point(Center.X, Center.Y);
+                }
+                else
+                {
+                    Center = new System.Drawing.Point((int)(displayWidth / 1.111111), (int)(displayHeight / 8.475) + (int)(displayHeight / 20.34) + (int)(displayHeight / 43.2));
+                    return new Point(Center.X, Center.Y);
+                }
+            }
+            else if (ObjType == ObjectiveType.Dishes)
+            {
+                if (PartCounter == 0)
+                {
+                    Center = new System.Drawing.Point((int)(displayWidth / 1.4307), (int)(displayHeight / 8.475) + (int)(displayHeight / 50.85) + (int)(displayHeight / 43.2));
+                    return new Point(Center.X, Center.Y);
+                }
+                else
+                {
+                    Center = new System.Drawing.Point((int)(displayWidth / 1.389291) + (int)(displayWidth / 12.8) - (int)(displayWidth / 96), (int)(displayHeight / 10.17) + (int)(displayHeight / 50.85) + (int)(displayHeight / 43.2));
+                    return new Point(Center.X, Center.Y);
+                }
+            }
+            else if (ObjType == ObjectiveType.Clean_Picture)
+            {
+                return new Point(Center.X - (int)(displayWidth / 96), Center.Y + (int)(displayHeight / 43.2));
+            }
+            else
+            {
+                return new Point(Center.X - (int)(displayWidth / 96), Center.Y + (int)(displayHeight / 43.2));
             }
         }
 
@@ -117,6 +214,7 @@ namespace Moving_Out.Logic
             this.displayWidth = displayWidth;
             this.displayHeight = displayHeight;
             Seconds = 30;
+            areaMoveValue = 0;
 
             if (objType == ObjectiveType.Clean_Picture)
             {

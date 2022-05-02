@@ -57,7 +57,7 @@ namespace Moving_Out.Logic
             Player = new Player((int)(area.Width / 2.206897), (int)(area.Height / 1.168966), (int)(area.Width / 128));
             Roommate = new Roommate((int)(area.Width / 4.8), (int)(area.Height / 2.5425), (int)(area.Width / 128));
             Objectives = new List<GameObjective>();
-            speed = 3;
+            speed = (int)(area.Width / 640);
         }
 
         public MoveLogic()

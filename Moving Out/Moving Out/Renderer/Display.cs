@@ -113,7 +113,7 @@ namespace Moving_Out.Renderer
                         FlowDirection.LeftToRight, new Typeface(new FontFamily("Arial"), FontStyles.Italic,
                         FontWeights.UltraBold, FontStretches.Normal), 16, Brushes.Black, 10);
 
-                    drawingContext.DrawText(objText, new Point(10, 20+moveTextPosition));
+                    drawingContext.DrawText(objText, new Point(10, 10+moveTextPosition));
 
                     FormattedText timerText = new FormattedText($"{model.Objectives[i].Seconds}s", System.Globalization.CultureInfo.CurrentCulture,
                         FlowDirection.LeftToRight, new Typeface(new FontFamily("Arial"), FontStyles.Italic,
@@ -155,6 +155,12 @@ namespace Moving_Out.Renderer
                 {
                     drawingContext.DrawRectangle(E_Button_Brush, null, new Rect((int)(area.Width / 96), (int)(area.Height / 1.08), (int)(area.Width / 27.428571), (int)(area.Height / 15.428571)));
                 }
+
+                FormattedText pointsText = new FormattedText($"Points: {model.Points}", System.Globalization.CultureInfo.CurrentCulture,
+                    FlowDirection.LeftToRight, new Typeface(new FontFamily("Arial"), FontStyles.Italic,
+                    FontWeights.UltraBold, FontStretches.Normal), 20, Brushes.White, 10);
+
+                drawingContext.DrawText(pointsText, new Point(1800, 20));
             }
         }
     }

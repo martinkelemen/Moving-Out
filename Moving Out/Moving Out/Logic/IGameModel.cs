@@ -14,5 +14,6 @@ namespace Moving_Out.Logic
         IGameControl Roommate { get; set; }
         List<GameObjective> Objectives { get; set; }
         bool PlayerAtObjective { get; set; }
+        int Points { get; set; }
     }
 }

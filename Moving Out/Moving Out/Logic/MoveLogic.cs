@@ -37,6 +37,7 @@ namespace Moving_Out.Logic
         public bool RoommateAtObjective { get; set; }
         public bool PlayerAtObjective { get; set; }
         private bool ObjectivesFull { get; set; }
+        public int Points { get; set; }
 
         private void Media_Ended(object sender, EventArgs e)
         {
@@ -68,6 +69,7 @@ namespace Moving_Out.Logic
             ingamemp.MediaEnded += new EventHandler(Media_Ended);
             ingamemp.Play();
             main_is_playing_audio = true;
+            Points = 0;
         }
 
         public void Interact()
@@ -77,6 +79,7 @@ namespace Moving_Out.Logic
                 if ((Player as GameItem).IsCollision(Objectives[i]) && Objectives[i].Interactable)
                 {
                     IncreasePartCounter(Objectives[i]);
+                    Points += 10;
                 }
             }
         }

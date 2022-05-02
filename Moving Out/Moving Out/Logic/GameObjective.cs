@@ -39,7 +39,7 @@ namespace Moving_Out.Logic
                     if (PartCounter == 0)
                     {
                         Interactable = false;
-                        Center = new System.Drawing.Point((int)(displayWidth / 1.662338), (int)(displayHeight / 2.21087) - areaMoveValue);
+                        Center = new System.Drawing.Point((int)(displayWidth / 1.662338) + (int)(displayWidth / 38.4), (int)(displayHeight / 2.21087) - areaMoveValue);
                         return new EllipseGeometry(new Point(Center.X, Center.Y), Radius, Radius);
                     }
                     else if (PartCounter == 1)
@@ -137,7 +137,7 @@ namespace Moving_Out.Logic
             {
                 if (PartCounter == 0)
                 {
-                    Center = new System.Drawing.Point((int)(displayWidth / 1.662338) - (int)(displayWidth / 96), (int)(displayHeight / 2.21087) + (int)(displayHeight / 43.2));
+                    Center = new System.Drawing.Point((int)(displayWidth / 1.662338) + (int)(displayWidth / 64), (int)(displayHeight / 2.21087) + (int)(displayHeight / 43.2));
                     return new Point(Center.X, Center.Y);
                 }
                 else if (PartCounter == 1)
@@ -164,7 +164,7 @@ namespace Moving_Out.Logic
                 }
                 else
                 {
-                    Center = new System.Drawing.Point((int)(displayWidth / 1.111111), (int)(displayHeight / 8.475) + (int)(displayHeight / 20.34) + (int)(displayHeight / 43.2));
+                    Center = new System.Drawing.Point((int)(displayWidth / 1.111111) - (int)(displayWidth / 64), (int)(displayHeight / 8.475) + (int)(displayHeight / 20.34) + (int)(displayHeight / 43.2));
                     return new Point(Center.X, Center.Y);
                 }
             }

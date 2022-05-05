@@ -19,8 +19,20 @@ namespace Moving_Out
     /// </summary>
     public partial class MainMenu : Window
     {
-        private MediaPlayer mpMainMenu = new MediaPlayer();
-        private bool sound_playing;
+        public MediaPlayer mpMainMenu = new MediaPlayer();
+        public bool sound_playing;
+        public MainMenu(TimeSpan Position)
+        {
+            InitializeComponent();
+            SoundButton.ImageSource = new BitmapImage(new Uri(System.IO.Path.Combine("Images", "volume.png"), UriKind.RelativeOrAbsolute));
+            mpMainMenu.Open(new Uri(System.IO.Path.Combine("Audio", "doomer.mp3"), UriKind.RelativeOrAbsolute));
+            mpMainMenu.Position = Position;
+            mpMainMenu.MediaEnded += new EventHandler(Media_Ended);
+            mpMainMenu.Play();
+            mpMainMenu.Volume = 0.2;
+            sound_playing = true;
+        }
+
         public MainMenu()
         {
             InitializeComponent();
@@ -51,7 +63,13 @@ namespace Moving_Out
 
         private void HighScore(object sender, RoutedEventArgs e)
         {
-
+            
+            sound_playing = true;
+            HighscoreWindow highscoreWindow = new HighscoreWindow(mpMainMenu.Position);
+            mpMainMenu.Stop();
+            mpMainMenu.Close();
+            highscoreWindow.Show();
+            this.Close();
         }
 
         private void Quit(object sender, RoutedEventArgs e)

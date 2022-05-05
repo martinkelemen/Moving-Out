@@ -201,8 +201,9 @@ namespace Moving_Out
                 logic.ingamemp.Stop();
                 GameOverWindow gameOverWindow = new GameOverWindow();
                 gameOverWindow.CloseMainWindow += (sender, eventargs) => this.Close();
-                gameOverWindow.ShowDialog();
-                gameOverWindow.points = logic.Points;
+                gameOverWindow.Points = logic.Points;
+                gameOverWindow.Show();
+                
             }
             else if (e.Key == Key.Escape)
             {

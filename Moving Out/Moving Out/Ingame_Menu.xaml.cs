@@ -36,14 +36,9 @@ namespace Moving_Out
             this.Close();
         }
 
-        private void Save(object sender, RoutedEventArgs e)
-        {
-
-        }
-
         private void Exit(object sender, RoutedEventArgs e)
         {
-            MainMenu mainMenu = new MainMenu();
+            MainMenu mainMenu = new MainMenu(TimeSpan.Zero);
             mainMenu.Show();
             CloseMainWindow?.Invoke(this, null);
             this.Close();

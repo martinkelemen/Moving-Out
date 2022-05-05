@@ -10,6 +10,9 @@
     <Compile Update="GameOverWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="HighscoreWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Ingame_Menu.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -19,6 +22,9 @@
   </ItemGroup>
   <ItemGroup>
     <Page Update="GameOverWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="HighscoreWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Ingame_Menu.xaml">

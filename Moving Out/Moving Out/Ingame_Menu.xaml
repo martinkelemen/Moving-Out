@@ -5,16 +5,11 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Moving_Out"
         mc:Ignorable="d"
-        Title="Ingame_Menu" Height="240" Width="300"
+        Title="Ingame_Menu" Height="160" Width="300"
         WindowStartupLocation="CenterScreen" WindowStyle="None" ResizeMode="NoResize" Background="#FF800025" BorderBrush="Goldenrod" BorderThickness="1.5">
     <Grid>
         <StackPanel>
             <Button Height="60" Width="250" Content="Continue" FontFamily="Papyrus" Margin="10" FontSize="24" Click="Continue" BorderThickness="0,0,0,0" Foreground="White">
-                <Button.Background>
-                    <ImageBrush ImageSource="/Images/ingamemenuclick.png"/>
-                </Button.Background>
-            </Button>
-            <Button Height="60" Width="250" Content="xd" FontFamily="Papyrus" Margin="10" FontSize="24" Click="Save" BorderThickness="0,0,0,0" Foreground="White">
                 <Button.Background>
                     <ImageBrush ImageSource="/Images/ingamemenuclick.png"/>
                 </Button.Background>

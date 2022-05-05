@@ -190,6 +190,20 @@ namespace Moving_Out
             {
                 logic.Interact();
             }
+            else if (e.Key == Key.Q)
+            {
+                dt.Stop();
+                dt_rm.Stop();
+                dt_obj.Stop();
+                dt_obj_t.Stop();
+                dt_rm_obj.Stop();
+                dt_setseconds.Stop();
+                logic.ingamemp.Stop();
+                GameOverWindow gameOverWindow = new GameOverWindow();
+                gameOverWindow.CloseMainWindow += (sender, eventargs) => this.Close();
+                gameOverWindow.ShowDialog();
+                gameOverWindow.points = logic.Points;
+            }
             else if (e.Key == Key.Escape)
             {
                 Ingame_Menu ingame_Menu = new Ingame_Menu();

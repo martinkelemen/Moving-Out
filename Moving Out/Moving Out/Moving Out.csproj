@@ -19,6 +19,7 @@
     <None Remove="Audio\doomermenu.mp3" />
     <None Remove="Audio\polizei.mp3" />
     <None Remove="Images\DoomerMenu.png" />
+    <None Remove="Images\doomer_end.png" />
     <None Remove="Images\exclamation_mark.png" />
     <None Remove="Images\E_button.png" />
     <None Remove="Images\fish.png" />
@@ -27,6 +28,7 @@
     <None Remove="Images\menuclick.png" />
     <None Remove="Images\mosquito.gif" />
     <None Remove="Images\mute.png" />
+    <None Remove="Images\nightcitydoomer.png" />
     <None Remove="Images\oldkurvinnyo_running_back.png" />
     <None Remove="Images\oldkurvinnyo_running_front.png" />
     <None Remove="Images\oldkurvinnyo_standing_back.png" />
@@ -64,6 +66,9 @@
     <Content Include="Images\DoomerMenu.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Images\doomer_end.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Images\exclamation_mark.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -86,6 +91,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Images\mute.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\nightcitydoomer.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Images\oldkurvinnyo_running_back.png">
@@ -158,6 +166,12 @@
 
   <ItemGroup>
     <Folder Include="Controller\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Text\highscore.txt">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>

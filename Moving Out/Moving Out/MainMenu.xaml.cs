@@ -63,7 +63,7 @@ namespace Moving_Out
 
         private void HighScore(object sender, RoutedEventArgs e)
         {
-            
+
             sound_playing = true;
             HighscoreWindow highscoreWindow = new HighscoreWindow(mpMainMenu.Position);
             mpMainMenu.Stop();
@@ -77,7 +77,7 @@ namespace Moving_Out
             this.Close();
         }
 
-        
+
         private void Mute(object sender, RoutedEventArgs e)
         {
             if (sound_playing)
@@ -86,7 +86,7 @@ namespace Moving_Out
                 SoundButton.ImageSource = new BitmapImage(new Uri(System.IO.Path.Combine("Images", "mute.png"), UriKind.RelativeOrAbsolute));
                 sound_playing = false;
             }
-            else if (sound_playing==false)
+            else if (sound_playing == false)
             {
                 mpMainMenu.Volume = 0.2;
                 SoundButton.ImageSource = new BitmapImage(new Uri(System.IO.Path.Combine("Images", "volume.png"), UriKind.RelativeOrAbsolute));

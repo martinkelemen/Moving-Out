@@ -18,6 +18,7 @@ namespace Moving_Out.Renderer
         int charachterBrushCounter;
         Brush last;
         Brush last_standing;
+        string roomateBrushDirection;
 
         public void SetupSizes(Size area)
         {
@@ -29,6 +30,15 @@ namespace Moving_Out.Renderer
         {
             this.model = model;
             this.model.Changed += (sender, eventargs) => this.InvalidateVisual();
+            this.model.RoommateMoveChanged += ChangeRoommateBrush;
+        }
+
+        private void ChangeRoommateBrush(object sender, EventArgs e)
+        {
+            if ((e as MoveDirectionChangedEventArgs).Message == "up") roomateBrushDirection = "up";
+            else if ((e as MoveDirectionChangedEventArgs).Message == "down") roomateBrushDirection = "down";
+            else if ((e as MoveDirectionChangedEventArgs).Message == "left") roomateBrushDirection = "left";
+            else roomateBrushDirection = "right";
         }
 
         public Display()
@@ -36,6 +46,7 @@ namespace Moving_Out.Renderer
             last = new ImageBrush(new BitmapImage(new Uri(Path.Combine("Images", "standing.png"), UriKind.RelativeOrAbsolute)));
             last_standing = new ImageBrush(new BitmapImage(new Uri(Path.Combine("Images", "standing.png"), UriKind.RelativeOrAbsolute)));
             charachterBrushCounter = 0;
+            roomateBrushDirection = "down";
         }
 
         public Brush HouseBrush
@@ -53,57 +64,73 @@ namespace Moving_Out.Renderer
                 if (model.Down == true)
                 {
                     charachterBrushCounter++;
-                    if (charachterBrushCounter % 20 == 0)
+                    if (charachterBrushCounter % 30 == 0)
                     {
                         charachterBrushCounter = 0;
                         last = new ImageBrush(new BitmapImage(new Uri(Path.Combine("Images", "standing.png"), UriKind.RelativeOrAbsolute)));
                         last_standing = last;
                     }
-                    else if (charachterBrushCounter % 20 == 10)
+                    else if (charachterBrushCounter % 30 == 10)
                     {
                         last = new ImageBrush(new BitmapImage(new Uri(Path.Combine("Images", "running_front.png"), UriKind.RelativeOrAbsolute)));
+                    }
+                    else if (charachterBrushCounter % 30 == 20)
+                    {
+                        last = new ImageBrush(new BitmapImage(new Uri(Path.Combine("Images", "running_front_v2.png"), UriKind.RelativeOrAbsolute)));
                     }
                 }
                 else if (model.Up == true)
                 {
                     charachterBrushCounter++;
-                    if (charachterBrushCounter % 20 == 0)
+                    if (charachterBrushCounter % 30 == 0)
                     {
                         charachterBrushCounter = 0;
                         last = new ImageBrush(new BitmapImage(new Uri(Path.Combine("Images", "standing_back.png"), UriKind.RelativeOrAbsolute)));
                         last_standing = last;
                     }
-                    else if (charachterBrushCounter % 20 == 10)
+                    else if (charachterBrushCounter % 30 == 10)
                     {
                         last = new ImageBrush(new BitmapImage(new Uri(Path.Combine("Images", "running_back.png"), UriKind.RelativeOrAbsolute)));
+                    }
+                    else if (charachterBrushCounter % 30 == 20)
+                    {
+                        last = new ImageBrush(new BitmapImage(new Uri(Path.Combine("Images", "running_back_v2.png"), UriKind.RelativeOrAbsolute)));
                     }
                 }
                 else if (model.Left == true)
                 {
                     charachterBrushCounter++;
-                    if (charachterBrushCounter % 20 == 0)
+                    if (charachterBrushCounter % 30 == 0)
                     {
                         charachterBrushCounter = 0;
                         last = new ImageBrush(new BitmapImage(new Uri(Path.Combine("Images", "standing_left.png"), UriKind.RelativeOrAbsolute)));
                         last_standing = last;
                     }
-                    else if (charachterBrushCounter % 20 == 10)
+                    else if (charachterBrushCounter % 30 == 10)
                     {
                         last = new ImageBrush(new BitmapImage(new Uri(Path.Combine("Images", "running_left.png"), UriKind.RelativeOrAbsolute)));
+                    }
+                    else if (charachterBrushCounter % 30 == 20)
+                    {
+                        last = new ImageBrush(new BitmapImage(new Uri(Path.Combine("Images", "running_left_v2.png"), UriKind.RelativeOrAbsolute)));
                     }
                 }
                 else if (model.Right == true)
                 {
                     charachterBrushCounter++;
-                    if (charachterBrushCounter % 20 == 0)
+                    if (charachterBrushCounter % 30 == 0)
                     {
                         charachterBrushCounter = 0;
                         last = new ImageBrush(new BitmapImage(new Uri(Path.Combine("Images", "standing_right.png"), UriKind.RelativeOrAbsolute)));
                         last_standing = last;
                     }
-                    else if (charachterBrushCounter % 20 == 10)
+                    else if (charachterBrushCounter % 30 == 10)
                     {
                         last = new ImageBrush(new BitmapImage(new Uri(Path.Combine("Images", "running_right.png"), UriKind.RelativeOrAbsolute)));
+                    }
+                    else if (charachterBrushCounter % 30 == 20)
+                    {
+                        last = new ImageBrush(new BitmapImage(new Uri(Path.Combine("Images", "running_right_v2.png"), UriKind.RelativeOrAbsolute)));
                     }
                 }
                 else
@@ -119,7 +146,22 @@ namespace Moving_Out.Renderer
         {
             get
             {
-                return new ImageBrush(new BitmapImage(new Uri(Path.Combine("Images", "Ghost_Front.png"), UriKind.RelativeOrAbsolute)));
+                if (roomateBrushDirection == "up")
+                {
+                    return new ImageBrush(new BitmapImage(new Uri(Path.Combine("Images", "Ghost_Front.png"), UriKind.RelativeOrAbsolute)));
+                }
+                else if (roomateBrushDirection == "down")
+                {
+                    return new ImageBrush(new BitmapImage(new Uri(Path.Combine("Images", "Ghost_Front.png"), UriKind.RelativeOrAbsolute)));
+                }
+                else if (roomateBrushDirection == "left")
+                {
+                    return new ImageBrush(new BitmapImage(new Uri(Path.Combine("Images", "Ghost_Front.png"), UriKind.RelativeOrAbsolute)));
+                }
+                else
+                {
+                    return new ImageBrush(new BitmapImage(new Uri(Path.Combine("Images", "Ghost_Front.png"), UriKind.RelativeOrAbsolute)));
+                }
             }
         }
 
@@ -167,7 +209,7 @@ namespace Moving_Out.Renderer
         {
             base.OnRender(drawingContext);
 
-            if(area.Width > 0 && area.Height > 0 && model != null)
+            if (area.Width > 0 && area.Height > 0 && model != null)
             {
                 drawingContext.DrawRectangle(HouseBrush, null, new Rect(0, 0, area.Width, area.Height));
                 drawingContext.DrawGeometry(Brushes.Transparent, null, new Wall((int)area.Width, (int)area.Height).Area);
@@ -191,9 +233,6 @@ namespace Moving_Out.Renderer
                         FontWeights.UltraBold, FontStretches.Normal), 16, Brushes.White, 10);
 
                     drawingContext.DrawText(timerText, model.Objectives[i].Objective_Timer_Position());
-
-                    //Geometry textGeometry = text.BuildGeometry(new Point(10, 20+moveTextPosition));
-                    //drawingContext.DrawGeometry(Brushes.Black, new Pen(Brushes.White, 0.25), textGeometry);
 
                     moveTextPosition += (int)(area.Height / 54);
 

@@ -10,6 +10,15 @@ using System.Windows.Media;
 
 namespace Moving_Out.Logic
 {
+    public class MoveDirectionChangedEventArgs : EventArgs
+    {
+        public string Message { get; set; }
+
+        public MoveDirectionChangedEventArgs(string message)
+        {
+            Message = message;
+        }
+    }
     public class MoveLogic : IGameModel
     {
         static Random r = new Random();
@@ -27,6 +36,7 @@ namespace Moving_Out.Logic
         private double speed;
 
         public event EventHandler Changed;
+        public event EventHandler RoommateMoveChanged;
         System.Windows.Size area;
 
         public IGameControl Player { get; set; }
@@ -193,14 +203,48 @@ namespace Moving_Out.Logic
             {
                 if (!(Roommate as GameItem).IsCollision(tmp))
                 {
-                    if (Roommate.Center.X > tmp.Center.X && Roommate.Center.Y > tmp.Center.Y) Roommate.Speed = new Vector(speed * -1 / 2, speed * -1 / 2);
-                    else if (Roommate.Center.X < tmp.Center.X && Roommate.Center.Y > tmp.Center.Y) Roommate.Speed = new Vector(speed / 2, speed * -1 / 2);
-                    else if (Roommate.Center.X < tmp.Center.X && Roommate.Center.Y < tmp.Center.Y) Roommate.Speed = new Vector(speed / 2, speed / 2);
-                    else if (Roommate.Center.X > tmp.Center.X && Roommate.Center.Y < tmp.Center.Y) Roommate.Speed = new Vector(speed * -1 / 2, speed / 2);
-                    else if (Roommate.Center.X == tmp.Center.X && Roommate.Center.Y < tmp.Center.Y) Roommate.Speed = new Vector(0, speed / 2);
-                    else if (Roommate.Center.X == tmp.Center.X && Roommate.Center.Y > tmp.Center.Y) Roommate.Speed = new Vector(0, speed * -1 / 2);
-                    else if (Roommate.Center.X > tmp.Center.X && Roommate.Center.Y == tmp.Center.Y) Roommate.Speed = new Vector(speed * -1 / 2, 0);
-                    else if (Roommate.Center.X < tmp.Center.X && Roommate.Center.Y == tmp.Center.Y) Roommate.Speed = new Vector(speed / 2, 0);
+                    string direction = "";
+                    if (Roommate.Center.X > tmp.Center.X && Roommate.Center.Y > tmp.Center.Y)
+                    {
+                        Roommate.Speed = new Vector(speed * -1 / 2, speed * -1 / 2);
+                        direction = "up";
+                    }
+                    else if (Roommate.Center.X < tmp.Center.X && Roommate.Center.Y > tmp.Center.Y)
+                    {
+                        Roommate.Speed = new Vector(speed / 2, speed * -1 / 2);
+                        direction = "down";
+                    }
+                    else if (Roommate.Center.X < tmp.Center.X && Roommate.Center.Y < tmp.Center.Y)
+                    {
+                        Roommate.Speed = new Vector(speed / 2, speed / 2);
+                        direction = "down";
+                    }
+                    else if (Roommate.Center.X > tmp.Center.X && Roommate.Center.Y < tmp.Center.Y)
+                    {
+                        Roommate.Speed = new Vector(speed * -1 / 2, speed / 2);
+                        direction = "up";
+                    }
+                    else if (Roommate.Center.X == tmp.Center.X && Roommate.Center.Y < tmp.Center.Y)
+                    {
+                        Roommate.Speed = new Vector(0, speed / 2);
+                        direction = "right";
+                    }
+                    else if (Roommate.Center.X == tmp.Center.X && Roommate.Center.Y > tmp.Center.Y)
+                    {
+                        Roommate.Speed = new Vector(0, speed * -1 / 2);
+                        direction = "left";
+                    }
+                    else if (Roommate.Center.X > tmp.Center.X && Roommate.Center.Y == tmp.Center.Y)
+                    {
+                        Roommate.Speed = new Vector(speed * -1 / 2, 0);
+                        direction = "up";
+                    }
+                    else if (Roommate.Center.X < tmp.Center.X && Roommate.Center.Y == tmp.Center.Y)
+                    {
+                        Roommate.Speed = new Vector(speed / 2, 0);
+                        direction = "down";
+                    }
+                    RoommateMoveChanged?.Invoke(this, new MoveDirectionChangedEventArgs(direction));
                 }
                 else
                 {
@@ -226,39 +270,49 @@ namespace Moving_Out.Logic
         public void ChangeRoommateDirection()
         {
             int newDirection_number = r.Next(0, 201);
+            string direction;
 
             if (newDirection_number <= 25)
             {
                 Roommate.Speed = new Vector(speed * -1 / 2, 0);
+                direction = "up";
             }
             else if (newDirection_number <= 50)
             {
                 Roommate.Speed = new Vector(speed / 2, 0);
+                direction = "down";
             }
             else if (newDirection_number <= 75)
             {
                 Roommate.Speed = new Vector(speed * -1 / 2, speed / 2);
+                direction = "up";
             }
             else if (newDirection_number <= 100)
             {
                 Roommate.Speed = new Vector(speed / 2, speed / 2);
+                direction = "down";
             }
             else if (newDirection_number <= 125)
             {
                 Roommate.Speed = new Vector(speed * -1 / 2, speed * -1 / 2);
+                direction = "up";
             }
             else if (newDirection_number <= 150)
             {
-                Roommate.Speed = new Vector(speed * -1 / 2, speed / 2);
+                Roommate.Speed = new Vector(speed * 1 / 2, speed / 2);
+                direction = "down";
             }
             else if (newDirection_number <= 175)
             {
                 Roommate.Speed = new Vector(0, speed * -1 / 2);
+                direction = "left";
             }
             else
             {
                 Roommate.Speed = new Vector(0, speed / 2);
+                direction = "right";
             }
+            RoommateMoveChanged?.Invoke(this, new MoveDirectionChangedEventArgs(direction));
         }
 
         public void TimeStep()

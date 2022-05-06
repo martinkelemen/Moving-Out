@@ -9,6 +9,7 @@ namespace Moving_Out.Logic
     public interface IGameModel
     {
         event EventHandler Changed;
+        event EventHandler RoommateMoveChanged;
 
         IGameControl Player { get; set; }
         IGameControl Roommate { get; set; }

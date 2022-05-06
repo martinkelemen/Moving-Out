@@ -40,9 +40,13 @@
     <None Remove="Images\plates.png" />
     <None Remove="Images\Q_button.png" />
     <None Remove="Images\running_back.png" />
+    <None Remove="Images\running_back_v2.png" />
     <None Remove="Images\running_front.png" />
+    <None Remove="Images\running_front_v2.png" />
     <None Remove="Images\running_left.png" />
+    <None Remove="Images\running_left_v2.png" />
     <None Remove="Images\running_right.png" />
+    <None Remove="Images\running_right_v2.png" />
     <None Remove="Images\silverfish.png" />
     <None Remove="Images\standing.png" />
     <None Remove="Images\standing_back.png" />
@@ -129,13 +133,25 @@
     <Content Include="Images\running_back.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Images\running_back_v2.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Images\running_front.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\running_front_v2.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Images\running_left.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Images\running_left_v2.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Images\running_right.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\running_right_v2.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Images\silverfish.png">

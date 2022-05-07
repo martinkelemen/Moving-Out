@@ -13,6 +13,7 @@ namespace Moving_Out.Logic
 
         int Radius { get; set; }
         Vector Speed { get; set; }
+        string Direction { get; set; }
         System.Drawing.Point Center { get; set; }
     }
 }

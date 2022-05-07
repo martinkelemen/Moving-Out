@@ -22,6 +22,8 @@ namespace Moving_Out.Logic
             }
         }
 
+        public string Direction { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+
         public Player(int centerX, int centerY, int radius)
         {
             Radius = radius;

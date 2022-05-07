@@ -14,11 +14,14 @@ namespace Moving_Out.Logic
         public Vector Speed { get; set; }
         public System.Drawing.Point Center { get; set; }
 
+        public string Direction { get; set; }
+
         public Roommate(int centerX, int centerY, int radius)
         {
             Radius = radius;
             Center = new System.Drawing.Point(centerX, centerY);
             Speed = new Vector(0, 0);
+            Direction = "down";
         }
 
         public override Geometry Area

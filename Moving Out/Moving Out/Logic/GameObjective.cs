@@ -226,7 +226,7 @@ namespace Moving_Out.Logic
             }
             else if (objType == ObjectiveType.Clean_Dinosaur)
             {
-                Radius = 50;
+                Radius = (int)(displayWidth / 38.4);
                 int number = r.Next(0, 3);
                 if (number == 0) Center = new System.Drawing.Point((int)(displayWidth / 5.565217) + (int)(displayWidth / 27.428571), (int)(displayHeight / 1.849091) + (int)(displayHeight / 33.9));
                 else if (number == 1) Center = new System.Drawing.Point((int)(displayWidth / 6.736842) + (int)(displayWidth / 27.428571), (int)(displayHeight / 1.27125) + (int)(displayHeight / 33.9));

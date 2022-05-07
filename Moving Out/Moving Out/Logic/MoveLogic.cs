@@ -19,6 +19,7 @@ namespace Moving_Out.Logic
             Message = message;
         }
     }
+
     public class MoveLogic : IGameModel
     {
         static Random r = new Random();
@@ -145,9 +146,9 @@ namespace Moving_Out.Logic
             if (!(Objectives.Where(t => t.ObjType == ObjectiveType.Fish).Any() && Objectives.Where(t => t.ObjType == ObjectiveType.Clean_Picture).Any()
                 && Objectives.Where(t => t.ObjType == ObjectiveType.Clean_Dinosaur).Any()))
             {
-                if (number == 0 && !Objectives.Where(t => t.ObjType == ObjectiveType.Fish).Any()) Objectives.Add(new GameObjective(ObjectiveType.Fish, 50, (int)area.Width, (int)area.Height));
-                else if (number == 1 && !Objectives.Where(t => t.ObjType == ObjectiveType.Clean_Picture).Any()) Objectives.Add(new GameObjective(ObjectiveType.Clean_Picture, 50, (int)area.Width, (int)area.Height));
-                else if (number == 2 && !Objectives.Where(t => t.ObjType == ObjectiveType.Clean_Dinosaur).Any()) Objectives.Add(new GameObjective(ObjectiveType.Clean_Dinosaur, 50, (int)area.Width, (int)area.Height));
+                if (number == 0 && !Objectives.Where(t => t.ObjType == ObjectiveType.Fish).Any()) Objectives.Add(new GameObjective(ObjectiveType.Fish, (int)(area.Width / 38.4), (int)area.Width, (int)area.Height));
+                else if (number == 1 && !Objectives.Where(t => t.ObjType == ObjectiveType.Clean_Picture).Any()) Objectives.Add(new GameObjective(ObjectiveType.Clean_Picture, (int)(area.Width / 38.4), (int)area.Width, (int)area.Height));
+                else if (number == 2 && !Objectives.Where(t => t.ObjType == ObjectiveType.Clean_Dinosaur).Any()) Objectives.Add(new GameObjective(ObjectiveType.Clean_Dinosaur, (int)(area.Width / 38.4), (int)area.Width, (int)area.Height));
                 else RandomObjective();
             }
         }
@@ -194,7 +195,7 @@ namespace Moving_Out.Logic
             {
                 if (!(Roommate as GameItem).IsCollision(Wall))
                 {
-                    Objectives.Add(new GameObjective(type, 50, (int)area.Width, (int)area.Height, Roommate.Center.X, Roommate.Center.Y));
+                    Objectives.Add(new GameObjective(type, (int)(area.Width / 38.4), (int)area.Width, (int)area.Height, Roommate.Center.X, Roommate.Center.Y));
                     Roommate.Speed = new Vector(0, 0);
                     RoommateAtObjective = true;
                 }
@@ -203,52 +204,51 @@ namespace Moving_Out.Logic
             {
                 if (!(Roommate as GameItem).IsCollision(tmp))
                 {
-                    string direction = "";
                     if (Roommate.Center.X > tmp.Center.X && Roommate.Center.Y > tmp.Center.Y)
                     {
                         Roommate.Speed = new Vector(speed * -1 / 2, speed * -1 / 2);
-                        direction = "up";
+                        Roommate.Direction = "up";
                     }
                     else if (Roommate.Center.X < tmp.Center.X && Roommate.Center.Y > tmp.Center.Y)
                     {
                         Roommate.Speed = new Vector(speed / 2, speed * -1 / 2);
-                        direction = "down";
+                        Roommate.Direction = "up";
                     }
                     else if (Roommate.Center.X < tmp.Center.X && Roommate.Center.Y < tmp.Center.Y)
                     {
                         Roommate.Speed = new Vector(speed / 2, speed / 2);
-                        direction = "down";
+                        Roommate.Direction = "down";
                     }
                     else if (Roommate.Center.X > tmp.Center.X && Roommate.Center.Y < tmp.Center.Y)
                     {
                         Roommate.Speed = new Vector(speed * -1 / 2, speed / 2);
-                        direction = "up";
+                        Roommate.Direction = "down";
                     }
                     else if (Roommate.Center.X == tmp.Center.X && Roommate.Center.Y < tmp.Center.Y)
                     {
                         Roommate.Speed = new Vector(0, speed / 2);
-                        direction = "right";
+                        Roommate.Direction = "down";
                     }
                     else if (Roommate.Center.X == tmp.Center.X && Roommate.Center.Y > tmp.Center.Y)
                     {
                         Roommate.Speed = new Vector(0, speed * -1 / 2);
-                        direction = "left";
+                        Roommate.Direction = "up";
                     }
                     else if (Roommate.Center.X > tmp.Center.X && Roommate.Center.Y == tmp.Center.Y)
                     {
                         Roommate.Speed = new Vector(speed * -1 / 2, 0);
-                        direction = "up";
+                        Roommate.Direction = "left";
                     }
                     else if (Roommate.Center.X < tmp.Center.X && Roommate.Center.Y == tmp.Center.Y)
                     {
                         Roommate.Speed = new Vector(speed / 2, 0);
-                        direction = "down";
+                        Roommate.Direction = "right";
                     }
-                    RoommateMoveChanged?.Invoke(this, new MoveDirectionChangedEventArgs(direction));
+                    RoommateMoveChanged?.Invoke(this, new MoveDirectionChangedEventArgs(Roommate.Direction));
                 }
                 else
                 {
-                    Objectives.Add(new GameObjective(type, 50, (int)area.Width, (int)area.Height));
+                    Objectives.Add(new GameObjective(type, (int)(area.Width / 38.4), (int)area.Width, (int)area.Height));
                     if (type == ObjectiveType.Music)
                     {
                         mainpositon = ingamemp.Position;
@@ -270,49 +270,48 @@ namespace Moving_Out.Logic
         public void ChangeRoommateDirection()
         {
             int newDirection_number = r.Next(0, 201);
-            string direction;
 
             if (newDirection_number <= 25)
             {
                 Roommate.Speed = new Vector(speed * -1 / 2, 0);
-                direction = "up";
+                Roommate.Direction = "left";
             }
             else if (newDirection_number <= 50)
             {
                 Roommate.Speed = new Vector(speed / 2, 0);
-                direction = "down";
+                Roommate.Direction = "right";
             }
             else if (newDirection_number <= 75)
             {
                 Roommate.Speed = new Vector(speed * -1 / 2, speed / 2);
-                direction = "up";
+                Roommate.Direction = "down";
             }
             else if (newDirection_number <= 100)
             {
                 Roommate.Speed = new Vector(speed / 2, speed / 2);
-                direction = "down";
+                Roommate.Direction = "down";
             }
             else if (newDirection_number <= 125)
             {
                 Roommate.Speed = new Vector(speed * -1 / 2, speed * -1 / 2);
-                direction = "up";
+                Roommate.Direction = "up";
             }
             else if (newDirection_number <= 150)
             {
-                Roommate.Speed = new Vector(speed * 1 / 2, speed / 2);
-                direction = "down";
+                Roommate.Speed = new Vector(speed / 2, speed * -1 / 2);
+                Roommate.Direction = "up";
             }
             else if (newDirection_number <= 175)
             {
                 Roommate.Speed = new Vector(0, speed * -1 / 2);
-                direction = "left";
+                Roommate.Direction = "up";
             }
             else
             {
                 Roommate.Speed = new Vector(0, speed / 2);
-                direction = "right";
+                Roommate.Direction = "down";
             }
-            RoommateMoveChanged?.Invoke(this, new MoveDirectionChangedEventArgs(direction));
+            RoommateMoveChanged?.Invoke(this, new MoveDirectionChangedEventArgs(Roommate.Direction));
         }
 
         public void TimeStep()
@@ -345,6 +344,13 @@ namespace Moving_Out.Logic
                 || Roommate.Center.Y < (int)(area.Height / 8.843478) || Roommate.Center.Y > (int)(area.Height / 1.13))
             {
                 Roommate.Speed = new Vector(Roommate.Speed.X * -1, Roommate.Speed.Y * -1);
+
+                if (Roommate.Direction == "up") Roommate.Direction = "down";
+                else if (Roommate.Direction == "down") Roommate.Direction = "up";
+                else if (Roommate.Direction == "left") Roommate.Direction = "right";
+                else Roommate.Direction = "left";
+
+                RoommateMoveChanged?.Invoke(this, new MoveDirectionChangedEventArgs(Roommate.Direction));
             }
 
             Roommate.Move();

@@ -8,9 +8,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Controller\**" />
     <Compile Remove="Models\**" />
+    <EmbeddedResource Remove="Controller\**" />
     <EmbeddedResource Remove="Models\**" />
+    <None Remove="Controller\**" />
     <None Remove="Models\**" />
+    <Page Remove="Controller\**" />
     <Page Remove="Models\**" />
   </ItemGroup>
 
@@ -23,7 +27,10 @@
     <None Remove="Images\exclamation_mark.png" />
     <None Remove="Images\E_button.png" />
     <None Remove="Images\fish.png" />
+    <None Remove="Images\Ghost_back.png" />
     <None Remove="Images\Ghost_Front.png" />
+    <None Remove="Images\Ghost_left.png" />
+    <None Remove="Images\Ghost_right.png" />
     <None Remove="Images\ingamemenuclick.png" />
     <None Remove="Images\menuclick.png" />
     <None Remove="Images\mosquito.gif" />
@@ -82,7 +89,16 @@
     <Content Include="Images\fish.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Images\Ghost_back.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Images\Ghost_Front.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\Ghost_left.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\Ghost_right.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Images\ingamemenuclick.png">
@@ -178,10 +194,6 @@
     <Content Include="Images\volume.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Controller\" />
   </ItemGroup>
 
   <ItemGroup>

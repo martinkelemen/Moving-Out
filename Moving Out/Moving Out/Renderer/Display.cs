@@ -64,17 +64,22 @@ namespace Moving_Out.Renderer
                 if (model.Down == true)
                 {
                     charachterBrushCounter++;
-                    if (charachterBrushCounter % 30 == 0)
+                    if (charachterBrushCounter % 40 == 0)
                     {
                         charachterBrushCounter = 0;
                         last = new ImageBrush(new BitmapImage(new Uri(Path.Combine("Images", "standing.png"), UriKind.RelativeOrAbsolute)));
                         last_standing = last;
                     }
-                    else if (charachterBrushCounter % 30 == 10)
+                    else if (charachterBrushCounter % 40 == 10)
                     {
                         last = new ImageBrush(new BitmapImage(new Uri(Path.Combine("Images", "running_front.png"), UriKind.RelativeOrAbsolute)));
                     }
-                    else if (charachterBrushCounter % 30 == 20)
+                    else if (charachterBrushCounter % 40 == 20)
+                    {
+                        last = new ImageBrush(new BitmapImage(new Uri(Path.Combine("Images", "standing.png"), UriKind.RelativeOrAbsolute)));
+                        last_standing = last;
+                    }
+                    else if (charachterBrushCounter % 40 == 30)
                     {
                         last = new ImageBrush(new BitmapImage(new Uri(Path.Combine("Images", "running_front_v2.png"), UriKind.RelativeOrAbsolute)));
                     }
@@ -82,17 +87,22 @@ namespace Moving_Out.Renderer
                 else if (model.Up == true)
                 {
                     charachterBrushCounter++;
-                    if (charachterBrushCounter % 30 == 0)
+                    if (charachterBrushCounter % 40 == 0)
                     {
                         charachterBrushCounter = 0;
                         last = new ImageBrush(new BitmapImage(new Uri(Path.Combine("Images", "standing_back.png"), UriKind.RelativeOrAbsolute)));
                         last_standing = last;
                     }
-                    else if (charachterBrushCounter % 30 == 10)
+                    else if (charachterBrushCounter % 40 == 10)
                     {
                         last = new ImageBrush(new BitmapImage(new Uri(Path.Combine("Images", "running_back.png"), UriKind.RelativeOrAbsolute)));
                     }
-                    else if (charachterBrushCounter % 30 == 20)
+                    else if (charachterBrushCounter % 40 == 20)
+                    {
+                        last = new ImageBrush(new BitmapImage(new Uri(Path.Combine("Images", "standing_back.png"), UriKind.RelativeOrAbsolute)));
+                        last_standing = last;
+                    }
+                    else if (charachterBrushCounter % 40 == 30)
                     {
                         last = new ImageBrush(new BitmapImage(new Uri(Path.Combine("Images", "running_back_v2.png"), UriKind.RelativeOrAbsolute)));
                     }
@@ -100,17 +110,22 @@ namespace Moving_Out.Renderer
                 else if (model.Left == true)
                 {
                     charachterBrushCounter++;
-                    if (charachterBrushCounter % 30 == 0)
+                    if (charachterBrushCounter % 40 == 0)
                     {
                         charachterBrushCounter = 0;
                         last = new ImageBrush(new BitmapImage(new Uri(Path.Combine("Images", "standing_left.png"), UriKind.RelativeOrAbsolute)));
                         last_standing = last;
                     }
-                    else if (charachterBrushCounter % 30 == 10)
+                    else if (charachterBrushCounter % 40 == 10)
                     {
                         last = new ImageBrush(new BitmapImage(new Uri(Path.Combine("Images", "running_left.png"), UriKind.RelativeOrAbsolute)));
                     }
-                    else if (charachterBrushCounter % 30 == 20)
+                    else if (charachterBrushCounter % 40 == 20)
+                    {
+                        last = new ImageBrush(new BitmapImage(new Uri(Path.Combine("Images", "standing_left.png"), UriKind.RelativeOrAbsolute)));
+                        last_standing = last;
+                    }
+                    else if (charachterBrushCounter % 40 == 30)
                     {
                         last = new ImageBrush(new BitmapImage(new Uri(Path.Combine("Images", "running_left_v2.png"), UriKind.RelativeOrAbsolute)));
                     }
@@ -118,17 +133,22 @@ namespace Moving_Out.Renderer
                 else if (model.Right == true)
                 {
                     charachterBrushCounter++;
-                    if (charachterBrushCounter % 30 == 0)
+                    if (charachterBrushCounter % 40 == 0)
                     {
                         charachterBrushCounter = 0;
                         last = new ImageBrush(new BitmapImage(new Uri(Path.Combine("Images", "standing_right.png"), UriKind.RelativeOrAbsolute)));
                         last_standing = last;
                     }
-                    else if (charachterBrushCounter % 30 == 10)
+                    else if (charachterBrushCounter % 40 == 10)
                     {
                         last = new ImageBrush(new BitmapImage(new Uri(Path.Combine("Images", "running_right.png"), UriKind.RelativeOrAbsolute)));
                     }
-                    else if (charachterBrushCounter % 30 == 20)
+                    else if (charachterBrushCounter % 40 == 20)
+                    {
+                        last = new ImageBrush(new BitmapImage(new Uri(Path.Combine("Images", "standing_right.png"), UriKind.RelativeOrAbsolute)));
+                        last_standing = last;
+                    }
+                    else if (charachterBrushCounter % 40 == 30)
                     {
                         last = new ImageBrush(new BitmapImage(new Uri(Path.Combine("Images", "running_right_v2.png"), UriKind.RelativeOrAbsolute)));
                     }
@@ -148,7 +168,7 @@ namespace Moving_Out.Renderer
             {
                 if (roomateBrushDirection == "up")
                 {
-                    return new ImageBrush(new BitmapImage(new Uri(Path.Combine("Images", "Ghost_Front.png"), UriKind.RelativeOrAbsolute)));
+                    return new ImageBrush(new BitmapImage(new Uri(Path.Combine("Images", "Ghost_back.png"), UriKind.RelativeOrAbsolute)));
                 }
                 else if (roomateBrushDirection == "down")
                 {
@@ -156,11 +176,11 @@ namespace Moving_Out.Renderer
                 }
                 else if (roomateBrushDirection == "left")
                 {
-                    return new ImageBrush(new BitmapImage(new Uri(Path.Combine("Images", "Ghost_Front.png"), UriKind.RelativeOrAbsolute)));
+                    return new ImageBrush(new BitmapImage(new Uri(Path.Combine("Images", "Ghost_left.png"), UriKind.RelativeOrAbsolute)));
                 }
                 else
                 {
-                    return new ImageBrush(new BitmapImage(new Uri(Path.Combine("Images", "Ghost_Front.png"), UriKind.RelativeOrAbsolute)));
+                    return new ImageBrush(new BitmapImage(new Uri(Path.Combine("Images", "Ghost_right.png"), UriKind.RelativeOrAbsolute)));
                 }
             }
         }

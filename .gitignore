@@ -36,3 +36,5 @@
 /Moving Out/Moving Out
 /.vs/slnx.sqlite
 /.vs/VSWorkspaceState.json
+*.suo
+*.json

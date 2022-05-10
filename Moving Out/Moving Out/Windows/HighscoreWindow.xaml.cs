@@ -13,7 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace Moving_Out
+namespace Moving_Out.Windows
 {
     /// <summary>
     /// Interaction logic for HighscoreWindow.xaml
@@ -23,7 +23,7 @@ namespace Moving_Out
         public MediaPlayer mp = new MediaPlayer();
         private void ReadFromFile()
         {
-            string[] lines = File.ReadAllLines(System.IO.Path.Combine("Text", "highscore.txt"));
+            string[] lines = File.ReadAllLines("highscore.txt");
             string[][] all = new string[lines.Length][];
             for (int i = 0; i < lines.Length; i++)
             {

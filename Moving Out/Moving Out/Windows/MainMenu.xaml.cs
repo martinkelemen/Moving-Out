@@ -12,7 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace Moving_Out
+namespace Moving_Out.Windows
 {
     /// <summary>
     /// Interaction logic for MainMenu.xaml

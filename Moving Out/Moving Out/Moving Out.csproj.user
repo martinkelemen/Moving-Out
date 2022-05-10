@@ -7,33 +7,33 @@
     </ApplicationDefinition>
   </ItemGroup>
   <ItemGroup>
-    <Compile Update="GameOverWindow.xaml.cs">
+    <Compile Update="Windows\GameOverWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="HighscoreWindow.xaml.cs">
+    <Compile Update="Windows\HighscoreWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Ingame_Menu.xaml.cs">
+    <Compile Update="Windows\Ingame_Menu.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="MainMenu.xaml.cs">
+    <Compile Update="Windows\MainMenu.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Page Update="GameOverWindow.xaml">
+    <Page Update="Windows\GameOverWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="HighscoreWindow.xaml">
+    <Page Update="Windows\HighscoreWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="Ingame_Menu.xaml">
+    <Page Update="Windows\Ingame_Menu.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="MainMenu.xaml">
+    <Page Update="Windows\MainMenu.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="MainWindow.xaml">
+    <Page Update="Windows\MainWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>

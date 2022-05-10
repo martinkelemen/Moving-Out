@@ -196,10 +196,4 @@
     </Content>
   </ItemGroup>
 
-  <ItemGroup>
-    <None Update="Text\highscore.txt">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </None>
-  </ItemGroup>
-
 </Project>

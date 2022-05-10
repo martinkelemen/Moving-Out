@@ -1,9 +1,9 @@
-﻿<Window x:Class="Moving_Out.Ingame_Menu"
+﻿<Window x:Class="Moving_Out.Windows.Ingame_Menu"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Moving_Out"
+        xmlns:local="clr-namespace:Moving_Out.Windows"
         mc:Ignorable="d"
         Title="Ingame_Menu" Height="160" Width="300"
         WindowStartupLocation="CenterScreen" WindowStyle="None" ResizeMode="NoResize" Background="#FF800025" BorderBrush="Goldenrod" BorderThickness="1.5">

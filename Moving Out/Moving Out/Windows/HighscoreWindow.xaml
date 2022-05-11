@@ -6,8 +6,9 @@
         xmlns:local="clr-namespace:Moving_Out.Windows"
         mc:Ignorable="d"
         Title="HighscoreWindow" Height="450" Width="800"
-        WindowState="Maximized" WindowStyle="None" ResizeMode="NoResize">
-    <Grid>
+        WindowState="Maximized" WindowStyle="None" ResizeMode="NoResize"
+        Loaded="Window_Loaded">
+    <Grid x:Name="grid">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1*"/>
             <ColumnDefinition Width="1*"/>

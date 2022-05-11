@@ -11,6 +11,10 @@ using System.Windows.Media.Imaging;
 
 namespace Moving_Out.Renderer
 {
+    public class MosquitoVisual : Visual
+    {
+
+    }
     public class Display : FrameworkElement
     {
         Size area;
@@ -18,7 +22,8 @@ namespace Moving_Out.Renderer
         int charachterBrushCounter;
         Brush last;
         Brush last_standing;
-        string roomateBrushDirection;
+        string roommateBrushDirection;
+        string pizzaGuyBrushDirection;
 
         public void SetupSizes(Size area)
         {
@@ -31,14 +36,21 @@ namespace Moving_Out.Renderer
             this.model = model;
             this.model.Changed += (sender, eventargs) => this.InvalidateVisual();
             this.model.RoommateMoveChanged += ChangeRoommateBrush;
+            this.model.PizzaGuyMoveChanged += ChangePizzaGuyBrush;
         }
 
         private void ChangeRoommateBrush(object sender, EventArgs e)
         {
-            if ((e as MoveDirectionChangedEventArgs).Message == "up") roomateBrushDirection = "up";
-            else if ((e as MoveDirectionChangedEventArgs).Message == "down") roomateBrushDirection = "down";
-            else if ((e as MoveDirectionChangedEventArgs).Message == "left") roomateBrushDirection = "left";
-            else roomateBrushDirection = "right";
+            if ((e as StatusChangedEventArgs).Message == "up") roommateBrushDirection = "up";
+            else if ((e as StatusChangedEventArgs).Message == "down") roommateBrushDirection = "down";
+            else if ((e as StatusChangedEventArgs).Message == "left") roommateBrushDirection = "left";
+            else roommateBrushDirection = "right";
+        }
+
+        private void ChangePizzaGuyBrush(object sender, EventArgs e)
+        {
+            if ((e as StatusChangedEventArgs).Message == "up") pizzaGuyBrushDirection = "up";
+            else if ((e as StatusChangedEventArgs).Message == "down") pizzaGuyBrushDirection = "down";
         }
 
         public Display()
@@ -46,7 +58,8 @@ namespace Moving_Out.Renderer
             last = new ImageBrush(new BitmapImage(new Uri(Path.Combine("Images", "standing.png"), UriKind.RelativeOrAbsolute)));
             last_standing = new ImageBrush(new BitmapImage(new Uri(Path.Combine("Images", "standing.png"), UriKind.RelativeOrAbsolute)));
             charachterBrushCounter = 0;
-            roomateBrushDirection = "down";
+            roommateBrushDirection = "down";
+            pizzaGuyBrushDirection = "up";
         }
 
         public Brush HouseBrush
@@ -166,15 +179,15 @@ namespace Moving_Out.Renderer
         {
             get
             {
-                if (roomateBrushDirection == "up")
+                if (roommateBrushDirection == "up")
                 {
                     return new ImageBrush(new BitmapImage(new Uri(Path.Combine("Images", "Ghost_back.png"), UriKind.RelativeOrAbsolute)));
                 }
-                else if (roomateBrushDirection == "down")
+                else if (roommateBrushDirection == "down")
                 {
                     return new ImageBrush(new BitmapImage(new Uri(Path.Combine("Images", "Ghost_Front.png"), UriKind.RelativeOrAbsolute)));
                 }
-                else if (roomateBrushDirection == "left")
+                else if (roommateBrushDirection == "left")
                 {
                     return new ImageBrush(new BitmapImage(new Uri(Path.Combine("Images", "Ghost_left.png"), UriKind.RelativeOrAbsolute)));
                 }
@@ -182,6 +195,29 @@ namespace Moving_Out.Renderer
                 {
                     return new ImageBrush(new BitmapImage(new Uri(Path.Combine("Images", "Ghost_right.png"), UriKind.RelativeOrAbsolute)));
                 }
+            }
+        }
+
+        public Brush PizzaGuy_Brush
+        {
+            get
+            {
+                if (pizzaGuyBrushDirection == "up")
+                {
+                    return new ImageBrush(new BitmapImage(new Uri(Path.Combine("Images", "pizza_standing_back.png"), UriKind.RelativeOrAbsolute)));
+                }
+                else
+                {
+                    return new ImageBrush(new BitmapImage(new Uri(Path.Combine("Images", "pizza_standing_front.png"), UriKind.RelativeOrAbsolute)));
+                }
+            }
+        }
+
+        public Brush Neighbour_Brush
+        {
+            get
+            {
+                return new ImageBrush(new BitmapImage(new Uri(Path.Combine("Images", "oldkurvinnyo_running_back.png"), UriKind.RelativeOrAbsolute)));
             }
         }
 
@@ -275,6 +311,8 @@ namespace Moving_Out.Renderer
 
                 drawingContext.DrawGeometry(Charachter_Standing_Brush, null, (model.Player as GameItem).Area);
                 drawingContext.DrawGeometry(Roommate_Brush, null, (model.Roommate as GameItem).Area);
+                drawingContext.DrawGeometry(PizzaGuy_Brush, null, (model.PizzaGuy as GameItem).Area);
+                drawingContext.DrawGeometry(Neighbour_Brush, null, (model.Neighbour as GameItem).Area);
 
                 for (int i = 0; i < model.Objectives.Count(); i++)
                 {

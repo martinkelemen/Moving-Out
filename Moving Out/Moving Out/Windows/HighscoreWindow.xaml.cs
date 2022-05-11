@@ -56,5 +56,10 @@ namespace Moving_Out.Windows
             mainMenu.Show();
             this.Close();
         }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            highscorelistbox.FontSize = (int)(grid.ActualWidth / 48);
+        }
     }
 }

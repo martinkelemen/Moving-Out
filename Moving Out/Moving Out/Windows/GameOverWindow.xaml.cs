@@ -31,7 +31,6 @@ namespace Moving_Out.Windows
         {
             string text = player_name.Text + ";" + Points.ToString();
             File.AppendAllText("highscore.txt", text + Environment.NewLine);
-            
         }
         private void save_exit_Click(object sender, RoutedEventArgs e)
         {

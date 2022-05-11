@@ -30,7 +30,11 @@
                 <Label Grid.Column="0" Content="Your name: " Foreground="White" FontFamily="Papyrus" FontSize="60" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                 <TextBox x:Name="player_name" Grid.Column="1" Text="MintaGéza" FontSize="60" TextAlignment="Center" Foreground="White" FontFamily="Papyrus" Margin="10" Background="Transparent" BorderThickness="0,0,0,0" />
             </Grid>
-            <Button x:Name="save_exit" Content="Save and exit" FontSize="30" Margin="10" Padding="30" Height="100" Width="300" Click="save_exit_Click"></Button>
+            <Button x:Name="save_exit" Content="Save and exit" Foreground="White" FontFamily="Papyrus" FontSize="30" Margin="10" Padding="30" Height="100" Width="300" Click="save_exit_Click">
+                <Button.Background>
+                    <ImageBrush ImageSource="/Images/menuclick.png"/>
+                </Button.Background>
+            </Button>
 
 
         </StackPanel>

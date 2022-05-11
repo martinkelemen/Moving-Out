@@ -251,13 +251,13 @@ namespace Moving_Out.Logic
                     texts.Add("The old Kurvinnyo has arrived..");
                     break;
                 case ObjectiveType.Trash:
-                    texts.Add("Your roommate threw trash on the ground, pick it up before mosquitoes take over the house!");
-                    texts.Add("Drop out the trash!");
+                    texts.Add("Your roommate threw trash on the ground, pick it up before the mosquitoes take over the house!");
+                    texts.Add("Throw out the trash!");
                     texts.Add("The mosquito boss is here..");
                     break;
                 case ObjectiveType.Fish:
-                    texts.Add("A dead fish came up from the drain, pick it up before you die from the smell!");
-                    texts.Add("Drop out the fish!");
+                    texts.Add("A rotten fish came up from the bathroom drain, pick it up before you die from the smell!");
+                    texts.Add("Throw out the fish!");
                     texts.Add("Your nose died..");
                     break;
                 case ObjectiveType.Dishes:

@@ -78,8 +78,8 @@ namespace Moving_Out.Logic
             Wall = new Wall((int)area.Width, (int)area.Height);
             Player = new Player((int)(area.Width / 2.206897), (int)(area.Height / 1.168966), (int)(area.Width / 128));
             Roommate = new Roommate((int)(area.Width / 4.8), (int)(area.Height / 2.5425), (int)(area.Width / 128));
-            PizzaGuy = new Player(870, 1100, (int)(area.Width / 128)); //ajto 870, 1010     kinn 870, 1100
-            Neighbour = new Player(900, 1100, (int)(area.Width / 128)); //ajto 900, 1010    kinn 900, 1100
+            PizzaGuy = new Player((int)(area.Width / 2.206897), (int)(area.Height / 0.981818), (int)(area.Width / 128)); //ajto 870, 1010     kinn 870, 1100
+            Neighbour = new Player((int)(area.Width / 2.133333), (int)(area.Height / 0.981818), (int)(area.Width / 128)); //ajto 900, 1010    kinn 900, 1100
             Objectives = new List<GameObjective>();
             speed = (int)(area.Width / 640);
         }
@@ -354,7 +354,7 @@ namespace Moving_Out.Logic
         {
             if (PizzaGuyAtStreet)
             {
-                if (PizzaGuy.Center.Y > 1010)
+                if (PizzaGuy.Center.Y > (int)(area.Height / 1.069307))
                 {
                     PizzaGuy.Speed = new Vector(0, speed * -1 / 2);
                 }
@@ -367,7 +367,7 @@ namespace Moving_Out.Logic
             }
             else
             {
-                if (PizzaGuy.Center.Y < 1100)
+                if (PizzaGuy.Center.Y < (int)(area.Height / 0.981818))
                 {
                     PizzaGuy.Speed = new Vector(0, speed / 2);
                 }
@@ -382,7 +382,7 @@ namespace Moving_Out.Logic
 
         public void MoveNeighbour()
         {
-            if (Neighbour.Center.Y > 1010)
+            if (Neighbour.Center.Y > (int)(area.Height / 1.069307))
             {
                 Neighbour.Speed = new Vector(0, speed * -1 / 3);
             }

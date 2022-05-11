@@ -43,7 +43,7 @@ namespace Moving_Out.Windows
             InitializeComponent();
             mp.Open(new Uri(System.IO.Path.Combine("Audio", "doomer.mp3"), UriKind.RelativeOrAbsolute));
             mp.Position = Position;
-            mp.Volume = 0.2;
+            mp.Volume = 0.1;
             mp.Play();
             ReadFromFile();
         }

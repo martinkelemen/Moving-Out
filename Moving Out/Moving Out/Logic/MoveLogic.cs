@@ -54,7 +54,7 @@ namespace Moving_Out.Logic
         {
             ingamemp.Position = TimeSpan.Zero;
             ingamemp.Play();
-            ingamemp.Volume = 0.2;
+            ingamemp.Volume = 0.1;
         }
 
         public void SetupSizes(System.Windows.Size area)
@@ -79,6 +79,7 @@ namespace Moving_Out.Logic
             ingamemp.Open(new Uri(System.IO.Path.Combine("Audio", "doomermenu.mp3"), UriKind.RelativeOrAbsolute));
             ingamemp.MediaEnded += new EventHandler(Media_Ended);
             ingamemp.Play();
+            ingamemp.Volume = 0.1;
             main_is_playing_audio = true;
             Points = 0;
         }
@@ -126,6 +127,7 @@ namespace Moving_Out.Logic
                     ingamemp.Open(new Uri(System.IO.Path.Combine("Audio", "doomermenu.mp3"), UriKind.RelativeOrAbsolute));
                     ingamemp.Position = mainpositon;
                     ingamemp.Play();
+                    ingamemp.Volume = 0.1;
                     ObjectivesFull = false;
                     task_is_playing_audio = false;
                     main_is_playing_audio = true;
@@ -256,8 +258,8 @@ namespace Moving_Out.Logic
                         ingamemp.Close();
                         ingamemp.Open(new Uri(System.IO.Path.Combine("Audio", "polizei.mp3"), UriKind.RelativeOrAbsolute));
                         ingamemp.Position = taskposition;
-                        ingamemp.Volume = 0.3;
                         ingamemp.Play();
+                        ingamemp.Volume = 0.1;
                         task_is_playing_audio = true;
                         main_is_playing_audio = false;
                     }

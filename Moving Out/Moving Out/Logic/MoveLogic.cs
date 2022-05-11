@@ -10,11 +10,11 @@ using System.Windows.Media;
 
 namespace Moving_Out.Logic
 {
-    public class MoveDirectionChangedEventArgs : EventArgs
+    public class StatusChangedEventArgs : EventArgs
     {
         public string Message { get; set; }
 
-        public MoveDirectionChangedEventArgs(string message)
+        public StatusChangedEventArgs(string message)
         {
             Message = message;
         }
@@ -39,17 +39,25 @@ namespace Moving_Out.Logic
 
         public event EventHandler Changed;
         public event EventHandler RoommateMoveChanged;
+        public event EventHandler PizzaGuyMoveChanged;
+        public event EventHandler PizzaArrived;
+        public event EventHandler NeighbourArrived;
         public event EventHandler GameEnded;
 
         System.Windows.Size area;
 
         public IGameControl Player { get; set; }
         public IGameControl Roommate { get; set; }
+        public IGameControl PizzaGuy { get; set; }
+        public IGameControl Neighbour { get; set; }
         public Wall Wall { get; set; }
         public List<GameObjective> Objectives { get; set; }
 
         public bool RoommateAtObjective { get; set; }
         public bool PlayerAtObjective { get; set; }
+        public bool PizzaGuyAtObjective { get; set; }
+        public bool PizzaGuyAtStreet { get; set; }
+        public bool NeighbourAtDoor { get; set; }
         private bool ObjectivesFull { get; set; }
         public int Points { get; set; }
 
@@ -70,6 +78,8 @@ namespace Moving_Out.Logic
             Wall = new Wall((int)area.Width, (int)area.Height);
             Player = new Player((int)(area.Width / 2.206897), (int)(area.Height / 1.168966), (int)(area.Width / 128));
             Roommate = new Roommate((int)(area.Width / 4.8), (int)(area.Height / 2.5425), (int)(area.Width / 128));
+            PizzaGuy = new Player(870, 1100, (int)(area.Width / 128)); //ajto 870, 1010     kinn 870, 1100
+            Neighbour = new Player(900, 1100, (int)(area.Width / 128)); //ajto 900, 1010    kinn 900, 1100
             Objectives = new List<GameObjective>();
             speed = (int)(area.Width / 640);
         }
@@ -77,6 +87,9 @@ namespace Moving_Out.Logic
         public MoveLogic()
         {
             RoommateAtObjective = false;
+            PizzaGuyAtObjective = false;
+            PizzaGuyAtStreet = true;
+            NeighbourAtDoor = false;
             ObjectivesFull = false;
             ingamemp = new MediaPlayer();
             ingamemp.Open(new Uri(System.IO.Path.Combine("Audio", "doomermenu.mp3"), UriKind.RelativeOrAbsolute));
@@ -92,6 +105,11 @@ namespace Moving_Out.Logic
             {
                 if ((Player as GameItem).IsCollision(Objectives[i]) && Objectives[i].Interactable)
                 {
+                    if (Objectives[i].ObjType == ObjectiveType.Pizza && Objectives[i].PartCounter == 1)
+                    {
+                        PizzaGuyMoveChanged?.Invoke(this, new StatusChangedEventArgs("down"));
+                        PizzaArrived?.Invoke(this, null);
+                    }
                     IncreasePartCounter(Objectives[i]);
                     Points += 10;
                 }
@@ -104,7 +122,13 @@ namespace Moving_Out.Logic
             {
                 Objectives[i].Seconds--;
 
-                if (Objectives[i].Seconds == 0 && !Objectives[i].Interactable)
+                if(!Objectives[i].Interactable && Objectives[i].Seconds == 3)
+                {
+                    PizzaGuyMoveChanged?.Invoke(this, new StatusChangedEventArgs("up"));
+                    PizzaArrived?.Invoke(this, null);
+                }
+
+                else if (!Objectives[i].Interactable && Objectives[i].Seconds == 0)
                 {
                     IncreasePartCounter(Objectives[i]);
                     Objectives[i].Seconds = 30;
@@ -112,7 +136,15 @@ namespace Moving_Out.Logic
                 else if (Objectives[i].Seconds == 0)
                 {
                     //todo game over
-                    GameEnded?.Invoke(this, null);
+                    if (Objectives[i].ObjType == ObjectiveType.Music)
+                    {
+                        NeighbourArrived?.Invoke(this, null);
+                    }
+                    else
+                    {
+                        var objTexts = GameObjective.ObjectiveText(Objectives[i].ObjType);
+                        GameEnded?.Invoke(this, new StatusChangedEventArgs(objTexts.Last()));
+                    }
                 }
             }
         }
@@ -248,7 +280,7 @@ namespace Moving_Out.Logic
                         Roommate.Speed = new Vector(speed / 2, 0);
                         Roommate.Direction = "right";
                     }
-                    RoommateMoveChanged?.Invoke(this, new MoveDirectionChangedEventArgs(Roommate.Direction));
+                    RoommateMoveChanged?.Invoke(this, new StatusChangedEventArgs(Roommate.Direction));
                 }
                 else
                 {
@@ -315,10 +347,53 @@ namespace Moving_Out.Logic
                 Roommate.Speed = new Vector(0, speed / 2);
                 Roommate.Direction = "down";
             }
-            RoommateMoveChanged?.Invoke(this, new MoveDirectionChangedEventArgs(Roommate.Direction));
+            RoommateMoveChanged?.Invoke(this, new StatusChangedEventArgs(Roommate.Direction));
         }
 
-        public void TimeStep()
+        public void MovePizzaGuy()
+        {
+            if (PizzaGuyAtStreet)
+            {
+                if (PizzaGuy.Center.Y > 1010)
+                {
+                    PizzaGuy.Speed = new Vector(0, speed * -1 / 2);
+                }
+                else
+                {
+                    PizzaGuy.Speed = new Vector(0, 0);
+                    PizzaGuyAtObjective = true;
+                    PizzaGuyAtStreet = false;
+                }
+            }
+            else
+            {
+                if (PizzaGuy.Center.Y < 1100)
+                {
+                    PizzaGuy.Speed = new Vector(0, speed / 2);
+                }
+                else
+                {
+                    PizzaGuy.Speed = new Vector(0, 0);
+                    PizzaGuyAtObjective = true;
+                    PizzaGuyAtStreet = true;
+                }
+            }
+        }
+
+        public void MoveNeighbour()
+        {
+            if (Neighbour.Center.Y > 1010)
+            {
+                Neighbour.Speed = new Vector(0, speed * -1 / 3);
+            }
+            else
+            {
+                Neighbour.Speed = new Vector(0, 0);
+                NeighbourAtDoor = true;
+            }
+        }
+
+            public void TimeStep()
         {
             if (TestMove(new Player(Player.Center.X, Player.Center.Y, Player.Radius)))
             {
@@ -354,10 +429,12 @@ namespace Moving_Out.Logic
                 else if (Roommate.Direction == "left") Roommate.Direction = "right";
                 else Roommate.Direction = "left";
 
-                RoommateMoveChanged?.Invoke(this, new MoveDirectionChangedEventArgs(Roommate.Direction));
+                RoommateMoveChanged?.Invoke(this, new StatusChangedEventArgs(Roommate.Direction));
             }
 
             Roommate.Move();
+            PizzaGuy.Move();
+            Neighbour.Move();
 
             int count = 0;
             for (int i = 0; i < Objectives.Count(); i++)

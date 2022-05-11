@@ -22,9 +22,13 @@ namespace Moving_Out.Windows
     {
         public event EventHandler CloseMainWindow;
         public int Points { get; set; }
-        public GameOverWindow()//gameover szoveg
+
+        private string message;
+
+        public GameOverWindow(string message)//gameover szoveg
         {
             InitializeComponent();
+            this.message = message;
         }
 
         private void WriteToFile()
@@ -44,9 +48,11 @@ namespace Moving_Out.Windows
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            this.label_gameover.FontSize = (int)(grid.ActualWidth / 12.8);
-            this.label_yourname.FontSize = (int)(grid.ActualWidth / 32);
-            this.player_name.FontSize = (int)(grid.ActualWidth / 32);
+            label_gameover.FontSize = (int)(grid.ActualWidth / 12.8);
+            label_yourname.FontSize = (int)(grid.ActualWidth / 32);
+            player_name.FontSize = (int)(grid.ActualWidth / 32);
+            label_objtext.FontSize = (int)(grid.ActualWidth / 32);
+            label_objtext.Content = message;
         }
     }
 }

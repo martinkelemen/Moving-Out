@@ -10,9 +10,12 @@ namespace Moving_Out.Logic
     {
         event EventHandler Changed;
         event EventHandler RoommateMoveChanged;
+        event EventHandler PizzaGuyMoveChanged;
 
         IGameControl Player { get; set; }
         IGameControl Roommate { get; set; }
+        IGameControl PizzaGuy { get; set; }
+        IGameControl Neighbour { get; set; }
         List<GameObjective> Objectives { get; set; }
         bool PlayerAtObjective { get; set; }
         int Points { get; set; }

@@ -31,6 +31,8 @@ namespace Moving_Out.Windows
         DispatcherTimer dt_obj_t;
         DispatcherTimer dt_rm_obj;
         DispatcherTimer dt_moverm;
+        DispatcherTimer dt_movepg;
+        DispatcherTimer dt_movenb;
         DispatcherTimer dt_setseconds;
         ObjectiveType type;
 
@@ -87,6 +89,32 @@ namespace Moving_Out.Windows
             }
         }
 
+        private void Move_Pg(object sender, EventArgs e)
+        {
+            if (!logic.PizzaGuyAtObjective)
+            {
+                logic.MovePizzaGuy();
+            }
+            else
+            {
+                dt_movepg.Stop();
+            }
+        }
+
+        private void Move_Nb(object sender, EventArgs e)
+        {
+            if (!logic.NeighbourAtDoor)
+            {
+                logic.MoveNeighbour();
+            }
+            else
+            {
+                dt_movenb.Stop();
+                var objTexts = GameObjective.ObjectiveText(ObjectiveType.Music);
+                GameOver(this, new StatusChangedEventArgs(objTexts.Last()));
+            }
+        }
+
         private void Set_Seconds(object sender, EventArgs e)
         {
             if(rm_obj_seconds > 2)
@@ -110,7 +138,7 @@ namespace Moving_Out.Windows
             dt_rm_obj.Stop();
             dt_setseconds.Stop();
             logic.ingamemp.Stop();
-            GameOverWindow gameOverWindow = new GameOverWindow();
+            GameOverWindow gameOverWindow = new GameOverWindow((e as StatusChangedEventArgs).Message);
             gameOverWindow.CloseMainWindow += (sender, eventargs) => this.Close();
             gameOverWindow.Points = logic.Points;
             gameOverWindow.Show();
@@ -129,6 +157,8 @@ namespace Moving_Out.Windows
             dt_obj_t = new DispatcherTimer();
             dt_rm_obj = new DispatcherTimer();
             dt_moverm = new DispatcherTimer();
+            dt_movepg = new DispatcherTimer();
+            dt_movenb = new DispatcherTimer();
             dt_setseconds = new DispatcherTimer();
 
             dt.Tick += Dt_Tick;
@@ -153,6 +183,12 @@ namespace Moving_Out.Windows
 
             dt_moverm.Tick += Move_Rm;
             dt_moverm.Interval = TimeSpan.FromMilliseconds(10);
+
+            dt_movepg.Tick += Move_Pg;
+            dt_moverm.Interval = TimeSpan.FromMilliseconds(10);
+
+            dt_movenb.Tick += Move_Nb;
+            dt_movenb.Interval = TimeSpan.FromMilliseconds(10);
 
             dt_setseconds.Tick += Set_Seconds;
             dt_setseconds.Interval = TimeSpan.FromSeconds(60);
@@ -248,6 +284,12 @@ namespace Moving_Out.Windows
             logic.SetupSizes(new Size((int)canvas.ActualWidth, (int)canvas.ActualHeight));
             logic.SetupItems();
             logic.GameEnded += GameOver;
+            logic.PizzaArrived += (sender, eventargs) =>
+            {
+                logic.PizzaGuyAtObjective = false;
+                dt_movepg.Start();
+            };
+            logic.NeighbourArrived += (sender, eventargs) => dt_movenb.Start();
         }
 
         

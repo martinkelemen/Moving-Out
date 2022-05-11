@@ -6,8 +6,9 @@
         xmlns:local="clr-namespace:Moving_Out.Windows"
         mc:Ignorable="d"
         Title="GameOverWindow" Height="450" Width="800"
-        WindowState="Maximized" WindowStyle="None" ResizeMode="NoResize">
-    <Grid>
+        WindowState="Maximized" WindowStyle="None" ResizeMode="NoResize"
+        Loaded="Window_Loaded">
+    <Grid x:Name="grid">
         <Grid.RowDefinitions>
             <RowDefinition Height="1*"/>
             <RowDefinition Height="1*"/>
@@ -20,14 +21,14 @@
         <Grid.Background>
             <ImageBrush ImageSource="/Images/doomer_end.png"/>
         </Grid.Background>
-        <Label Grid.Column="0" Grid.Row="0" Content="Game Over" Foreground="White" FontFamily="Papyrus" FontSize="200" VerticalAlignment="Center" HorizontalAlignment="Center"  FontWeight="Bold"/>
+        <Label x:Name ="label_gameover" Grid.Column="0" Grid.Row="0" Content="Game Over" Foreground="White" FontFamily="Papyrus" FontSize="150" VerticalAlignment="Center" HorizontalAlignment="Center"  FontWeight="Bold"/>
         <StackPanel Grid.Column="0" Grid.Row="1">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="1*"/>
                     <ColumnDefinition Width="1*"/>
                 </Grid.ColumnDefinitions>
-                <Label Grid.Column="0" Content="Your name: " Foreground="White" FontFamily="Papyrus" FontSize="60" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <Label x:Name ="label_yourname" Grid.Column="0" Content="Your name: " Foreground="White" FontFamily="Papyrus" FontSize="60" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                 <TextBox x:Name="player_name" Grid.Column="1" Text="MintaGéza" FontSize="60" TextAlignment="Center" Foreground="White" FontFamily="Papyrus" Margin="10" Background="Transparent" BorderThickness="0,0,0,0" />
             </Grid>
             <Button x:Name="save_exit" Content="Save and exit" FontSize="30" Margin="10" Padding="30" Height="100" Width="300" Click="save_exit_Click"></Button>

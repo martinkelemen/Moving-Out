@@ -23,6 +23,7 @@ namespace Moving_Out.Logic
     public class MoveLogic : IGameModel
     {
         static Random r = new Random();
+
         public MediaPlayer ingamemp;
         public bool task_is_playing_audio;
         public bool main_is_playing_audio;
@@ -38,6 +39,8 @@ namespace Moving_Out.Logic
 
         public event EventHandler Changed;
         public event EventHandler RoommateMoveChanged;
+        public event EventHandler GameEnded;
+
         System.Windows.Size area;
 
         public IGameControl Player { get; set; }
@@ -106,9 +109,10 @@ namespace Moving_Out.Logic
                     IncreasePartCounter(Objectives[i]);
                     Objectives[i].Seconds = 30;
                 }
-                else
+                else if (Objectives[i].Seconds == 0)
                 {
                     //todo game over
+                    GameEnded?.Invoke(this, null);
                 }
             }
         }

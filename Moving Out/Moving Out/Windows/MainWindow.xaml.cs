@@ -101,6 +101,21 @@ namespace Moving_Out.Windows
             }
         }
 
+        private void GameOver(object sender, EventArgs e)
+        {
+            dt.Stop();
+            dt_rm.Stop();
+            dt_obj.Stop();
+            dt_obj_t.Stop();
+            dt_rm_obj.Stop();
+            dt_setseconds.Stop();
+            logic.ingamemp.Stop();
+            GameOverWindow gameOverWindow = new GameOverWindow();
+            gameOverWindow.CloseMainWindow += (sender, eventargs) => this.Close();
+            gameOverWindow.Points = logic.Points;
+            gameOverWindow.Show();
+        }
+
         public MainWindow()
         {
             InitializeComponent();
@@ -192,18 +207,7 @@ namespace Moving_Out.Windows
             }
             else if (e.Key == Key.Q)
             {
-                dt.Stop();
-                dt_rm.Stop();
-                dt_obj.Stop();
-                dt_obj_t.Stop();
-                dt_rm_obj.Stop();
-                dt_setseconds.Stop();
-                logic.ingamemp.Stop();
-                GameOverWindow gameOverWindow = new GameOverWindow();
-                gameOverWindow.CloseMainWindow += (sender, eventargs) => this.Close();
-                gameOverWindow.Points = logic.Points;
-                gameOverWindow.Show();
-                
+                GameOver(this, null);
             }
             else if (e.Key == Key.Escape)
             {
@@ -243,6 +247,7 @@ namespace Moving_Out.Windows
             display.SetupSizes(new Size(canvas.ActualWidth, canvas.ActualHeight));
             logic.SetupSizes(new Size((int)canvas.ActualWidth, (int)canvas.ActualHeight));
             logic.SetupItems();
+            logic.GameEnded += GameOver;
         }
 
         

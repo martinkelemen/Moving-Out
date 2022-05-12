@@ -35,7 +35,6 @@ namespace Moving_Out.Logic
                 gg.Children.Add(new RectangleGeometry(new Rect((int)(displayWidth / 2.382134), (int)(displayHeight / 1.428371), (int)(displayWidth / 48), (int)(displayHeight / 5.65))));
                 gg.Children.Add(new RectangleGeometry(new Rect((int)(displayWidth / 12.631578), (int)(displayHeight / 1.994118), (int)(displayWidth / 2.93578), (int)(displayHeight / 50.85))));
                 gg.Children.Add(new RectangleGeometry(new Rect((int)(displayWidth / 3.33913), (int)(displayHeight / 8.843478), (int)(displayWidth / 8.347826), (int)(displayHeight / 11.556818))));
-               //gg.Children.Add(new RectangleGeometry(new Rect((int)(displayWidth / 3.121951), (int)(displayHeight / 5.557377), (int)(displayWidth / 10.052356), (int)(displayHeight / 50.85))));
                 //előszoba és fürdő
                 gg.Children.Add(new RectangleGeometry(new Rect((int)(displayWidth / 2.084691), (int)(displayHeight / 1.196471), (int)(displayWidth / 48), (int)(displayHeight / 29.057143))));
                 gg.Children.Add(new RectangleGeometry(new Rect((int)(displayWidth / 2.084691), (int)(displayHeight / 2.001969), (int)(displayWidth / 48), (int)(displayHeight / 3.568421))));

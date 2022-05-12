@@ -8,11 +8,12 @@ using System.Windows.Media;
 
 namespace Moving_Out.Logic
 {
-    public class Player : GameItem, IGameControl
+    public class Character : GameItem, IGameControl
     {
         public int Radius { get; set; }
         public System.Drawing.Point Center { get; set; }
         public Vector Speed { get; set; }
+        public string Direction { get; set; }
 
         public override Geometry Area
         {
@@ -22,13 +23,12 @@ namespace Moving_Out.Logic
             }
         }
 
-        public string Direction { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-
-        public Player(int centerX, int centerY, int radius)
+        public Character(int centerX, int centerY, int radius)
         {
             Radius = radius;
             Center = new System.Drawing.Point(centerX, centerY);
             Speed = new Vector(0, 0);
+            Direction = "down";
         }
 
         public void Move()

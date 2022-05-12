@@ -27,15 +27,11 @@ namespace Moving_Out.Logic
         public MediaPlayer ingamemp;
         public bool task_is_playing_audio;
         public bool main_is_playing_audio;
-        TimeSpan mainpositon;
-        TimeSpan taskposition;
 
         public bool Left { get; set; }
         public bool Right { get; set; }
         public bool Up { get; set; }
         public bool Down { get; set; }
-
-        private double speed;
 
         public event EventHandler Changed;
         public event EventHandler RoommateMoveChanged;
@@ -43,8 +39,6 @@ namespace Moving_Out.Logic
         public event EventHandler PizzaArrived;
         public event EventHandler NeighbourArrived;
         public event EventHandler GameEnded;
-
-        System.Windows.Size area;
 
         public IGameControl Player { get; set; }
         public IGameControl Roommate { get; set; }
@@ -58,8 +52,15 @@ namespace Moving_Out.Logic
         public bool PizzaGuyAtObjective { get; set; }
         public bool PizzaGuyAtStreet { get; set; }
         public bool NeighbourAtDoor { get; set; }
-        private bool ObjectivesFull { get; set; }
+
         public int Points { get; set; }
+
+        System.Windows.Size area;
+
+        private double speed;
+
+        TimeSpan mainpositon;
+        TimeSpan taskposition;
 
         private void Media_Ended(object sender, EventArgs e)
         {
@@ -76,10 +77,10 @@ namespace Moving_Out.Logic
         public void SetupItems()
         {
             Wall = new Wall((int)area.Width, (int)area.Height);
-            Player = new Player((int)(area.Width / 2.206897), (int)(area.Height / 1.168966), (int)(area.Width / 128));
-            Roommate = new Roommate((int)(area.Width / 4.8), (int)(area.Height / 2.5425), (int)(area.Width / 128));
-            PizzaGuy = new Player((int)(area.Width / 2.206897), (int)(area.Height / 0.981818), (int)(area.Width / 128)); //ajto 870, 1010     kinn 870, 1100
-            Neighbour = new Player((int)(area.Width / 2.133333), (int)(area.Height / 0.981818), (int)(area.Width / 128)); //ajto 900, 1010    kinn 900, 1100
+            Player = new Character((int)(area.Width / 2.206897), (int)(area.Height / 1.168966), (int)(area.Width / 128));
+            Roommate = new Character((int)(area.Width / 4.8), (int)(area.Height / 2.5425), (int)(area.Width / 128));
+            PizzaGuy = new Character((int)(area.Width / 2.206897), (int)(area.Height / 0.981818), (int)(area.Width / 128)); //ajto 870, 1010     kinn 870, 1100
+            Neighbour = new Character((int)(area.Width / 2.133333), (int)(area.Height / 0.981818), (int)(area.Width / 128)); //ajto 900, 1010    kinn 900, 1100
             Objectives = new List<GameObjective>();
             speed = (int)(area.Width / 640);
         }
@@ -90,13 +91,14 @@ namespace Moving_Out.Logic
             PizzaGuyAtObjective = false;
             PizzaGuyAtStreet = true;
             NeighbourAtDoor = false;
-            ObjectivesFull = false;
+
             ingamemp = new MediaPlayer();
             ingamemp.Open(new Uri(System.IO.Path.Combine("Audio", "doomermenu.mp3"), UriKind.RelativeOrAbsolute));
             ingamemp.MediaEnded += new EventHandler(Media_Ended);
             ingamemp.Play();
             ingamemp.Volume = 0.1;
             main_is_playing_audio = true;
+
             Points = 0;
         }
 
@@ -128,7 +130,6 @@ namespace Moving_Out.Logic
                     PizzaGuyMoveChanged?.Invoke(this, new StatusChangedEventArgs("up"));
                     PizzaArrived?.Invoke(this, null);
                 }
-
                 else if (!Objectives[i].Interactable && Objectives[i].Seconds == 0)
                 {
                     IncreasePartCounter(Objectives[i]);
@@ -136,7 +137,6 @@ namespace Moving_Out.Logic
                 }
                 else if (Objectives[i].Seconds == 0)
                 {
-                    //todo game over
                     if (Objectives[i].ObjType == ObjectiveType.Music)
                     {
                         NeighbourArrived?.Invoke(this, null);
@@ -164,13 +164,8 @@ namespace Moving_Out.Logic
                     ingamemp.Position = mainpositon;
                     ingamemp.Play();
                     ingamemp.Volume = 0.1;
-                    ObjectivesFull = false;
                     task_is_playing_audio = false;
                     main_is_playing_audio = true;
-                }
-                else if (obj.ObjType == ObjectiveType.Pizza || obj.ObjType == ObjectiveType.Dishes || obj.ObjType == ObjectiveType.Trash)
-                {
-                    ObjectivesFull = false;
                 }
 
                 Objectives.Remove(obj);
@@ -194,7 +189,6 @@ namespace Moving_Out.Logic
         public ObjectiveType RoommateObjective()
         {
             int number = r.Next(0, 4);
-            //int number = 1;
 
             if (!(Objectives.Where(t => t.ObjType == ObjectiveType.Pizza).Any() && Objectives.Where(t => t.ObjType == ObjectiveType.Music).Any() &&
                 Objectives.Where(t => t.ObjType == ObjectiveType.Trash).Any() && Objectives.Where(t => t.ObjType == ObjectiveType.Dishes).Any()))
@@ -222,7 +216,6 @@ namespace Moving_Out.Logic
             }
             else
             {
-                ObjectivesFull = true;
                 return ObjectiveType.None;
             }
         }
@@ -395,9 +388,9 @@ namespace Moving_Out.Logic
             }
         }
 
-            public void TimeStep()
+        public void TimeStep()
         {
-            if (TestMove(new Player(Player.Center.X, Player.Center.Y, Player.Radius)))
+            if (TestMove(new Character(Player.Center.X, Player.Center.Y, Player.Radius)))
             {
                 if (Left == true)
                 {
@@ -481,6 +474,5 @@ namespace Moving_Out.Logic
             }
             else return true;
         }
-
     }
 }

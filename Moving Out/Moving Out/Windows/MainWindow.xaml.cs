@@ -25,6 +25,7 @@ namespace Moving_Out.Windows
     public partial class MainWindow : Window
     {
         MoveLogic logic;
+
         DispatcherTimer dt;
         DispatcherTimer dt_rm;
         DispatcherTimer dt_obj;
@@ -34,10 +35,11 @@ namespace Moving_Out.Windows
         DispatcherTimer dt_movepg;
         DispatcherTimer dt_movenb;
         DispatcherTimer dt_setseconds;
-        ObjectiveType type;
 
         int rm_obj_seconds;
         int obj_seconds;
+
+        ObjectiveType type;
 
         private void Dt_Tick(object sender, EventArgs e)
         {
@@ -213,10 +215,6 @@ namespace Moving_Out.Windows
             {
                 logic.Down = false;
             }
-            else if (e.Key == Key.Escape)
-            {
-                //semmi
-            }
         }
 
         private void KeyIsDown(object sender, KeyEventArgs e)
@@ -290,17 +288,6 @@ namespace Moving_Out.Windows
                 dt_movepg.Start();
             };
             logic.NeighbourArrived += (sender, eventargs) => dt_movenb.Start();
-        }
-
-        
-
-        private void Window_SizeChanged(object sender, SizeChangedEventArgs e)
-        {
-            display.SetupSizes(new Size(canvas.ActualWidth, canvas.ActualHeight));
-            //if (logic != null)
-            //{
-            //    logic.ChangeSize(new Size(canvas.ActualWidth, canvas.ActualHeight));
-            //}
         }
     }
 }

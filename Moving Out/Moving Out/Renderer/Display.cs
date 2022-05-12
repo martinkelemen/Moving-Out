@@ -11,17 +11,14 @@ using System.Windows.Media.Imaging;
 
 namespace Moving_Out.Renderer
 {
-    public class MosquitoVisual : Visual
-    {
-
-    }
     public class Display : FrameworkElement
     {
         Size area;
         IGameModel model;
-        int charachterBrushCounter;
+
         Brush last;
         Brush last_standing;
+        int characterBrushCounter;
         string roommateBrushDirection;
         string pizzaGuyBrushDirection;
 
@@ -57,7 +54,7 @@ namespace Moving_Out.Renderer
         {
             last = new ImageBrush(new BitmapImage(new Uri(Path.Combine("Images", "standing.png"), UriKind.RelativeOrAbsolute)));
             last_standing = new ImageBrush(new BitmapImage(new Uri(Path.Combine("Images", "standing.png"), UriKind.RelativeOrAbsolute)));
-            charachterBrushCounter = 0;
+            characterBrushCounter = 0;
             roommateBrushDirection = "down";
             pizzaGuyBrushDirection = "up";
         }
@@ -70,98 +67,98 @@ namespace Moving_Out.Renderer
             }
         }
 
-        public Brush Charachter_Standing_Brush
+        public Brush Character_Brush
         {
             get
             {
                 if (model.Down == true)
                 {
-                    charachterBrushCounter++;
-                    if (charachterBrushCounter % 40 == 0)
+                    characterBrushCounter++;
+                    if (characterBrushCounter % 40 == 0)
                     {
-                        charachterBrushCounter = 0;
+                        characterBrushCounter = 0;
                         last = new ImageBrush(new BitmapImage(new Uri(Path.Combine("Images", "standing.png"), UriKind.RelativeOrAbsolute)));
                         last_standing = last;
                     }
-                    else if (charachterBrushCounter % 40 == 10)
+                    else if (characterBrushCounter % 40 == 10)
                     {
                         last = new ImageBrush(new BitmapImage(new Uri(Path.Combine("Images", "running_front.png"), UriKind.RelativeOrAbsolute)));
                     }
-                    else if (charachterBrushCounter % 40 == 20)
+                    else if (characterBrushCounter % 40 == 20)
                     {
                         last = new ImageBrush(new BitmapImage(new Uri(Path.Combine("Images", "standing.png"), UriKind.RelativeOrAbsolute)));
                         last_standing = last;
                     }
-                    else if (charachterBrushCounter % 40 == 30)
+                    else if (characterBrushCounter % 40 == 30)
                     {
                         last = new ImageBrush(new BitmapImage(new Uri(Path.Combine("Images", "running_front_v2.png"), UriKind.RelativeOrAbsolute)));
                     }
                 }
                 else if (model.Up == true)
                 {
-                    charachterBrushCounter++;
-                    if (charachterBrushCounter % 40 == 0)
+                    characterBrushCounter++;
+                    if (characterBrushCounter % 40 == 0)
                     {
-                        charachterBrushCounter = 0;
+                        characterBrushCounter = 0;
                         last = new ImageBrush(new BitmapImage(new Uri(Path.Combine("Images", "standing_back.png"), UriKind.RelativeOrAbsolute)));
                         last_standing = last;
                     }
-                    else if (charachterBrushCounter % 40 == 10)
+                    else if (characterBrushCounter % 40 == 10)
                     {
                         last = new ImageBrush(new BitmapImage(new Uri(Path.Combine("Images", "running_back.png"), UriKind.RelativeOrAbsolute)));
                     }
-                    else if (charachterBrushCounter % 40 == 20)
+                    else if (characterBrushCounter % 40 == 20)
                     {
                         last = new ImageBrush(new BitmapImage(new Uri(Path.Combine("Images", "standing_back.png"), UriKind.RelativeOrAbsolute)));
                         last_standing = last;
                     }
-                    else if (charachterBrushCounter % 40 == 30)
+                    else if (characterBrushCounter % 40 == 30)
                     {
                         last = new ImageBrush(new BitmapImage(new Uri(Path.Combine("Images", "running_back_v2.png"), UriKind.RelativeOrAbsolute)));
                     }
                 }
                 else if (model.Left == true)
                 {
-                    charachterBrushCounter++;
-                    if (charachterBrushCounter % 40 == 0)
+                    characterBrushCounter++;
+                    if (characterBrushCounter % 40 == 0)
                     {
-                        charachterBrushCounter = 0;
+                        characterBrushCounter = 0;
                         last = new ImageBrush(new BitmapImage(new Uri(Path.Combine("Images", "standing_left.png"), UriKind.RelativeOrAbsolute)));
                         last_standing = last;
                     }
-                    else if (charachterBrushCounter % 40 == 10)
+                    else if (characterBrushCounter % 40 == 10)
                     {
                         last = new ImageBrush(new BitmapImage(new Uri(Path.Combine("Images", "running_left.png"), UriKind.RelativeOrAbsolute)));
                     }
-                    else if (charachterBrushCounter % 40 == 20)
+                    else if (characterBrushCounter % 40 == 20)
                     {
                         last = new ImageBrush(new BitmapImage(new Uri(Path.Combine("Images", "standing_left.png"), UriKind.RelativeOrAbsolute)));
                         last_standing = last;
                     }
-                    else if (charachterBrushCounter % 40 == 30)
+                    else if (characterBrushCounter % 40 == 30)
                     {
                         last = new ImageBrush(new BitmapImage(new Uri(Path.Combine("Images", "running_left_v2.png"), UriKind.RelativeOrAbsolute)));
                     }
                 }
                 else if (model.Right == true)
                 {
-                    charachterBrushCounter++;
-                    if (charachterBrushCounter % 40 == 0)
+                    characterBrushCounter++;
+                    if (characterBrushCounter % 40 == 0)
                     {
-                        charachterBrushCounter = 0;
+                        characterBrushCounter = 0;
                         last = new ImageBrush(new BitmapImage(new Uri(Path.Combine("Images", "standing_right.png"), UriKind.RelativeOrAbsolute)));
                         last_standing = last;
                     }
-                    else if (charachterBrushCounter % 40 == 10)
+                    else if (characterBrushCounter % 40 == 10)
                     {
                         last = new ImageBrush(new BitmapImage(new Uri(Path.Combine("Images", "running_right.png"), UriKind.RelativeOrAbsolute)));
                     }
-                    else if (charachterBrushCounter % 40 == 20)
+                    else if (characterBrushCounter % 40 == 20)
                     {
                         last = new ImageBrush(new BitmapImage(new Uri(Path.Combine("Images", "standing_right.png"), UriKind.RelativeOrAbsolute)));
                         last_standing = last;
                     }
-                    else if (charachterBrushCounter % 40 == 30)
+                    else if (characterBrushCounter % 40 == 30)
                     {
                         last = new ImageBrush(new BitmapImage(new Uri(Path.Combine("Images", "running_right_v2.png"), UriKind.RelativeOrAbsolute)));
                     }
@@ -309,7 +306,7 @@ namespace Moving_Out.Renderer
                     }
                 }
 
-                drawingContext.DrawGeometry(Charachter_Standing_Brush, null, (model.Player as GameItem).Area);
+                drawingContext.DrawGeometry(Character_Brush, null, (model.Player as GameItem).Area);
                 drawingContext.DrawGeometry(Roommate_Brush, null, (model.Roommate as GameItem).Area);
                 drawingContext.DrawGeometry(PizzaGuy_Brush, null, (model.PizzaGuy as GameItem).Area);
                 drawingContext.DrawGeometry(Neighbour_Brush, null, (model.Neighbour as GameItem).Area);

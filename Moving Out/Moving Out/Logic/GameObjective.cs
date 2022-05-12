@@ -18,16 +18,16 @@ namespace Moving_Out.Logic
         static Random r = new Random();
 
         public ObjectiveType ObjType { get; }
-        private int displayWidth;
-        private int displayHeight;
 
-        public int Radius { get; set; }
-        public System.Drawing.Point Center { get; set; }
+        public int Radius { get; private set; }
+        public System.Drawing.Point Center { get; private set; }
 
         public bool Interactable { get; private set; }
         public int PartCounter { get; set; }
         public int Seconds { get; set; }
 
+        private int displayWidth;
+        private int displayHeight;
         private int areaMoveValue;
 
         public override Geometry Area
@@ -248,7 +248,7 @@ namespace Moving_Out.Logic
                     break;
                 case ObjectiveType.Music:
                     texts.Add("Your roommate turned on the radio, turn it off before your neighbour comes over!");
-                    texts.Add("The old Kurvinnyo has arrived..");
+                    texts.Add("The old Csurvinnyo has arrived..");
                     break;
                 case ObjectiveType.Trash:
                     texts.Add("Your roommate threw trash on the ground, pick it up before the mosquitoes take over the house!");
@@ -266,7 +266,7 @@ namespace Moving_Out.Logic
                     texts.Add("R.I.P. dishes..");
                     break;
                 case ObjectiveType.Clean_Picture:
-                    texts.Add("Wipe off the dust from the paint, before it loses its value!");
+                    texts.Add("Wipe off the dust from the painting, before it loses its value!");
                     texts.Add("You became poor..");
                     break;
                 case ObjectiveType.Clean_Dinosaur:

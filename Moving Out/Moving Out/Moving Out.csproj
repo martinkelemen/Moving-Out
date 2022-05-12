@@ -33,7 +33,6 @@
     <None Remove="Images\Ghost_right.png" />
     <None Remove="Images\ingamemenuclick.png" />
     <None Remove="Images\menuclick.png" />
-    <None Remove="Images\mosquito.gif" />
     <None Remove="Images\nightcitydoomer.png" />
     <None Remove="Images\oldkurvinnyo_running_back.png" />
     <None Remove="Images\oldkurvinnyo_running_front.png" />
@@ -103,9 +102,6 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Images\menuclick.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Images\mosquito.gif">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Images\nightcitydoomer.png">

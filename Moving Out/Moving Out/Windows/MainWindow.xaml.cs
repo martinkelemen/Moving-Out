@@ -239,10 +239,10 @@ namespace Moving_Out.Windows
             {
                 logic.Interact();
             }
-            else if (e.Key == Key.Q)
-            {
-                GameOver(this, null);
-            }
+            //else if (e.Key == Key.Q)
+            //{
+            //    GameOver(this, null);
+            //}
             else if (e.Key == Key.Escape)
             {
                 Ingame_Menu ingame_Menu = new Ingame_Menu();
